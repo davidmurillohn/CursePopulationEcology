@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: "Clase 10- Metapoblaciones, estructura espacial y Análisis de viablidad poblacional"
 format:
@@ -13,3 +14,20 @@ También ofreceremos una breve introducción a algunos paquetes en R para el an�
 
 ![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
 
+=======
+---
+title: "Clase 10- Metapoblaciones, estructura espacial y Análisis de viablidad poblacional"
+format:
+  html:
+    toc: false
+    html-math-method: katex
+    css: styles.css
+---
+
+En esta clase, nos sumergiremos en el fascinante mundo de las metapoblaciones y la estructura espacial en ecología. Exploraremos cómo las poblaciones interactúan en paisajes fragmentados y cómo estas interacciones afectan su viabilidad. Además, nos sumergiremos en el análisis de viabilidad poblacional para comprender cómo factores como la conectividad del hábitat, la dispersión y la estructura del paisaje influyen en la persistencia a largo plazo de las especies en entornos fragmentados.
+
+También ofreceremos una breve introducción a algunos paquetes en R para el análisis de viabilidad poblacional, tales como [popbio](https://www.jstatsoft.org/article/view/v022i11), [popdemo](https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/j.2041-210X.2012.00222.x), [mvabund](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/j.2041-210X.2012.00190.x), [dismo](https://rdrr.io/cran/dismo/man/). Estos paquetes proveen herramientas para evaluar medidas de viabilidad poblacional, incluyendo tasas de crecimiento, demografía de poblaciones, análisis multivariado de abundancia, modelado de distribuciones de especies y estimación de la probabilidad de extinción.
+
+![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
+
+>>>>>>> 082fd59577c8fd42a960f68cb8c672c6e2b0e9ad
