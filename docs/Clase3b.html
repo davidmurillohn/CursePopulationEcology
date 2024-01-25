@@ -103,11 +103,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Tipos de dependencia de la densidad.</li>
 </ul>
 </section>
-<section id="estimación-del-tamaño-poblacional-mediante-el-método-de-captura-recaptura." class="level3">
-<h3 class="anchored" data-anchor-id="estimación-del-tamaño-poblacional-mediante-el-método-de-captura-recaptura.">Estimación del tamaño poblacional mediante el método de captura-recaptura.</h3>
-<p>Examinaremos los estimadores de tamaño poblacional mediante el método de captura-recaptura:</p>
-<p><span class="math display">\[\hat{N} = \frac{n_1 \times n_2}{m}\]</span></p>
-</section>
 <section id="estimación-de-la-densidad-y-abundancia" class="level3">
 <h3 class="anchored" data-anchor-id="estimación-de-la-densidad-y-abundancia">Estimación de la Densidad y abundancia</h3>
 <p><strong>Abundancia absoluta</strong>: Cantidad total de individuos.</p>
@@ -147,7 +142,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Combinando las dos formulas obtenemos el estimador de abundacia simple para conteo por franjas</p>
-<p><span class="math display">\[N = A\frac{\sum x}{2Lwn_s}\]</span> Donde: <span class="math display">\[n_s\]</span> = Numero de franjas</p>
+<p><span class="math display">\[N = \frac{A{\sum x}}{2Lwn_s}\]</span> Donde:</p>
+<p><span class="math display">\[n_s\]</span> = Numero de franjas</p>
 <p>La desvianza se obtiene con la formula:</p>
 <p><span class="math display">\[s^2_x = {\sum x^2 -} \frac{(\sum x)^2}{n_s} / {n_s - 1}\]</span> -&gt;</p>
 <p><span class="math display">\[s^2_N = {{((n_t)^2}/n_s)} * {s^2_x}{(1 - n_s / n_t)}\]</span></p>
@@ -226,133 +222,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Tipicamente se utilizan para estimar densidad de aves</p>
 <p><span class="math display">\[N = A{\sum x_i}/n\pi r^2\]</span></p>
 </section>
-<section id="hn-biology-investigation-academy" class="level1">
-<h1><img src="HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg" class="img-fluid" alt="HN Biology Investigation Academy"></h1>
-<section id="regulación-de-poblaciones-1" class="level3">
-<h3 class="anchored" data-anchor-id="regulación-de-poblaciones-1">Regulación de Poblaciones</h3>
-<ul>
-<li>Efecto de aglomeración (crowding).</li>
-<li>Tipos de dependencia de la densidad.</li>
-</ul>
-</section>
-<section id="estimación-del-tamaño-poblacional-mediante-el-método-de-captura-recaptura.-1" class="level3">
-<h3 class="anchored" data-anchor-id="estimación-del-tamaño-poblacional-mediante-el-método-de-captura-recaptura.-1">Estimación del tamaño poblacional mediante el método de captura-recaptura.</h3>
-<p>Examinaremos los estimadores de tamaño poblacional mediante el método de captura-recaptura:</p>
-<p><span class="math display">\[\hat{N} = \frac{n_1 \times n_2}{m}\]</span></p>
-</section>
-<section id="estimación-de-la-densidad-y-abundancia-1" class="level3">
-<h3 class="anchored" data-anchor-id="estimación-de-la-densidad-y-abundancia-1">Estimación de la Densidad y abundancia</h3>
-<p><strong>Abundancia absoluta</strong>: Cantidad total de individuos.</p>
-<p><strong>Abundancia relativa</strong>: Número de individuos de una población en un lugar y periodo de tiempo, en relación con el número de individuos en diferentes lugares o momentos.</p>
-<p><strong>Densidad de la población</strong>: Número de individuos por unidad de área.</p>
-</section>
-<section id="conteo-en-franjas-1" class="level2">
-<h2 class="anchored" data-anchor-id="conteo-en-franjas-1">Conteo en franjas</h2>
-<p>Es uno de los métodos más utilizados para estimar la densidad, utilizando franjas o transectos como unidades de conteo. El método clásico implica asignar el 0.5 del ancho de la franja a cada lado del transecto lineal, y solo se consideran los organismos observados dentro de este ancho predefinido.</p>
-<p><span class="math display">\[D = \frac{\sum x}{\sum a}\]</span> Donde:</p>
-<p>x = Numeros de individous observados</p>
-<p>a = area de cada franja (L X 2w)</p>
-<p>ejemplo 1:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear datos de muestra</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">30</span>)  <span class="co"># valores de x</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5000</span>, <span class="dv">5000</span>, <span class="dv">4700</span>, <span class="dv">5300</span>)       <span class="co"># valores de a</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Den1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, a) {</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  D <span class="ot">&lt;-</span> <span class="fu">sum</span>(x) <span class="sc">/</span> <span class="fu">sum</span>(a)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(D, <span class="st">"inv/metro cuadrado"</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Den1</span>(<span class="at">x =</span> x, <span class="at">a =</span> a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>0.005 inv/metro cuadrado</code></pre>
-</div>
-</div>
-<p>Para obtener el tamano poblacion a partir de la densidad utilizaremos:</p>
-<p><span class="math display">\[N = DA\]</span> Donde: N = Tamano de la poblacion A = area de interferencia (area de estudio)</p>
-<p>Ejemplo 2</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="fl">0.005</span> <span class="sc">*</span> <span class="dv">100000</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>N</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 500</code></pre>
-</div>
-</div>
-<p>Combinando las dos formulas obtenemos el estimador de abundacia simple para conteo por franjas</p>
-<p><span class="math display">\[N = A\frac{\sum x}{2Lwn_s}\]</span> Donde: <span class="math display">\[n_s\]</span> = Numero de franjas</p>
-<p>La desvianza se obtiene con la formula:</p>
-<p><span class="math display">\[s^2_x = {\sum x^2 -} \frac{(\sum x)^2}{n_s} / {n_s - 1}\]</span> -&gt;</p>
-<p><span class="math display">\[s^2_N = {{((n_t)^2}/n_s)} * {s^2_x}{(1 - n_s / n_t)}\]</span></p>
-<p>El error estandar se estima con:</p>
-<p><span class="math display">\[SE_x = \sqrt(s^2_x/n_s)\]</span> =</p>
-<p><span class="math display">\[SE_N = \sqrt(s^2_N)\]</span></p>
-<p>Finalmente los Intervalos de confianza al 95% se estiman con;</p>
-<p><span class="math display">\[CI = N \pm t_{\alpha, df}(SE_N)\]</span></p>
-<p>Ejercicio 3</p>
-<p>Con el objetivo de estimar el número de aves en una área de estudio de 2 km cuadrados, hemos implementado un muestreo mediante 5 transectos con franjas. Cada transecto tiene una longitud de 100 metros y cada franja tiene un ancho de 10 metros.</p>
-<p>Los resultados de nuestro conteo indican que se observaron un total de 15 aves, distribuidas de la siguiente manera: 4, 3, 3, 2 y 3 en cada uno de los transectos. El total del possible numero de muestreos es de 1000 (nt = A/a)</p>
-<p>Para abordar este ejercicio, se busca calcular la estimación del tamaño de la población, la varianza, el error estándar y los intervalos de confianza al 95%.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>Abundancia <span class="ot">&lt;-</span> <span class="cf">function</span>(A, x, L, w, ns){</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  N <span class="ot">=</span> (A <span class="sc">*</span> <span class="fu">sum</span>(x))<span class="sc">/</span> (<span class="dv">2</span><span class="sc">*</span>L<span class="sc">*</span>w<span class="sc">*</span>ns)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(N)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>A <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>L <span class="ot">=</span> <span class="fl">0.1</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>w <span class="ot">=</span> <span class="fl">0.01</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">=</span> <span class="dv">5</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Abundancia</span>(<span class="at">x =</span>x, <span class="at">A =</span>A, <span class="at">L=</span> L, <span class="at">w=</span>w, <span class="at">ns=</span> ns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3000</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>Varianza1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, ns ){</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  s2x <span class="ot">=</span> (<span class="fu">sum</span>(x<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> (<span class="fu">sum</span>(x)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>ns)) <span class="sc">/</span> (ns <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(s2x)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>s2x <span class="ot">&lt;-</span> <span class="fu">Varianza1</span>(<span class="at">x=</span> x, <span class="at">ns=</span> ns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>s2x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.5</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Varianza <span class="ot">&lt;-</span> <span class="cf">function</span>(nt, ns, s2x){</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">=</span> (nt<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>ns) <span class="sc">*</span> s2x </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(s)</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>nt<span class="ot">=</span> <span class="dv">1000</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">Varianza</span>(<span class="at">nt =</span> nt, <span class="at">ns =</span> ns, <span class="at">s2x =</span> s2x )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1e+05</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ES <span class="ot">&lt;-</span> <span class="cf">function</span>(Varianza){</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  ES <span class="ot">=</span> <span class="fu">sqrt</span>(Varianza)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(ES)</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ES</span>(<span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 316.2278</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>IC95 <span class="ot">&lt;-</span> <span class="cf">function</span>(N, t, ES) {</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  IC95low <span class="ot">=</span> N <span class="sc">-</span> t <span class="sc">*</span> ES</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  IC95high <span class="ot">=</span> N <span class="sc">+</span> t <span class="sc">*</span> ES</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">c</span>(IC95low, IC95high))</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">IC95</span>(<span class="at">N =</span> <span class="dv">3000</span>, <span class="at">t=</span> <span class="fl">2.776</span>, <span class="at">ES=</span> <span class="fl">316.2278</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2122.152 3877.848</code></pre>
-</div>
-</div>
-</section>
 <section id="conteo-por-puntos-1" class="level2">
 <h2 class="anchored" data-anchor-id="conteo-por-puntos-1">Conteo por puntos</h2>
 <p>Tipicamente se utilizan para estimar densidad de aves</p>
@@ -363,7 +232,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <figcaption class="figure-caption">HN Biology Investigation Academy</figcaption>
 </figure>
 </div>
-</section>
 </section>
 
 </main>
