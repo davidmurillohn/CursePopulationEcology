@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ---
 title: "Clase 1 Introduccion al Curso y uso de R"
 format:
@@ -200,6 +200,6 @@ TablaNueva <- read.csv("Tabla2.csv")
 
 
 
-![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
+![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
 
->>>>>>> 082fd59577c8fd42a960f68cb8c672c6e2b0e9ad
+

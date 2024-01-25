@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ---
 title: "Curso Ecología de Poblaciones Aplicada"
 format:
@@ -84,6 +84,6 @@ El propósito principal de este curso es servir como una guía que permita a los
 *No dude en consultarnos ante cualquier inconveniente que surja durante el curso. Puede contactarnos a través de admi@hnbiology.org.*
 
 
-![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
+![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
 
->>>>>>> 082fd59577c8fd42a960f68cb8c672c6e2b0e9ad
+
