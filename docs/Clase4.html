@@ -97,7 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Conteo por puntos</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Distance</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Conteo por puntos</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Distance</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Minke whales</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Amakihi</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Goodness of fit</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">Model selection</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false" href="">Estimación de la abundancia y la varianza</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-8" role="tab" aria-controls="tabset-1-8" aria-selected="false" href="">Representacion grafica de los resultados</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>Los conteos por puntos son una técnica comúnmente utilizada en ecología y biología para estimar la abundancia de organismos en un área determinada. En este método, se seleccionan puntos de muestreo dentro del área de estudio y se registra el número de individuos de la especie de interés que se encuentran en cada punto durante un período de tiempo específico. Estos conteos pueden realizarse de manera visual o auditiva, según la especie y las condiciones del entorno. Posteriormente, los datos recopilados se utilizan para calcular una estimación de la densidad o abundancia total de la población en el área de estudio, mediante técnicas estadísticas como extrapolación o interpolación. Los conteos por puntos son una herramienta valiosa para monitorear poblaciones y comprender la distribución espacial de los organismos en su hábitat.</p>
@@ -132,8 +132,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Distance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="minke-whales" class="level3">
-<h3 class="anchored" data-anchor-id="minke-whales">Minke whales</h3>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>Los datos de transecto lineal han sido simulados a partir de modelos ajustados a datos de la ballena minke antártica (Balaenoptera bonaerensis). Estos datos fueron recolectados como parte del programa Investigación sobre Ballenas y Ecosistemas del Océano Austral (IWC IDCR-SOWER) de la Comisión Ballenera Internacional durante las encuestas de verano austral de 1992-1993. Los datos consisten en 99 observaciones en 25 transectos, los cuales fueron estratificados según la ubicación (cerca o lejos del borde de hielo) y los datos de esfuerzo (longitudes de transecto). Más detalles sobre la encuesta están disponibles en Branch y Butterworth (2001) (los datos son simulados según el diseño utilizado para “Área III 1992/93” en dicho estudio).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"minke"</span>)</span>
@@ -313,9 +313,8 @@ Density:
 3 Total 0.02426093 0.007612805 0.3137886 0.012708030 0.04631661 16.97306</code></pre>
 </div>
 </div>
-</section>
-<section id="amakihi" class="level3">
-<h3 class="anchored" data-anchor-id="amakihi">Amakihi</h3>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"amakihi"</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(amakihi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -424,9 +423,8 @@ Density:
 8 1453.0007</code></pre>
 </div>
 </div>
-</section>
-<section id="goodness-of-fit" class="level3">
-<h3 class="anchored" data-anchor-id="goodness-of-fit">Goodness of fit</h3>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
 <p>La bondad de ajuste (goodness of fit en inglés) es una medida que evalúa qué tan bien un modelo teórico se ajusta a los datos observados. En otras palabras, indica qué tan bien los valores predichos por el modelo se aproximan a los valores reales observados en los datos. La bondad de ajuste es fundamental en el análisis estadístico y en la validación de modelos, ya que permite determinar si un modelo proporciona una descripción adecuada y precisa de los datos observados. Se utilizan diferentes estadísticos y pruebas para evaluar la bondad de ajuste en función de la naturaleza de los datos y del modelo en cuestión. Una buena bondad de ajuste indica que el modelo es adecuado para los datos, mientras que una mala bondad de ajuste sugiere que el modelo puede requerir modificaciones o que otro modelo podría ser más apropiado.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>amakihi_hn <span class="ot">&lt;-</span> <span class="fu">ds</span>(amakihi, <span class="at">truncation =</span> <span class="fl">82.5</span>, <span class="at">transect =</span> <span class="st">"point"</span>, <span class="at">key =</span> <span class="st">"hn"</span>, <span class="at">adjustment =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -461,9 +459,8 @@ Distance sampling Cramer-von Mises test (unweighted)
 Test statistic = 0.198335 p-value = 0.270719</code></pre>
 </div>
 </div>
-</section>
-<section id="model-selection" class="level3">
-<h3 class="anchored" data-anchor-id="model-selection">Model selection</h3>
+</div>
+<div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
 <p>El AIC, o Criterio de Información de Akaike por sus siglas en inglés (Akaike Information Criterion), es una herramienta ampliamente utilizada en estadística para la selección de modelos. Su objetivo es encontrar el modelo que mejor balancee el ajuste a los datos y la complejidad del modelo. En resumen, el AIC penaliza la complejidad del modelo, premiando modelos que se ajustan bien a los datos con el menor número de parámetros.</p>
 <p>La idea central es comparar diferentes modelos y seleccionar aquel que tenga el valor más bajo de AIC. Cuando se comparan modelos, un valor de AIC menor indica un mejor compromiso entre ajuste y complejidad. Es importante tener en cuenta que el AIC no proporciona una medida absoluta de la bondad de ajuste, sino que se utiliza principalmente para comparar modelos entre sí.</p>
 <p>En la práctica, se calcula el AIC para cada modelo ajustado a los datos y se selecciona el modelo con el valor más bajo de AIC como el más adecuado para describir los datos. Esta técnica de selección de modelos con AIC es ampliamente utilizada en diversas disciplinas, incluyendo la econometría, la biología, la ecología y la ingeniería, entre</p>
@@ -483,9 +480,8 @@ Test statistic = 0.198335 p-value = 0.270719</code></pre>
 <blockquote class="blockquote">
 <p>Resumen de los modelos de función de detección ajustados a los datos de amakihi. “CvM” significa Cramér-von Mises, Pa es la detectabilidad promedio (consulte “Estimación de la abundancia y la varianza”), se es el error estándar. Los modelos están ordenados según el AIC.</p>
 </blockquote>
-</section>
-<section id="estimación-de-la-abundancia-y-la-varianza" class="level3">
-<h3 class="anchored" data-anchor-id="estimación-de-la-abundancia-y-la-varianza">Estimación de la abundancia y la varianza</h3>
+</div>
+<div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
 <p>Regresando a los datos de ballena minke, tenemos la información necesaria para calcular A y a como se mencionó anteriormente, por lo que podemos estimar la abundancia y su varianza. Cuando proporcionamos datos a ds en el formato “flatfile” dado anteriormente, ds calculará automáticamente las estimaciones de abundancia basadas en la información de la encuesta en los datos. Habiendo ajustado previamente un modelo a los datos de ballena minke, podemos ver los resultados de la estimación de la abundancia al visualizar el resumen del modelo:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(minke_hn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -549,9 +545,8 @@ Density:
 3   Total   17191.90 5135.5862 0.2987212 99 3183.0693</code></pre>
 </div>
 </div>
-</section>
-<section id="representacion-grafica-de-los-resultados" class="level3">
-<h3 class="anchored" data-anchor-id="representacion-grafica-de-los-resultados">Representacion grafica de los resultados</h3>
+</div>
+<div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -578,7 +573,6 @@ Density:
 <p><img src="Clase4_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
 </div>
 </div>
 </div>

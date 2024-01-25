@@ -54,7 +54,7 @@ library(Distance)
 ```
 
 
-### Minke whales
+## Minke whales
 
 Los datos de transecto lineal han sido simulados a partir de modelos ajustados a datos de la ballena minke antártica (Balaenoptera bonaerensis). Estos datos fueron recolectados como parte del programa Investigación sobre Ballenas y Ecosistemas del Océano Austral (IWC IDCR-SOWER) de la Comisión Ballenera Internacional durante las encuestas de verano austral de 1992-1993. Los datos consisten en 99 observaciones en 25 transectos, los cuales fueron estratificados según la ubicación (cerca o lejos del borde de hielo) y los datos de esfuerzo (longitudes de transecto). Más detalles sobre la encuesta están disponibles en Branch y Butterworth (2001) (los datos son simulados según el diseño utilizado para "Área III 1992/93" en dicho estudio).
 
@@ -100,7 +100,7 @@ summary(minke_unifcos)
 
 
 
-### Amakihi
+## Amakihi
 
 ```{r}
 data("amakihi")
@@ -125,7 +125,7 @@ plot(amakihi_hr_obs)
 summary(amakihi_hr_obs)
 ```
 
-### Goodness of fit
+## Goodness of fit
 
 La bondad de ajuste (goodness of fit en inglés) es una medida que evalúa qué tan bien un modelo teórico se ajusta a los datos observados. En otras palabras, indica qué tan bien los valores predichos por el modelo se aproximan a los valores reales observados en los datos. La bondad de ajuste es fundamental en el análisis estadístico y en la validación de modelos, ya que permite determinar si un modelo proporciona una descripción adecuada y precisa de los datos observados. Se utilizan diferentes estadísticos y pruebas para evaluar la bondad de ajuste en función de la naturaleza de los datos y del modelo en cuestión. Una buena bondad de ajuste indica que el modelo es adecuado para los datos, mientras que una mala bondad de ajuste sugiere que el modelo puede requerir modificaciones o que otro modelo podría ser más apropiado.
 
@@ -138,7 +138,7 @@ gof_ds(amakihi_hn)
 gof_ds(amakihi_hr_obs)
 ```
 
-###  Model selection
+##  Model selection
 
 El AIC, o Criterio de Información de Akaike por sus siglas en inglés (Akaike Information Criterion), es una herramienta ampliamente utilizada en estadística para la selección de modelos. Su objetivo es encontrar el modelo que mejor balancee el ajuste a los datos y la complejidad del modelo. En resumen, el AIC penaliza la complejidad del modelo, premiando modelos que se ajustan bien a los datos con el menor número de parámetros.
 
@@ -152,7 +152,7 @@ summarize_ds_models(amakihi_hn, amakihi_hr_obs, amakihi_hr_obs_mas)
 
 >  Resumen de los modelos de función de detección ajustados a los datos de amakihi. "CvM" significa Cramér-von Mises, Pa es la detectabilidad promedio (consulte "Estimación de la abundancia y la varianza"), se es el error estándar. Los modelos están ordenados según el AIC.
 
-###  Estimación de la abundancia y la varianza
+##  Estimación de la abundancia y la varianza
 
 Regresando a los datos de ballena minke, tenemos la información necesaria para calcular A y a como se mencionó anteriormente, por lo que podemos estimar la abundancia y su varianza. Cuando proporcionamos datos a ds en el formato "flatfile" dado anteriormente, ds calculará automáticamente las estimaciones de abundancia basadas en la información de la encuesta en los datos.
 Habiendo ajustado previamente un modelo a los datos de ballena minke, podemos ver los resultados de la estimación de la abundancia al visualizar el resumen del modelo:
@@ -185,7 +185,7 @@ minke_table$IC95 <- 1.96 * minke_table$ES/sqrt(n)
 ```{r}
 minke_table
 ```
-### Representacion grafica de los resultados
+## Representacion grafica de los resultados
 
 ```{r}
 library(tidyverse)
