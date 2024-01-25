@@ -1,91 +1,205 @@
-<<<<<<< HEAD
+
 ---
-title: "Clase4"
+title: "Clase 4: Estimadores de abundancia parte 2, usando distance"
 format: html
 editor: visual
 ---
 
-EEn esta clase, nos adentraremos en las estimaciones de captura-recaptura mediante RMark. Para utilizar este paquete, será necesario instalar previamente el [programa MARK](http://www.phidot.org/software/mark/background/). Durante el curso, se enseñará detalladamente tanto la instalación como el uso de este paquete.
+::: panel-tabset
 
-Esta sección se encarga de instalar el paquete RMark necesario para nuestras evaluaciones.
+## Conteo por puntos
 
-#### Instalar y Carga del paquete
+Los conteos por puntos son una técnica comúnmente utilizada en ecología y biología para estimar la abundancia de organismos en un área determinada. En este método, se seleccionan puntos de muestreo dentro del área de estudio y se registra el número de individuos de la especie de interés que se encuentran en cada punto durante un período de tiempo específico. Estos conteos pueden realizarse de manera visual o auditiva, según la especie y las condiciones del entorno. Posteriormente, los datos recopilados se utilizan para calcular una estimación de la densidad o abundancia total de la población en el área de estudio, mediante técnicas estadísticas como extrapolación o interpolación. Los conteos por puntos son una herramienta valiosa para monitorear poblaciones y comprender la distribución espacial de los organismos en su hábitat.
 
-```{r, eval=FALSE}
-install.packages("RMark")
+Para estimar la abundancia utilizamos la siguiente formula: 
+
+$$N = \frac{A{\sum x_i}}{n \pi r^2}$$
+
+Donde:
+
+*N* = Abundancia de la población
+*A* = Área
+*x* = Número de aves observadas
+*n* = Total de puntos de conteo
+*r* = Radio del punto de conteo
+
+Ejercicio
+
+> Se llevó a cabo un estudio para estimar la abundancia de aves mediante 10 conteos por punto, cada uno con un radio fijo de 50 metros. El estudio se realizó en un área de 2 kilómetros cuadrados y se avistaron en total 50 individuos.
+
+```{r}
+AbundanciaConteo <- function(A, x, n, r){
+  N = (A*sum(x)) / (n*3.1416*r^2)
+  print(N)
+}
+
+A= 2
+x= 50
+n= 10
+r= 0.050
+
+AbundanciaConteo(A=A, x=x, n=n, r=r)
+```
+
+
+## Distance
+
+Estimar la abundancia y distribución espacial de poblaciones animales y vegetales es esencial para la conservación y gestión. El paquete R *Distance* implementa métodos de muestreo de distancia para estimar la abundancia. 
+
+"Describimos cómo los usuarios pueden obtener estimaciones de abundancia (y densidad) utilizando el paquete, así como documentando los enlaces que proporciona con otros paquetes R más especializados. También demostramos cómo Distance proporciona una vía de migración desde software anterior, lo que nos permite ofrecer métodos de vanguardia a los usuarios más rápidamente". <https://www.jstatsoft.org/article/view/v089i01>
+
+```{r, warning=FALSE, message=FALSE}
+library(Distance)
+
+```
+
+
+### Minke whales
+
+Los datos de transecto lineal han sido simulados a partir de modelos ajustados a datos de la ballena minke antártica (Balaenoptera bonaerensis). Estos datos fueron recolectados como parte del programa Investigación sobre Ballenas y Ecosistemas del Océano Austral (IWC IDCR-SOWER) de la Comisión Ballenera Internacional durante las encuestas de verano austral de 1992-1993. Los datos consisten en 99 observaciones en 25 transectos, los cuales fueron estratificados según la ubicación (cerca o lejos del borde de hielo) y los datos de esfuerzo (longitudes de transecto). Más detalles sobre la encuesta están disponibles en Branch y Butterworth (2001) (los datos son simulados según el diseño utilizado para "Área III 1992/93" en dicho estudio).
+
+```{r}
+data("minke")
+head(minke)
+```
+Detection functions
+
+> La detectabilidad en conteos por puntos se refiere a la probabilidad de detectar un organismo presente en un punto de muestreo durante un período de observación determinado. Esta detectabilidad puede variar según diversas condiciones, como el comportamiento del organismo, la estacionalidad, el hábitat y las habilidades del observador. Comprender y estimar la detectabilidad es crucial para obtener estimaciones precisas de la abundancia de una especie utilizando conteos por puntos, ya que afecta directamente a la eficacia del método de muestreo y a la interpretación de los datos recopilados. Se pueden emplear diversas técnicas y modelos estadísticos para estimar la detectabilidad y corregir los sesgos que pueda introducir en las estimaciones de abundancia.
+
+```{r}
+minke_hn <- ds(minke, truncation = 1.5)
 ```
 
 ```{r}
-library(RMark)
+plot(minke_hn)
 ```
 
-Aquí se importa la base de datos "example.txt" para su uso en nuestros análisis. En la clase utilizaremos base de datos reales y caso de estudios reales.
+hazard rate model can be fitted as:
 
 ```{r}
-reid <- import.chdata("data/example.txt")
-```
-
-#### Visualización de los primeros datos
-
-```{r}
-head(reid)
-```
-
-#### Ejecución del modelo
-
-```{r}
-f0 <- list(formula=~1)
-mb <- mark(reid, model="Closed", model.parameters=list(p=f0, c=f0))
-```
-
-Esta sección ejecuta el modelo para realizar el análisis de captura-recaptura.
-
-Durante el curso, se cubrirán todos los detalles, desde la creación de la base de datos hasta la interpretación de los resultados.
-
-![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
-=======
----
-title: "Clase4"
-format: html
-editor: visual
----
-
-EEn esta clase, nos adentraremos en las estimaciones de captura-recaptura mediante RMark. Para utilizar este paquete, será necesario instalar previamente el [programa MARK](http://www.phidot.org/software/mark/background/). Durante el curso, se enseñará detalladamente tanto la instalación como el uso de este paquete.
-
-Esta sección se encarga de instalar el paquete RMark necesario para nuestras evaluaciones.
-
-#### Instalar y Carga del paquete
-
-```{r, eval=FALSE}
-install.packages("RMark")
+minke_hrcos <- ds(minke, truncation = 1.5, key = "hr")
+plot(minke_hrcos)
 ```
 
 ```{r}
-library(RMark)
+summary(minke_hrcos)
 ```
 
-Aquí se importa la base de datos "example.txt" para su uso en nuestros análisis. En la clase utilizaremos base de datos reales y caso de estudios reales.
+
+> Otras series de ajuste pueden ser seleccionadas utilizando el argumento de ajuste y se pueden establecer órdenes específicos de ajustes utilizando el argumento order. Por ejemplo, para especificar un modelo uniforme con ajustes coseno de orden 1 y 2, podemos escribir:
 
 ```{r}
-reid <- import.chdata("data/example.txt")
-```
+minke_unifcos <- ds(minke, truncation = 1.5, key = "unif", adjustment = "cos", order = c(1, 2))
+plot(minke_unifcos)
 
-#### Visualización de los primeros datos
+```
 
 ```{r}
-head(reid)
+summary(minke_unifcos)
 ```
 
-#### Ejecución del modelo
+
+
+### Amakihi
 
 ```{r}
-f0 <- list(formula=~1)
-mb <- mark(reid, model="Closed", model.parameters=list(p=f0, c=f0))
+data("amakihi")
+head(amakihi)
 ```
 
-Esta sección ejecuta el modelo para realizar el análisis de captura-recaptura.
 
-Durante el curso, se cubrirán todos los detalles, desde la creación de la base de datos hasta la interpretación de los resultados.
 
-![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
->>>>>>> 082fd59577c8fd42a960f68cb8c672c6e2b0e9ad
+El conjunto de datos de transectos de puntos consiste en 1485 observaciones de Amakihi (Hemignathus virens; un pájaro cantor hawaiano), recolectadas en 41 puntos entre 1992 y 1995. Los datos incluyen distancias y dos covariables recolectadas durante la encuesta: observador (un factor de tres niveles) y tiempo después del amanecer (transformado a minutos (continuo) o horas (factor)). Los datos son analizados de manera exhaustiva en Marques et al. (2007).
+
+
+```{r}
+amakihi_hr_obs <- ds(amakihi, truncation = 82.5, transect = "point", key = "hr", formula = ~ OBs)
+
+amakihi_hr_obs_mas <- ds(amakihi, truncation = 82.5, transect = "point", key = "hr", formula = ~OBs + MAS)
+```
+```{r}
+plot(amakihi_hr_obs)
+```
+
+```{r}
+summary(amakihi_hr_obs)
+```
+
+### Goodness of fit
+
+La bondad de ajuste (goodness of fit en inglés) es una medida que evalúa qué tan bien un modelo teórico se ajusta a los datos observados. En otras palabras, indica qué tan bien los valores predichos por el modelo se aproximan a los valores reales observados en los datos. La bondad de ajuste es fundamental en el análisis estadístico y en la validación de modelos, ya que permite determinar si un modelo proporciona una descripción adecuada y precisa de los datos observados. Se utilizan diferentes estadísticos y pruebas para evaluar la bondad de ajuste en función de la naturaleza de los datos y del modelo en cuestión. Una buena bondad de ajuste indica que el modelo es adecuado para los datos, mientras que una mala bondad de ajuste sugiere que el modelo puede requerir modificaciones o que otro modelo podría ser más apropiado.
+
+```{r}
+amakihi_hn <- ds(amakihi, truncation = 82.5, transect = "point", key = "hn", adjustment = NULL)
+```
+
+```{r}
+gof_ds(amakihi_hn)
+gof_ds(amakihi_hr_obs)
+```
+
+###  Model selection
+
+El AIC, o Criterio de Información de Akaike por sus siglas en inglés (Akaike Information Criterion), es una herramienta ampliamente utilizada en estadística para la selección de modelos. Su objetivo es encontrar el modelo que mejor balancee el ajuste a los datos y la complejidad del modelo. En resumen, el AIC penaliza la complejidad del modelo, premiando modelos que se ajustan bien a los datos con el menor número de parámetros.
+
+La idea central es comparar diferentes modelos y seleccionar aquel que tenga el valor más bajo de AIC. Cuando se comparan modelos, un valor de AIC menor indica un mejor compromiso entre ajuste y complejidad. Es importante tener en cuenta que el AIC no proporciona una medida absoluta de la bondad de ajuste, sino que se utiliza principalmente para comparar modelos entre sí.
+
+En la práctica, se calcula el AIC para cada modelo ajustado a los datos y se selecciona el modelo con el valor más bajo de AIC como el más adecuado para describir los datos. Esta técnica de selección de modelos con AIC es ampliamente utilizada en diversas disciplinas, incluyendo la econometría, la biología, la ecología y la ingeniería, entre 
+
+```{r}
+summarize_ds_models(amakihi_hn, amakihi_hr_obs, amakihi_hr_obs_mas)
+```
+
+>  Resumen de los modelos de función de detección ajustados a los datos de amakihi. "CvM" significa Cramér-von Mises, Pa es la detectabilidad promedio (consulte "Estimación de la abundancia y la varianza"), se es el error estándar. Los modelos están ordenados según el AIC.
+
+###  Estimación de la abundancia y la varianza
+
+Regresando a los datos de ballena minke, tenemos la información necesaria para calcular A y a como se mencionó anteriormente, por lo que podemos estimar la abundancia y su varianza. Cuando proporcionamos datos a ds en el formato "flatfile" dado anteriormente, ds calculará automáticamente las estimaciones de abundancia basadas en la información de la encuesta en los datos.
+Habiendo ajustado previamente un modelo a los datos de ballena minke, podemos ver los resultados de la estimación de la abundancia al visualizar el resumen del modelo:
+
+```{r}
+summary(minke_hn)
+```
+
+- Estadísticas resumidas: proporcionando las áreas, áreas cubiertas, esfuerzo, número de observaciones, número de transectos, tasa de encuentro, su error estándar y coeficiente de variación para cada estrato.
+
+- Abundancia: proporcionando estimaciones, errores estándar, coeficientes de variación, intervalos de confianza inferiores y superiores, y finalmente los grados de libertad para la estimación de abundancia de cada estrato.
+
+- Densidad: lista las mismas estadísticas que Abundancia pero para una estimación de densidad.
+
+
+
+
+
+
+
+```{r}
+minke_table <- summary(minke_hn)$dht$individuals$N
+minke_table$lcl <- minke_table$ucl <- minke_table$df <- NULL
+colnames(minke_table) <- c("Stratum", "Abundancia", "ES", "CV")
+
+minke_table$n <- c(54, 45, 54+45)
+minke_table$IC95 <- 1.96 * minke_table$ES/sqrt(n)
+```
+
+```{r}
+minke_table
+```
+### Representacion grafica de los resultados
+
+```{r}
+library(tidyverse)
+
+ggplot(data= minke_table, aes(x= Stratum, y= Abundancia))+
+  geom_col()+
+  geom_errorbar(aes(ymin= Abundancia -IC95,
+                    ymax= Abundancia + IC95))+
+  theme_classic()
+```
+
+
+
+:::
+
+
+![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
