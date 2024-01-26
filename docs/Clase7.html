@@ -124,49 +124,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>AvesLimpia <span class="ot">&lt;-</span> Aves <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Site, VEGID, Type, ALTITUDE, Area_Basal, Hora, Fecha, Cielo, Viento, Especies, Abundancia) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Especies <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"CARPUS"</span>, <span class="st">"SETMAG"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fecha =</span> <span class="fu">as.Date</span>(Fecha, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Hora =</span> <span class="fu">as.integer</span>(<span class="fu">str_replace</span>(Hora, <span class="st">":"</span>, <span class="st">""</span>)))</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>AvesOrdenadas <span class="ot">&lt;-</span> AvesLimpia <span class="sc">%&gt;%</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Site, Especies, Fecha, Hora) <span class="sc">%&gt;%</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site, Especies) <span class="sc">%&gt;%</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Orden =</span> <span class="fu">factor</span>(<span class="fu">row_number</span>())) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Orden <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(AvesOrdenadas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fecha =</span> <span class="fu">as.Date</span>(Fecha, <span class="at">format =</span> <span class="st">"%m/%d/%Y"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Hora =</span> <span class="fu">as.integer</span>(<span class="fu">str_replace</span>(Hora, <span class="st">":"</span>, <span class="st">""</span>)))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>AvesOrdenadas <span class="ot">&lt;-</span> AvesLimpia <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Site, Especies, Fecha, Hora, VEGID, Type, ALTITUDE, Area_Basal) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site, Especies, Fecha, Hora, VEGID, Type, ALTITUDE, Area_Basal) <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Abundancia =</span> <span class="fu">max</span>(Abundancia)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site, Fecha, Hora,  Especies, VEGID, Type, ALTITUDE, Area_Basal) <span class="sc">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Orden =</span> <span class="fu">factor</span>(<span class="fu">row_number</span>())) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Orden <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Site', 'Especies', 'Fecha', 'Hora',
+'VEGID', 'Type', 'ALTITUDE'. You can override using the `.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>CarpusPivot <span class="ot">&lt;-</span> AvesOrdenadas <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Especies, <span class="at">values_from =</span> Abundancia, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Site, VEGID, Type, ALTITUDE, Area_Basal, Fecha, Hora, Orden, CARPUS)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>CarpusPivotOrden <span class="ot">&lt;-</span> CarpusPivot <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(Site, VEGID, Type, ALTITUDE, Area_Basal, CARPUS, Fecha, Hora) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site,VEGID, Type, ALTITUDE, Area_Basal, CARPUS) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Orden =</span> <span class="fu">factor</span>(<span class="fu">row_number</span>())) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Site))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(CarpusPivotOrden)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 12
-# Groups:   Site, Especies [3]
-   Site VEGID Type  ALTITUDE Area_Basal  Hora Fecha      Cielo Viento Especies
-  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt; &lt;date&gt;     &lt;int&gt;  &lt;int&gt; &lt;chr&gt;   
-1     3 3P    C          825        7.8  1200 2016-03-31     0      2 SETMAG  
-2     3 3P    C          825        7.8  1200 2016-03-31     0      2 SETMAG  
-3     5 5p    C          910        9.8   912 2016-02-23     0      2 CARPUS  
-4     5 5p    C          910        9.8   912 2016-02-23     0      2 CARPUS  
-5     5 5p    C          910        9.8   912 2016-02-23     0      2 SETMAG  
-6     5 5p    C          910        9.8   912 2016-02-23     0      2 SETMAG  
-# ℹ 2 more variables: Abundancia &lt;int&gt;, Orden &lt;fct&gt;</code></pre>
+<pre><code># A tibble: 6 × 9
+# Groups:   Site, VEGID, Type, ALTITUDE, Area_Basal, CARPUS [3]
+   Site VEGID Type  ALTITUDE Area_Basal Fecha       Hora Orden CARPUS
+  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;date&gt;     &lt;int&gt; &lt;fct&gt;  &lt;int&gt;
+1     1 1     F          879       10   2016-02-10   802 1          0
+2     1 1     F          879       10   2016-03-19   815 2          0
+3     1 1     F          879       10   2016-03-31   725 3          0
+4     3 3P    C          825        7.8 2016-03-17  1125 1          0
+5     3 3P    C          825        7.8 2016-03-31  1200 2          0
+6     4 4P    F          868       NA   2016-03-17  1418 1          0</code></pre>
 </div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Pasar cada replica en columnas diferentes de acuerdo a la especie de ave</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un conjunto de datos con todos los niveles de Orden por Site</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>AvesCompletas <span class="ot">&lt;-</span> AvesOrdenadas <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Orden =</span> <span class="fu">as.numeric</span>(Orden)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(<span class="at">Orden =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">Abundancia =</span> <span class="dv">50</span>))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot_wider</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>AvesPivot <span class="ot">&lt;-</span> AvesCompletas <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="fu">c</span>(Especies, Orden), <span class="at">values_from =</span> Abundancia, <span class="at">values_fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SETMAG_1 =</span> <span class="fu">replace</span>(SETMAG_1, SETMAG_1 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SETMAG_2 =</span> <span class="fu">replace</span>(SETMAG_2, SETMAG_2 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SETMAG_3 =</span> <span class="fu">replace</span>(SETMAG_3, SETMAG_3 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CARPUS_1 =</span> <span class="fu">replace</span>(CARPUS_1, CARPUS_1 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CARPUS_2 =</span> <span class="fu">replace</span>(CARPUS_2, CARPUS_2 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CARPUS_3 =</span> <span class="fu">replace</span>(CARPUS_3, CARPUS_3 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un conjunto de datos con todos los niveles de Orden por Site</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>CARPUSunmarked <span class="ot">&lt;-</span> CarpusPivotOrden <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Fecha)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Orden =</span> <span class="fu">as.numeric</span>(Orden)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(<span class="at">Orden =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CARPUS =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(Fecha), <span class="cn">NA</span>, CARPUS),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">CARPUS =</span> <span class="fu">replace_na</span>(CARPUS, <span class="dv">50</span>))</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot_wider</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>CARPUSunmarkedReady <span class="ot">&lt;-</span> CARPUSunmarked <span class="sc">%&gt;%</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Fechaord =</span> <span class="fu">yday</span>(Fecha)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site, Orden, VEGID, Type, ALTITUDE, Area_Basal) <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">CARPUS =</span> <span class="fu">max</span>(CARPUS),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">Fechaord =</span> <span class="fu">max</span>(Fechaord),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">Hora =</span> <span class="fu">max</span>(Hora)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Site, VEGID, Type, ALTITUDE, Area_Basal) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Orden,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="fu">c</span>(Fechaord, Hora, CARPUS),</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_fill =</span>  <span class="dv">0</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CARPUS_1 =</span> <span class="fu">replace</span>(CARPUS_1, CARPUS_1 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CARPUS_2 =</span> <span class="fu">replace</span>(CARPUS_2, CARPUS_2 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CARPUS_3 =</span> <span class="fu">replace</span>(CARPUS_3, CARPUS_3 <span class="sc">==</span> <span class="dv">50</span>, <span class="cn">NA</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'Site', 'Orden', 'VEGID', 'Type',
+'ALTITUDE'. You can override using the `.groups` argument.</code></pre>
+</div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
@@ -193,14 +220,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(unmarked)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mallard)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>mallardUMF <span class="ot">&lt;-</span> <span class="fu">unmarkedFramePCount</span>(mallard.y, <span class="at">siteCovs =</span> mallard.site,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">obsCovs =</span> mallard.obs)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>(fm.mallard <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span> ivel<span class="sc">+</span> date <span class="sc">+</span> <span class="fu">I</span>(date<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> length <span class="sc">+</span> elev <span class="sc">+</span> forest, mallardUMF, <span class="at">K=</span><span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(unmarked)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mallard)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>mallardUMF <span class="ot">&lt;-</span> <span class="fu">unmarkedFramePCount</span>(mallard.y, <span class="at">siteCovs =</span> mallard.site,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">obsCovs =</span> mallard.obs)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>(fm.mallard <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span> ivel<span class="sc">+</span> date <span class="sc">+</span> <span class="fu">I</span>(date<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> length <span class="sc">+</span> elev <span class="sc">+</span> forest, mallardUMF, <span class="at">K=</span><span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 4 sites have been discarded because of missing data.</code></pre>
 </div>
@@ -226,7 +253,7 @@ I(date^2)    0.00908 0.0886  0.103  0.9183
 
 AIC: 511.2066 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(fm.mallard.nb <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span> date <span class="sc">+</span> <span class="fu">I</span>(date<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> length <span class="sc">+</span> elev, <span class="at">mixture =</span> <span class="st">"NB"</span>, mallardUMF, <span class="at">K=</span><span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(fm.mallard.nb <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span> date <span class="sc">+</span> <span class="fu">I</span>(date<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> length <span class="sc">+</span> elev, <span class="at">mixture =</span> <span class="st">"NB"</span>, mallardUMF, <span class="at">K=</span><span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 4 sites have been discarded because of missing data.</code></pre>
 </div>
@@ -256,7 +283,7 @@ AIC: 484.6365 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm.mallard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm.mallard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:

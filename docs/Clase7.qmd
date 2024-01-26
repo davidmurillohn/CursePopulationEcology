@@ -27,17 +27,29 @@ library(tidyverse)
 
 AvesLimpia <- Aves %>% 
   select(Site, VEGID, Type, ALTITUDE, Area_Basal, Hora, Fecha, Cielo, Viento, Especies, Abundancia) %>% 
-  filter(Especies %in% c("CARPUS", "SETMAG")) %>% 
   mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y")) %>% 
   mutate(Hora = as.integer(str_replace(Hora, ":", "")))
   
 AvesOrdenadas <- AvesLimpia %>%
-  arrange(Site, Especies, Fecha, Hora) %>%
-  group_by(Site, Especies) %>%
+  arrange(Site, Especies, Fecha, Hora, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  group_by(Site, Especies, Fecha, Hora, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  summarise(Abundancia = max(Abundancia)) %>%
+  group_by(Site, Fecha, Hora,  Especies, VEGID, Type, ALTITUDE, Area_Basal) %>%
   mutate(Orden = factor(row_number())) %>% 
-  filter(Orden %in% c(1,2,3))
+  filter(Orden %in% c(1, 2, 3))
 
-head(AvesOrdenadas)
+CarpusPivot <- AvesOrdenadas %>% 
+  pivot_wider(names_from = Especies, values_from = Abundancia, values_fill = 0) %>% 
+  select(Site, VEGID, Type, ALTITUDE, Area_Basal, Fecha, Hora, Orden, CARPUS)
+
+CarpusPivotOrden <- CarpusPivot %>%
+  arrange(Site, VEGID, Type, ALTITUDE, Area_Basal, CARPUS, Fecha, Hora) %>%
+  group_by(Site,VEGID, Type, ALTITUDE, Area_Basal, CARPUS) %>%
+  mutate(Orden = factor(row_number())) %>% 
+  filter(!is.na(Site))
+  
+
+head(CarpusPivotOrden)
 ```
 
 
@@ -49,27 +61,39 @@ Pasar cada replica en columnas diferentes de acuerdo a la especie de ave
 
 
 # Crear un conjunto de datos con todos los niveles de Orden por Site
-AvesCompletas <- AvesOrdenadas %>%
+CARPUSunmarked <- CarpusPivotOrden %>%
+  filter(!is.na(Fecha)) %>% 
   mutate(Orden = as.numeric(Orden)) %>% 
-  complete(Orden = 1:3, fill = list(Abundancia = 50))
+  complete(Orden = 1:3) %>%
+  mutate(CARPUS = ifelse(is.na(Fecha), NA, CARPUS),
+         CARPUS = replace_na(CARPUS, 50))
 
 # Pivot_wider
-AvesPivot <- AvesCompletas %>%
-  pivot_wider(names_from = c(Especies, Orden), values_from = Abundancia, values_fill = 0) %>% 
-  mutate(SETMAG_1 = replace(SETMAG_1, SETMAG_1 == 50, NA)) %>% 
-  mutate(SETMAG_2 = replace(SETMAG_2, SETMAG_2 == 50, NA)) %>% 
-  mutate(SETMAG_3 = replace(SETMAG_3, SETMAG_3 == 50, NA)) %>% 
+CARPUSunmarkedReady <- CARPUSunmarked %>%
+  mutate(Fechaord = yday(Fecha)) %>% 
+  group_by(Site, Orden, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  summarise(CARPUS = max(CARPUS),
+            Fechaord = max(Fechaord),
+            Hora = max(Hora)) %>% 
+  ungroup() %>%
+  group_by(Site, VEGID, Type, ALTITUDE, Area_Basal) %>% 
+  pivot_wider(names_from = Orden,
+              values_from = c(Fechaord, Hora, CARPUS),
+              values_fill =  0) %>% 
   mutate(CARPUS_1 = replace(CARPUS_1, CARPUS_1 == 50, NA)) %>% 
   mutate(CARPUS_2 = replace(CARPUS_2, CARPUS_2 == 50, NA)) %>% 
   mutate(CARPUS_3 = replace(CARPUS_3, CARPUS_3 == 50, NA)) 
-
-
 
 
 ```
 
 
 ## Crear variables de detectabilidad
+
+```{r}
+
+```
+
 
 ## Crear variables de habitat (covariables)
 
