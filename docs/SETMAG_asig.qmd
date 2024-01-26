@@ -1,0 +1,255 @@
+
+---
+title: "Clase 5: Uso de Unmarked, Estimación de abundancia por conteo por puntos SETMAG"
+format: html
+editor: visual
+---
+
+Unmarked se destaca como uno de los paquetes más populares para ajustar modelos de abundancia que incorporan variables de detección. A diferencia de Distance, este paquete se caracteriza por su mayor complejidad y una versatilidad notable en la capacidad de ajustar modelos más detallados. Requiere un nivel de conocimiento en R al menos intermedio para aprovechar plenamente su potencial, debido a su complejidad y las múltiples opciones de modelado que ofrece.
+
+En esta clase se obordara como utilizar Unmarked para modelar abundancia de especies para lo cuales se tomaran datos por medio de conteo por puntos. En la clase se explicara desde cero el uso de este paquete y paso a paso como ajustar, seleccionar, validar, interpretar y graficar el modelo, incluso la presancion de los datos para publicaciones cientificas.
+
+En esta clase, exploraremos el uso de Unmarked para modelar la abundancia de especies a partir de datos recopilados mediante conteo por puntos. Desde los fundamentos, explicaremos paso a paso cómo utilizar este paquete, cubriendo el proceso completo: desde el ajuste inicial del modelo hasta la selección, validación e interpretación de los resultados. También abordaremos la presentación de los datos para su inclusión en publicaciones científicas, asegurando un entendimiento completo y la capacidad de aplicar estos modelos de manera efectiva en contextos de investigación y divulgación científica.
+
+::: panel-tabset
+
+## Cargar base de datos
+
+```{r}
+Aves <- read.csv("docs/data/AvesHabitatUm.csv")
+```
+
+Seleccionar variables necesarias
+
+```{r}
+library(tidyverse)
+
+AvesLimpia <- Aves %>% 
+  select(Site, VEGID, Type, ALTITUDE, Area_Basal, Hora, Fecha, Cielo, Viento, Especies, Abundancia) %>% 
+  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y")) %>% 
+  mutate(Hora = as.integer(str_replace(Hora, ":", "")))
+  
+AvesOrdenadas <- AvesLimpia %>%
+  arrange(Site, Especies, Fecha, Hora, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  group_by(Site, Especies, Fecha, Hora, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  summarise(Abundancia = max(Abundancia)) %>%
+  group_by(Site, Fecha, Hora,  Especies, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  mutate(Orden = factor(row_number())) %>% 
+  filter(Orden %in% c(1, 2, 3))
+
+SetmagPivot <- AvesOrdenadas %>% 
+  pivot_wider(names_from = Especies, values_from = Abundancia, values_fill = 0) %>% 
+  select(Site, VEGID, Type, ALTITUDE, Area_Basal, Fecha, Hora, Orden,SETMAG)
+```
+
+
+```{r}
+SetmagPivotOrden <-SetmagPivot %>%
+  arrange(Site, VEGID, Type, ALTITUDE, Area_Basal,SETMAG, Fecha, Hora) %>%
+  group_by(Site,VEGID, Type, ALTITUDE, Area_Basal,SETMAG) %>%
+  mutate(Orden = factor(row_number())) %>% 
+  filter(!is.na(Site))
+  
+
+head(SetmagPivotOrden)
+```
+
+
+## Formatear base de datos a formato unmarked
+
+Pasar cada replica en columnas diferentes de acuerdo a la especie de ave
+
+```{r}
+
+
+# Crear un conjunto de datos con todos los niveles de Orden por Site
+Setmagunmarked <-SetmagPivotOrden %>%
+  filter(!is.na(Fecha)) %>% 
+  mutate(Orden = as.numeric(Orden)) %>% 
+  complete(Orden = 1:3) %>%
+  mutate(Setmag = ifelse(is.na(Fecha), NA,SETMAG),
+        SETMAG = replace_na(Setmag, 50))
+
+# Pivot_wider
+SetmagunmarkedReady <-Setmagunmarked %>%
+  mutate(Fechaord = yday(Fecha)) %>% 
+  group_by(Site, Orden, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  summarise(SETMAG = max(SETMAG),
+            Fechaord = max(Fechaord),
+            Hora = max(Hora)) %>% 
+  ungroup() %>%
+  group_by(Site, VEGID, Type, ALTITUDE, Area_Basal) %>% 
+  pivot_wider(names_from = Orden,
+              values_from = c(Fechaord, Hora,SETMAG),
+              values_fill =  0) %>% 
+  mutate(SETMAG_1 = replace(SETMAG_1,SETMAG_1 == 50, NA)) %>% 
+  mutate(SETMAG_2 = replace(SETMAG_2,SETMAG_2 == 50, NA)) %>% 
+  mutate(SETMAG_3 = replace(SETMAG_3,SETMAG_3 == 50, NA)) 
+
+
+```
+```{r}
+# saveRDS(SetmagunmarkedReady, file = "SETMAG.rds")
+```
+
+
+## Crear variables de detectabilidad
+
+```{r}
+## Definir ocasiones de deteccion
+Setmag_y <-SETMAGunmarkedReady[,12:14]
+# y[y > 1] <- 1
+
+
+## Definir los variables asociados a la deteccion:
+
+
+Fecha_Setmag= list(Fecha=SetmagunmarkedReady[,6:8]) 
+
+# Y quien realizo la observacion
+
+Hora_Setmag= list(Hora=SetmagunmarkedReady[,9:11]) 
+
+
+```
+
+
+## Crear variables de habitat (covariables)
+
+```{r}
+## Definir los variables de covarianza
+
+Setmag_siteCovs <-SETMAGunmarkedReady[,c("Type", "ALTITUDE", "Area_Basal")]
+```
+
+## Crear tabla unmarked
+
+```{r}
+
+library(unmarked)
+
+## CREAR DATA FRAME
+Setmagunmarked_df <- unmarkedFramePCount(y =SETMAG_y, siteCovs =SETMAG_siteCovs, 
+                                    obsCovs=c(Fecha_Setmag, Hora_Setmag))
+
+summary(Setmagunmarked_df)
+
+```
+
+
+## Ajustar modelo de deteccion
+
+```{r}
+#### MODELAR DETECCION PRIMERO
+
+ModelDet0 <- pcount(~1 ~1,SETMAGunmarked_df) ##Null model
+
+ModelDet1 <- pcount(~Fecha ~1,SETMAGunmarked_df)
+
+ModelDet2 <- pcount(~Hora ~1,SETMAGunmarked_df)
+
+ModelDet3 <- pcount(~Fecha + Hora ~1,SETMAGunmarked_df)
+```
+
+
+
+## Seleccion de modelo de deteccion
+
+```{r}
+library(AICcmodavg)
+
+DetModels <- list(ModelDet0, ModelDet1, ModelDet2, ModelDet3)
+
+DetNames <- c("Nulo", "Fecha", "Hora", "Fecha + Hora")
+
+aictab(DetModels, DetNames, sort = TRUE)
+```
+
+## Ajustar modelo de Abundancia
+
+```{r}
+#### MODELAR DETECCION PRIMERO
+
+ModelAbun0 <- pcount(~1 ~ 1,SETMAGunmarked_df) ##Null model
+
+ModelAbun1 <- pcount(~1 ~ Type,SETMAGunmarked_df)
+
+ModelAbun2 <- pcount(~1 ~ ALTITUDE,SETMAGunmarked_df)
+
+ModelAbun3 <- pcount(~1 ~ Area_Basal,SETMAGunmarked_df)
+```
+## Seleccion de modelo de abundancia
+
+```{r}
+library(AICcmodavg)
+
+AbunModels <- list(ModelAbun0, ModelAbun1, ModelAbun2, ModelAbun3)
+
+AbunNames <- c("Nulo", "Type", "ALTITUDE", "Area_Basal")
+
+aictab(AbunModels, AbunNames, sort = TRUE)
+```
+## Resumen de los resultados
+
+```{r}
+summary(ModelAbun3)
+confint(ModelAbun3, type = "state", level = 0.9)
+```
+
+## Bondad de ajuste
+
+```{r, warning=FALSE, message=FALSE}
+
+
+fitstats <- function(Mod_global2) {
+  observed <- getY(Mod_global2@data)
+  expected <- fitted(Mod_global2)
+  resids <- residuals(Mod_global2)
+  sse <- sum(resids^2,na.rm=TRUE)
+  chisq <- sum((observed - expected)^2 / expected,na.rm=TRUE)
+  freeTuke <- sum((sqrt(observed) - sqrt(expected))^2,na.rm=TRUE)
+  out <- c(SSE=sse, Chisq=chisq, freemanTukey=freeTuke)
+  return(out)
+}
+
+(pb <- parboot(ModelAbun3, fitstats, nsim=100, report=1))
+
+cHat_pb <- pb@t0[2] / mean(pb@t.star[,2])
+
+
+MigGOF <- Nmix.gof.test(ModelAbun3, nsim = 100, report = 3)
+
+
+```
+
+
+## Prepar data para graficar
+
+```{r}
+Setmag_arear_basal <- data.frame(Area_Basal = seq(min(SetmagunmarkedReady$Area_Basal, na.rm = TRUE), max(SetmagunmarkedReady$Area_Basal, na.rm = TRUE), length.out = 100))
+                                 
+Setmag_pre_area_basal <- predict(ModelAbun3, newdata =SETMAG_arear_basal, type = "state")
+
+Setmag_pre_area_basal$Area_Basal <-SETMAG_arear_basal$Area_Basal 
+```
+
+
+## Graficar modelo
+
+```{r}
+ggplot(data=SETMAG_pre_area_basal, aes(x= Area_Basal, y= Predicted))+
+  geom_ribbon(aes(ymin= lower,
+                  ymax= upper), fill = "lightblue") +
+  geom_line(color= "black") +
+  labs(x = "Area Basal", 
+       y = "Abundancia")+
+  ggtitle("Relacion de Cardenilla pusilla versus el area basal") +
+  theme_classic()
+```
+
+
+::: 
+
+
+
+![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
