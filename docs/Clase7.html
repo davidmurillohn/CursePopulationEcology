@@ -98,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>En esta clase se obordara como utilizar Unmarked para modelar abundancia de especies para lo cuales se tomaran datos por medio de conteo por puntos. En la clase se explicara desde cero el uso de este paquete y paso a paso como ajustar, seleccionar, validar, interpretar y graficar el modelo, incluso la presancion de los datos para publicaciones cientificas.</p>
 <p>En esta clase, exploraremos el uso de Unmarked para modelar la abundancia de especies a partir de datos recopilados mediante conteo por puntos. Desde los fundamentos, explicaremos paso a paso cómo utilizar este paquete, cubriendo el proceso completo: desde el ajuste inicial del modelo hasta la selección, validación e interpretación de los resultados. También abordaremos la presentación de los datos para su inclusión en publicaciones científicas, asegurando un entendimiento completo y la capacidad de aplicar estos modelos de manera efectiva en contextos de investigación y divulgación científica.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Cargar base de datos</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Formatear base de datos a formato unmarked</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Crear variables de detectabilidad</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Crear variables de habitat (covariables)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Ajustar modelo</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">Seleccion de modelo</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false" href="">Bondad de ajuste</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-8" role="tab" aria-controls="tabset-1-8" aria-selected="false" href="">Prepar data para graficar</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-9-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-9" role="tab" aria-controls="tabset-1-9" aria-selected="false" href="">Graficar modelo</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Cargar base de datos</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Formatear base de datos a formato unmarked</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Crear variables de detectabilidad</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Crear variables de habitat (covariables)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Crear tabla unmarked</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">Ajustar modelo de deteccion</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-7-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-7" role="tab" aria-controls="tabset-1-7" aria-selected="false" href="">Seleccion de modelo de deteccion</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-8-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-8" role="tab" aria-controls="tabset-1-8" aria-selected="false" href="">Ajustar modelo de Abundancia</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-9-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-9" role="tab" aria-controls="tabset-1-9" aria-selected="false" href="">Seleccion de modelo de abundancia</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-10-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-10" role="tab" aria-controls="tabset-1-10" aria-selected="false" href="">Resumen de los resultados</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-11-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-11" role="tab" aria-controls="tabset-1-11" aria-selected="false" href="">Bondad de ajuste</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-12-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-12" role="tab" aria-controls="tabset-1-12" aria-selected="false" href="">Prepar data para graficar</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-13-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-13" role="tab" aria-controls="tabset-1-13" aria-selected="false" href="">Graficar modelo</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
@@ -197,37 +197,295 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Definir ocasiones de deteccion</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>CARPUS_y <span class="ot">&lt;-</span> CARPUSunmarkedReady[,<span class="dv">12</span><span class="sc">:</span><span class="dv">14</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># y[y &gt; 1] &lt;- 1</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Definir los variables asociados a la deteccion:</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>Fecha_CARPUS<span class="ot">=</span> <span class="fu">list</span>(<span class="at">Fecha=</span>CARPUSunmarkedReady[,<span class="dv">6</span><span class="sc">:</span><span class="dv">8</span>]) </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Y quien realizo la observacion</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>Hora_CARPUS<span class="ot">=</span> <span class="fu">list</span>(<span class="at">Hora=</span>CARPUSunmarkedReady[,<span class="dv">9</span><span class="sc">:</span><span class="dv">11</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Definir los variables de covarianza</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>CARPUS_siteCovs <span class="ot">&lt;-</span> CARPUSunmarkedReady[,<span class="fu">c</span>(<span class="st">"Type"</span>, <span class="st">"ALTITUDE"</span>, <span class="st">"Area_Basal"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 <div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(unmarked)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## CREAR DATA FRAME</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>CARPUSunmarked_df <span class="ot">&lt;-</span> <span class="fu">unmarkedFramePCount</span>(<span class="at">y =</span> CARPUS_y, <span class="at">siteCovs =</span> CARPUS_siteCovs, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">obsCovs=</span><span class="fu">c</span>(Fecha_CARPUS, Hora_CARPUS))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: siteCovs contains characters. Converting them to factors.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(CARPUSunmarked_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>unmarkedFrame Object
 
+44 sites
+Maximum number of observations per site: 3 
+Mean number of observations per site: 1.68 
+Sites with at least one detection: 22 
+
+Tabulation of y observations:
+   0    1    2    3 &lt;NA&gt; 
+  44   25    4    1   58 
+
+Site-level covariates:
+ Type      ALTITUDE      Area_Basal   
+ C:20   Min.   : 812   Min.   : 1.40  
+ F:24   1st Qu.: 952   1st Qu.:10.20  
+        Median :1148   Median :13.40  
+        Mean   :1138   Mean   :18.70  
+        3rd Qu.:1276   3rd Qu.:22.35  
+        Max.   :1622   Max.   :47.80  
+                       NA's   :1      
+
+Observation-level covariates:
+     Fecha            Hora       
+ Min.   :25.00   Min.   : 247.0  
+ 1st Qu.:62.25   1st Qu.: 826.0  
+ Median :77.00   Median : 947.5  
+ Mean   :71.91   Mean   : 969.2  
+ 3rd Qu.:85.00   3rd Qu.:1097.5  
+ Max.   :92.00   Max.   :1426.0  
+ NA's   :58      NA's   :58      </code></pre>
+</div>
+</div>
 </div>
 <div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### MODELAR DETECCION PRIMERO</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>ModelDet0 <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span><span class="dv">1</span> <span class="sc">~</span><span class="dv">1</span>, CARPUSunmarked_df) <span class="do">##Null model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pcount(~1 ~ 1, CARPUSunmarked_df): K was not specified and was set
+to 103.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ModelDet1 <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span>Fecha <span class="sc">~</span><span class="dv">1</span>, CARPUSunmarked_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pcount(~Fecha ~ 1, CARPUSunmarked_df): K was not specified and was
+set to 103.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Hessian is singular. Try providing starting values or using fewer
+covariates.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ModelDet2 <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span>Hora <span class="sc">~</span><span class="dv">1</span>, CARPUSunmarked_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pcount(~Hora ~ 1, CARPUSunmarked_df): K was not specified and was
+set to 103.
 
+Warning in pcount(~Hora ~ 1, CARPUSunmarked_df): Hessian is singular. Try
+providing starting values or using fewer covariates.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ModelDet3 <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span>Fecha <span class="sc">+</span> Hora <span class="sc">~</span><span class="dv">1</span>, CARPUSunmarked_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pcount(~Fecha + Hora ~ 1, CARPUSunmarked_df): K was not specified
+and was set to 103.
+
+Warning in pcount(~Fecha + Hora ~ 1, CARPUSunmarked_df): Hessian is singular.
+Try providing starting values or using fewer covariates.</code></pre>
+</div>
+</div>
 </div>
 <div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AICcmodavg)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>DetModels <span class="ot">&lt;-</span> <span class="fu">list</span>(ModelDet0, ModelDet1, ModelDet2, ModelDet3)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>DetNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Nulo"</span>, <span class="st">"Fecha"</span>, <span class="st">"Hora"</span>, <span class="st">"Fecha + Hora"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">aictab</span>(DetModels, DetNames, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model selection based on AICc:
 
+             K  AICc Delta_AICc AICcWt Cum.Wt     LL
+Nulo         2 94.73       0.00   0.58   0.58 -45.22
+Fecha        3 97.04       2.31   0.18   0.76 -45.22
+Hora         3 97.04       2.31   0.18   0.95 -45.22
+Fecha + Hora 4 99.47       4.73   0.05   1.00 -45.22</code></pre>
+</div>
+</div>
 </div>
 <div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
-
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">#### MODELAR DETECCION PRIMERO</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>ModelAbun0 <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span><span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>, CARPUSunmarked_df) <span class="do">##Null model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pcount(~1 ~ 1, CARPUSunmarked_df): K was not specified and was set
+to 103.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ModelAbun1 <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span><span class="dv">1</span> <span class="sc">~</span> Type, CARPUSunmarked_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pcount(~1 ~ Type, CARPUSunmarked_df): K was not specified and was
+set to 103.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>ModelAbun2 <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span><span class="dv">1</span> <span class="sc">~</span> ALTITUDE, CARPUSunmarked_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pcount(~1 ~ ALTITUDE, CARPUSunmarked_df): K was not specified and
+was set to 103.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ModelAbun3 <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span><span class="dv">1</span> <span class="sc">~</span> Area_Basal, CARPUSunmarked_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Some observations have been discarded because corresponding covariates
+were missing.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 1 sites have been discarded because of missing data.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in pcount(~1 ~ Area_Basal, CARPUSunmarked_df): K was not specified and
+was set to 103.</code></pre>
+</div>
+</div>
 </div>
 <div id="tabset-1-9" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-9-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AICcmodavg)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>AbunModels <span class="ot">&lt;-</span> <span class="fu">list</span>(ModelAbun0, ModelAbun1, ModelAbun2, ModelAbun3)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>AbunNames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Nulo"</span>, <span class="st">"Type"</span>, <span class="st">"ALTITUDE"</span>, <span class="st">"Area_Basal"</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="fu">aictab</span>(AbunModels, AbunNames, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model selection based on AICc:
 
+           K   AICc Delta_AICc AICcWt Cum.Wt     LL
+Area_Basal 3  93.08       0.00   0.58   0.58 -43.24
+Nulo       2  94.73       1.66   0.25   0.83 -45.22
+Type       3  95.51       2.43   0.17   1.00 -44.45
+ALTITUDE   3 119.80      26.72   0.00   1.00 -56.60</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-10" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-10-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ModelAbun3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+pcount(formula = ~1 ~ Area_Basal, data = CARPUSunmarked_df)
+
+Abundance (log-scale):
+            Estimate     SE     z P(&gt;|z|)
+(Intercept)  -0.9104 0.3655 -2.49  0.0128
+Area_Basal    0.0234 0.0138  1.69  0.0907
+
+Detection (logit-scale):
+ Estimate   SE     z P(&gt;|z|)
+     11.1 53.3 0.208   0.835
+
+AIC: 92.47558 
+Number of sites: 43
+ID of sites removed due to NA: 3
+optim convergence code: 0
+optim iterations: 62 
+Bootstrap iterations: 0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(ModelAbun3, <span class="at">type =</span> <span class="st">"state"</span>, <span class="at">level =</span> <span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         0.05        0.95
+lam(Int)        -1.5116026850 -0.30915757
+lam(Area_Basal)  0.0006449957  0.04610495</code></pre>
+</div>
+</div>
+</div>
+<div id="tabset-1-11" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-11-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>fitstats <span class="ot">&lt;-</span> <span class="cf">function</span>(Mod_global2) {</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  observed <span class="ot">&lt;-</span> <span class="fu">getY</span>(Mod_global2<span class="sc">@</span>data)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  expected <span class="ot">&lt;-</span> <span class="fu">fitted</span>(Mod_global2)</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  resids <span class="ot">&lt;-</span> <span class="fu">residuals</span>(Mod_global2)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  sse <span class="ot">&lt;-</span> <span class="fu">sum</span>(resids<span class="sc">^</span><span class="dv">2</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  chisq <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> expected,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  freeTuke <span class="ot">&lt;-</span> <span class="fu">sum</span>((<span class="fu">sqrt</span>(observed) <span class="sc">-</span> <span class="fu">sqrt</span>(expected))<span class="sc">^</span><span class="dv">2</span>,<span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">SSE=</span>sse, <span class="at">Chisq=</span>chisq, <span class="at">freemanTukey=</span>freeTuke)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>(pb <span class="ot">&lt;-</span> <span class="fu">parboot</span>(ModelAbun3, fitstats, <span class="at">nsim=</span><span class="dv">100</span>, <span class="at">report=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call: 
+parboot(object = ModelAbun3, statistic = fitstats, nsim = 100, report = 1)
+
+Parametric Bootstrap Statistics:
+               t0 mean(t0 - t_B) StdDev(t0 - t_B) Pr(t_B &gt; t0)
+SSE          30.5        -14.887            13.88        0.842
+Chisq        47.0        -23.834            20.17        0.891
+freemanTukey 28.2         -0.293             3.78        0.554
+
+t_B quantiles:
+             0% 2.5% 25% 50% 75% 97.5% 100%
+SSE          20   24  35  45  52    78   90
+Chisq        32   43  58  70  80   119  161
+freemanTukey 20   21  26  29  31    35   37
+
+t0 = Original statistic computed from data
+t_B = Vector of bootstrap samples</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>cHat_pb <span class="ot">&lt;-</span> pb<span class="sc">@</span>t0[<span class="dv">2</span>] <span class="sc">/</span> <span class="fu">mean</span>(pb<span class="sc">@</span>t.star[,<span class="dv">2</span>])</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>MigGOF <span class="ot">&lt;-</span> <span class="fu">Nmix.gof.test</span>(ModelAbun3, <span class="at">nsim =</span> <span class="dv">100</span>, <span class="at">report =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Clase7_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+<div id="tabset-1-12" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-12-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>CARPUS_arear_basal <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Area_Basal =</span> <span class="fu">seq</span>(<span class="fu">min</span>(CARPUSunmarkedReady<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="fu">max</span>(CARPUSunmarkedReady<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">length.out =</span> <span class="dv">100</span>))</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>                                 </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>Carpus_pre_area_basal <span class="ot">&lt;-</span> <span class="fu">predict</span>(ModelAbun3, <span class="at">newdata =</span> CARPUS_arear_basal, <span class="at">type =</span> <span class="st">"state"</span>)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>Carpus_pre_area_basal<span class="sc">$</span>Area_Basal <span class="ot">&lt;-</span> CARPUS_arear_basal<span class="sc">$</span>Area_Basal </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-13" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-13-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span> Carpus_pre_area_basal, <span class="fu">aes</span>(<span class="at">x=</span> Area_Basal, <span class="at">y=</span> Predicted))<span class="sc">+</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin=</span> lower,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ymax=</span> upper), <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Area Basal"</span>, </span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Abundancia"</span>)<span class="sc">+</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Relacion de Cardenilla pusilla versus el area basal"</span>) <span class="sc">+</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Clase7_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(unmarked)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mallard)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>mallardUMF <span class="ot">&lt;-</span> <span class="fu">unmarkedFramePCount</span>(mallard.y, <span class="at">siteCovs =</span> mallard.site,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="at">obsCovs =</span> mallard.obs)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>(fm.mallard <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span> ivel<span class="sc">+</span> date <span class="sc">+</span> <span class="fu">I</span>(date<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> length <span class="sc">+</span> elev <span class="sc">+</span> forest, mallardUMF, <span class="at">K=</span><span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(unmarked)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mallard)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>mallardUMF <span class="ot">&lt;-</span> <span class="fu">unmarkedFramePCount</span>(mallard.y, <span class="at">siteCovs =</span> mallard.site,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="at">obsCovs =</span> mallard.obs)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>(fm.mallard <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span> ivel<span class="sc">+</span> date <span class="sc">+</span> <span class="fu">I</span>(date<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> length <span class="sc">+</span> elev <span class="sc">+</span> forest, mallardUMF, <span class="at">K=</span><span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 4 sites have been discarded because of missing data.</code></pre>
 </div>
@@ -253,7 +511,7 @@ I(date^2)    0.00908 0.0886  0.103  0.9183
 
 AIC: 511.2066 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(fm.mallard.nb <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span> date <span class="sc">+</span> <span class="fu">I</span>(date<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> length <span class="sc">+</span> elev, <span class="at">mixture =</span> <span class="st">"NB"</span>, mallardUMF, <span class="at">K=</span><span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>(fm.mallard.nb <span class="ot">&lt;-</span> <span class="fu">pcount</span>(<span class="sc">~</span> date <span class="sc">+</span> <span class="fu">I</span>(date<span class="sc">^</span><span class="dv">2</span>) <span class="sc">~</span> length <span class="sc">+</span> elev, <span class="at">mixture =</span> <span class="st">"NB"</span>, mallardUMF, <span class="at">K=</span><span class="dv">30</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: 4 sites have been discarded because of missing data.</code></pre>
 </div>
@@ -283,7 +541,7 @@ AIC: 484.6365 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm.mallard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fm.mallard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:

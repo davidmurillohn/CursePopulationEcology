@@ -91,21 +91,157 @@ CARPUSunmarkedReady <- CARPUSunmarked %>%
 ## Crear variables de detectabilidad
 
 ```{r}
+## Definir ocasiones de deteccion
+CARPUS_y <- CARPUSunmarkedReady[,12:14]
+# y[y > 1] <- 1
+
+
+## Definir los variables asociados a la deteccion:
+
+
+Fecha_CARPUS= list(Fecha=CARPUSunmarkedReady[,6:8]) 
+
+# Y quien realizo la observacion
+
+Hora_CARPUS= list(Hora=CARPUSunmarkedReady[,9:11]) 
+
 
 ```
 
 
 ## Crear variables de habitat (covariables)
 
-## Ajustar modelo
+```{r}
+## Definir los variables de covarianza
 
-## Seleccion de modelo
+CARPUS_siteCovs <- CARPUSunmarkedReady[,c("Type", "ALTITUDE", "Area_Basal")]
+```
+
+## Crear tabla unmarked
+
+```{r}
+
+library(unmarked)
+
+## CREAR DATA FRAME
+CARPUSunmarked_df <- unmarkedFramePCount(y = CARPUS_y, siteCovs = CARPUS_siteCovs, 
+                                    obsCovs=c(Fecha_CARPUS, Hora_CARPUS))
+
+summary(CARPUSunmarked_df)
+
+```
+
+
+## Ajustar modelo de deteccion
+
+```{r}
+#### MODELAR DETECCION PRIMERO
+
+ModelDet0 <- pcount(~1 ~1, CARPUSunmarked_df) ##Null model
+
+ModelDet1 <- pcount(~Fecha ~1, CARPUSunmarked_df)
+
+ModelDet2 <- pcount(~Hora ~1, CARPUSunmarked_df)
+
+ModelDet3 <- pcount(~Fecha + Hora ~1, CARPUSunmarked_df)
+```
+
+
+
+## Seleccion de modelo de deteccion
+
+```{r}
+library(AICcmodavg)
+
+DetModels <- list(ModelDet0, ModelDet1, ModelDet2, ModelDet3)
+
+DetNames <- c("Nulo", "Fecha", "Hora", "Fecha + Hora")
+
+aictab(DetModels, DetNames, sort = TRUE)
+```
+
+## Ajustar modelo de Abundancia
+
+```{r}
+#### MODELAR DETECCION PRIMERO
+
+ModelAbun0 <- pcount(~1 ~ 1, CARPUSunmarked_df) ##Null model
+
+ModelAbun1 <- pcount(~1 ~ Type, CARPUSunmarked_df)
+
+ModelAbun2 <- pcount(~1 ~ ALTITUDE, CARPUSunmarked_df)
+
+ModelAbun3 <- pcount(~1 ~ Area_Basal, CARPUSunmarked_df)
+```
+## Seleccion de modelo de abundancia
+
+```{r}
+library(AICcmodavg)
+
+AbunModels <- list(ModelAbun0, ModelAbun1, ModelAbun2, ModelAbun3)
+
+AbunNames <- c("Nulo", "Type", "ALTITUDE", "Area_Basal")
+
+aictab(AbunModels, AbunNames, sort = TRUE)
+```
+## Resumen de los resultados
+
+```{r}
+summary(ModelAbun3)
+confint(ModelAbun3, type = "state", level = 0.9)
+```
 
 ## Bondad de ajuste
 
+```{r, warning=FALSE, message=FALSE}
+
+
+fitstats <- function(Mod_global2) {
+  observed <- getY(Mod_global2@data)
+  expected <- fitted(Mod_global2)
+  resids <- residuals(Mod_global2)
+  sse <- sum(resids^2,na.rm=TRUE)
+  chisq <- sum((observed - expected)^2 / expected,na.rm=TRUE)
+  freeTuke <- sum((sqrt(observed) - sqrt(expected))^2,na.rm=TRUE)
+  out <- c(SSE=sse, Chisq=chisq, freemanTukey=freeTuke)
+  return(out)
+}
+
+(pb <- parboot(ModelAbun3, fitstats, nsim=100, report=1))
+
+cHat_pb <- pb@t0[2] / mean(pb@t.star[,2])
+
+
+MigGOF <- Nmix.gof.test(ModelAbun3, nsim = 100, report = 3)
+
+
+```
+
+
 ## Prepar data para graficar
 
+```{r}
+CARPUS_arear_basal <- data.frame(Area_Basal = seq(min(CARPUSunmarkedReady$Area_Basal, na.rm = TRUE), max(CARPUSunmarkedReady$Area_Basal, na.rm = TRUE), length.out = 100))
+                                 
+Carpus_pre_area_basal <- predict(ModelAbun3, newdata = CARPUS_arear_basal, type = "state")
+
+Carpus_pre_area_basal$Area_Basal <- CARPUS_arear_basal$Area_Basal 
+```
+
+
 ## Graficar modelo
+
+```{r}
+ggplot(data= Carpus_pre_area_basal, aes(x= Area_Basal, y= Predicted))+
+  geom_ribbon(aes(ymin= lower,
+                  ymax= upper), fill = "lightblue") +
+  geom_line(color= "black") +
+  labs(x = "Area Basal", 
+       y = "Abundancia")+
+  ggtitle("Relacion de Cardenilla pusilla versus el area basal") +
+  theme_classic()
+```
+
 
 ::: 
 
