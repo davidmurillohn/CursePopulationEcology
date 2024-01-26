@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 ---
-title: "Clase 7- Uso de Unmarked: Estimación de abundancia por conteo por puntos"
+title: "Clase 5: Uso de Unmarked, Estimación de abundancia por conteo por puntos"
 format: html
 editor: visual
 ---
@@ -10,6 +10,82 @@ Unmarked se destaca como uno de los paquetes más populares para ajustar modelos
 En esta clase se obordara como utilizar Unmarked para modelar abundancia de especies para lo cuales se tomaran datos por medio de conteo por puntos. En la clase se explicara desde cero el uso de este paquete y paso a paso como ajustar, seleccionar, validar, interpretar y graficar el modelo, incluso la presancion de los datos para publicaciones cientificas.
 
 En esta clase, exploraremos el uso de Unmarked para modelar la abundancia de especies a partir de datos recopilados mediante conteo por puntos. Desde los fundamentos, explicaremos paso a paso cómo utilizar este paquete, cubriendo el proceso completo: desde el ajuste inicial del modelo hasta la selección, validación e interpretación de los resultados. También abordaremos la presentación de los datos para su inclusión en publicaciones científicas, asegurando un entendimiento completo y la capacidad de aplicar estos modelos de manera efectiva en contextos de investigación y divulgación científica.
+
+::: panel-tabset
+
+## Cargar base de datos
+
+```{r}
+Aves <- read.csv("data/AvesHabitatUm.csv")
+```
+
+Seleccionar variables necesarias
+
+```{r}
+
+library(tidyverse)
+
+AvesLimpia <- Aves %>% 
+  select(Site, VEGID, Type, ALTITUDE, Area_Basal, Hora, Fecha, Cielo, Viento, Especies, Abundancia) %>% 
+  filter(Especies %in% c("CARPUS", "SETMAG")) %>% 
+  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y")) %>% 
+  mutate(Hora = as.integer(str_replace(Hora, ":", "")))
+  
+AvesOrdenadas <- AvesLimpia %>%
+  arrange(Site, Especies, Fecha, Hora) %>%
+  group_by(Site, Especies) %>%
+  mutate(Orden = factor(row_number())) %>% 
+  filter(Orden %in% c(1,2,3))
+
+head(AvesOrdenadas)
+```
+
+
+## Formatear base de datos a formato unmarked
+
+Pasar cada replica en columnas diferentes de acuerdo a la especie de ave
+
+```{r}
+
+
+# Crear un conjunto de datos con todos los niveles de Orden por Site
+AvesCompletas <- AvesOrdenadas %>%
+  mutate(Orden = as.numeric(Orden)) %>% 
+  complete(Orden = 1:3, fill = list(Abundancia = 50))
+
+# Pivot_wider
+AvesPivot <- AvesCompletas %>%
+  pivot_wider(names_from = c(Especies, Orden), values_from = Abundancia, values_fill = 0) %>% 
+  mutate(SETMAG_1 = replace(SETMAG_1, SETMAG_1 == 50, NA)) %>% 
+  mutate(SETMAG_2 = replace(SETMAG_2, SETMAG_2 == 50, NA)) %>% 
+  mutate(SETMAG_3 = replace(SETMAG_3, SETMAG_3 == 50, NA)) %>% 
+  mutate(CARPUS_1 = replace(CARPUS_1, CARPUS_1 == 50, NA)) %>% 
+  mutate(CARPUS_2 = replace(CARPUS_2, CARPUS_2 == 50, NA)) %>% 
+  mutate(CARPUS_3 = replace(CARPUS_3, CARPUS_3 == 50, NA)) 
+
+
+
+
+```
+
+
+## Crear variables de detectabilidad
+
+## Crear variables de habitat (covariables)
+
+## Ajustar modelo
+
+## Seleccion de modelo
+
+## Bondad de ajuste
+
+## Prepar data para graficar
+
+## Graficar modelo
+
+::: 
+
+
 
 ```{r}
 library(unmarked)
@@ -29,37 +105,4 @@ obsCovs = mallard.obs)
 summary(fm.mallard)
 ```
 
-![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
-=======
----
-title: "Clase 7- Uso de Unmarked: Estimación de abundancia por conteo por puntos"
-format: html
-editor: visual
----
-
-Unmarked se destaca como uno de los paquetes más populares para ajustar modelos de abundancia que incorporan variables de detección. A diferencia de Distance, este paquete se caracteriza por su mayor complejidad y una versatilidad notable en la capacidad de ajustar modelos más detallados. Requiere un nivel de conocimiento en R al menos intermedio para aprovechar plenamente su potencial, debido a su complejidad y las múltiples opciones de modelado que ofrece.
-
-En esta clase se obordara como utilizar Unmarked para modelar abundancia de especies para lo cuales se tomaran datos por medio de conteo por puntos. En la clase se explicara desde cero el uso de este paquete y paso a paso como ajustar, seleccionar, validar, interpretar y graficar el modelo, incluso la presancion de los datos para publicaciones cientificas.
-
-En esta clase, exploraremos el uso de Unmarked para modelar la abundancia de especies a partir de datos recopilados mediante conteo por puntos. Desde los fundamentos, explicaremos paso a paso cómo utilizar este paquete, cubriendo el proceso completo: desde el ajuste inicial del modelo hasta la selección, validación e interpretación de los resultados. También abordaremos la presentación de los datos para su inclusión en publicaciones científicas, asegurando un entendimiento completo y la capacidad de aplicar estos modelos de manera efectiva en contextos de investigación y divulgación científica.
-
-```{r}
-library(unmarked)
-
-data(mallard)
-
-mallardUMF <- unmarkedFramePCount(mallard.y, siteCovs = mallard.site,
-obsCovs = mallard.obs)
-
-(fm.mallard <- pcount(~ ivel+ date + I(date^2) ~ length + elev + forest, mallardUMF, K=30))
-
-(fm.mallard.nb <- pcount(~ date + I(date^2) ~ length + elev, mixture = "NB", mallardUMF, K=30))
-
-```
-
-```{r}
-summary(fm.mallard)
-```
-
-![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
->>>>>>> 082fd59577c8fd42a960f68cb8c672c6e2b0e9ad
+![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)

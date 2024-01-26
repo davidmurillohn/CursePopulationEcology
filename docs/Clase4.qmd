@@ -1,4 +1,3 @@
-
 ---
 title: "Clase 4: Estimadores de abundancia parte 2, usando distance"
 format: html
@@ -6,22 +5,17 @@ editor: visual
 ---
 
 ::: panel-tabset
-
 ## Conteo por puntos
 
 Los conteos por puntos son una técnica comúnmente utilizada en ecología y biología para estimar la abundancia de organismos en un área determinada. En este método, se seleccionan puntos de muestreo dentro del área de estudio y se registra el número de individuos de la especie de interés que se encuentran en cada punto durante un período de tiempo específico. Estos conteos pueden realizarse de manera visual o auditiva, según la especie y las condiciones del entorno. Posteriormente, los datos recopilados se utilizan para calcular una estimación de la densidad o abundancia total de la población en el área de estudio, mediante técnicas estadísticas como extrapolación o interpolación. Los conteos por puntos son una herramienta valiosa para monitorear poblaciones y comprender la distribución espacial de los organismos en su hábitat.
 
-Para estimar la abundancia utilizamos la siguiente formula: 
+Para estimar la abundancia utilizamos la siguiente formula:
 
 $$N = \frac{A{\sum x_i}}{n \pi r^2}$$
 
 Donde:
 
-*N* = Abundancia de la población
-*A* = Área
-*x* = Número de aves observadas
-*n* = Total de puntos de conteo
-*r* = Radio del punto de conteo
+*N* = Abundancia de la población *A* = Área *x* = Número de aves observadas *n* = Total de puntos de conteo *r* = Radio del punto de conteo
 
 Ejercicio
 
@@ -41,10 +35,9 @@ r= 0.050
 AbundanciaConteo(A=A, x=x, n=n, r=r)
 ```
 
-
 ## Distance
 
-Estimar la abundancia y distribución espacial de poblaciones animales y vegetales es esencial para la conservación y gestión. El paquete R *Distance* implementa métodos de muestreo de distancia para estimar la abundancia. 
+Estimar la abundancia y distribución espacial de poblaciones animales y vegetales es esencial para la conservación y gestión. El paquete R *Distance* implementa métodos de muestreo de distancia para estimar la abundancia.
 
 "Describimos cómo los usuarios pueden obtener estimaciones de abundancia (y densidad) utilizando el paquete, así como documentando los enlaces que proporciona con otros paquetes R más especializados. También demostramos cómo Distance proporciona una vía de migración desde software anterior, lo que nos permite ofrecer métodos de vanguardia a los usuarios más rápidamente". <https://www.jstatsoft.org/article/view/v089i01>
 
@@ -52,7 +45,6 @@ Estimar la abundancia y distribución espacial de poblaciones animales y vegetal
 library(Distance)
 
 ```
-
 
 ## Minke whales
 
@@ -62,6 +54,7 @@ Los datos de transecto lineal han sido simulados a partir de modelos ajustados a
 data("minke")
 head(minke)
 ```
+
 Detection functions
 
 > La detectabilidad en conteos por puntos se refiere a la probabilidad de detectar un organismo presente en un punto de muestreo durante un período de observación determinado. Esta detectabilidad puede variar según diversas condiciones, como el comportamiento del organismo, la estacionalidad, el hábitat y las habilidades del observador. Comprender y estimar la detectabilidad es crucial para obtener estimaciones precisas de la abundancia de una especie utilizando conteos por puntos, ya que afecta directamente a la eficacia del método de muestreo y a la interpretación de los datos recopilados. Se pueden emplear diversas técnicas y modelos estadísticos para estimar la detectabilidad y corregir los sesgos que pueda introducir en las estimaciones de abundancia.
@@ -85,7 +78,6 @@ plot(minke_hrcos)
 summary(minke_hrcos)
 ```
 
-
 > Otras series de ajuste pueden ser seleccionadas utilizando el argumento de ajuste y se pueden establecer órdenes específicos de ajustes utilizando el argumento order. Por ejemplo, para especificar un modelo uniforme con ajustes coseno de orden 1 y 2, podemos escribir:
 
 ```{r}
@@ -98,8 +90,6 @@ plot(minke_unifcos)
 summary(minke_unifcos)
 ```
 
-
-
 ## Amakihi
 
 ```{r}
@@ -107,16 +97,14 @@ data("amakihi")
 head(amakihi)
 ```
 
-
-
 El conjunto de datos de transectos de puntos consiste en 1485 observaciones de Amakihi (Hemignathus virens; un pájaro cantor hawaiano), recolectadas en 41 puntos entre 1992 y 1995. Los datos incluyen distancias y dos covariables recolectadas durante la encuesta: observador (un factor de tres niveles) y tiempo después del amanecer (transformado a minutos (continuo) o horas (factor)). Los datos son analizados de manera exhaustiva en Marques et al. (2007).
-
 
 ```{r}
 amakihi_hr_obs <- ds(amakihi, truncation = 82.5, transect = "point", key = "hr", formula = ~ OBs)
 
 amakihi_hr_obs_mas <- ds(amakihi, truncation = 82.5, transect = "point", key = "hr", formula = ~OBs + MAS)
 ```
+
 ```{r}
 plot(amakihi_hr_obs)
 ```
@@ -138,40 +126,33 @@ gof_ds(amakihi_hn)
 gof_ds(amakihi_hr_obs)
 ```
 
-##  Model selection
+## Model selection
 
 El AIC, o Criterio de Información de Akaike por sus siglas en inglés (Akaike Information Criterion), es una herramienta ampliamente utilizada en estadística para la selección de modelos. Su objetivo es encontrar el modelo que mejor balancee el ajuste a los datos y la complejidad del modelo. En resumen, el AIC penaliza la complejidad del modelo, premiando modelos que se ajustan bien a los datos con el menor número de parámetros.
 
 La idea central es comparar diferentes modelos y seleccionar aquel que tenga el valor más bajo de AIC. Cuando se comparan modelos, un valor de AIC menor indica un mejor compromiso entre ajuste y complejidad. Es importante tener en cuenta que el AIC no proporciona una medida absoluta de la bondad de ajuste, sino que se utiliza principalmente para comparar modelos entre sí.
 
-En la práctica, se calcula el AIC para cada modelo ajustado a los datos y se selecciona el modelo con el valor más bajo de AIC como el más adecuado para describir los datos. Esta técnica de selección de modelos con AIC es ampliamente utilizada en diversas disciplinas, incluyendo la econometría, la biología, la ecología y la ingeniería, entre 
+En la práctica, se calcula el AIC para cada modelo ajustado a los datos y se selecciona el modelo con el valor más bajo de AIC como el más adecuado para describir los datos. Esta técnica de selección de modelos con AIC es ampliamente utilizada en diversas disciplinas, incluyendo la econometría, la biología, la ecología y la ingeniería, entre
 
 ```{r}
 summarize_ds_models(amakihi_hn, amakihi_hr_obs, amakihi_hr_obs_mas)
 ```
 
->  Resumen de los modelos de función de detección ajustados a los datos de amakihi. "CvM" significa Cramér-von Mises, Pa es la detectabilidad promedio (consulte "Estimación de la abundancia y la varianza"), se es el error estándar. Los modelos están ordenados según el AIC.
+> Resumen de los modelos de función de detección ajustados a los datos de amakihi. "CvM" significa Cramér-von Mises, Pa es la detectabilidad promedio (consulte "Estimación de la abundancia y la varianza"), se es el error estándar. Los modelos están ordenados según el AIC.
 
-##  Estimación de la abundancia y la varianza
+## Estimación de la abundancia y la varianza
 
-Regresando a los datos de ballena minke, tenemos la información necesaria para calcular A y a como se mencionó anteriormente, por lo que podemos estimar la abundancia y su varianza. Cuando proporcionamos datos a ds en el formato "flatfile" dado anteriormente, ds calculará automáticamente las estimaciones de abundancia basadas en la información de la encuesta en los datos.
-Habiendo ajustado previamente un modelo a los datos de ballena minke, podemos ver los resultados de la estimación de la abundancia al visualizar el resumen del modelo:
+Regresando a los datos de ballena minke, tenemos la información necesaria para calcular A y a como se mencionó anteriormente, por lo que podemos estimar la abundancia y su varianza. Cuando proporcionamos datos a ds en el formato "flatfile" dado anteriormente, ds calculará automáticamente las estimaciones de abundancia basadas en la información de la encuesta en los datos. Habiendo ajustado previamente un modelo a los datos de ballena minke, podemos ver los resultados de la estimación de la abundancia al visualizar el resumen del modelo:
 
 ```{r}
 summary(minke_hn)
 ```
 
-- Estadísticas resumidas: proporcionando las áreas, áreas cubiertas, esfuerzo, número de observaciones, número de transectos, tasa de encuentro, su error estándar y coeficiente de variación para cada estrato.
+-   Estadísticas resumidas: proporcionando las áreas, áreas cubiertas, esfuerzo, número de observaciones, número de transectos, tasa de encuentro, su error estándar y coeficiente de variación para cada estrato.
 
-- Abundancia: proporcionando estimaciones, errores estándar, coeficientes de variación, intervalos de confianza inferiores y superiores, y finalmente los grados de libertad para la estimación de abundancia de cada estrato.
+-   Abundancia: proporcionando estimaciones, errores estándar, coeficientes de variación, intervalos de confianza inferiores y superiores, y finalmente los grados de libertad para la estimación de abundancia de cada estrato.
 
-- Densidad: lista las mismas estadísticas que Abundancia pero para una estimación de densidad.
-
-
-
-
-
-
+-   Densidad: lista las mismas estadísticas que Abundancia pero para una estimación de densidad.
 
 ```{r}
 minke_table <- summary(minke_hn)$dht$individuals$N
@@ -185,6 +166,7 @@ minke_table$IC95 <- 1.96 * minke_table$ES/sqrt(n)
 ```{r}
 minke_table
 ```
+
 ## Representacion grafica de los resultados
 
 ```{r}
@@ -196,10 +178,6 @@ ggplot(data= minke_table, aes(x= Stratum, y= Abundancia))+
                     ymax= Abundancia + IC95))+
   theme_classic()
 ```
-
-
-
 :::
 
-
-![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
+![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)

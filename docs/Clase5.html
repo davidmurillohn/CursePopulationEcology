@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Curso Ecología de Poblaciones Aplicada</title>
+<title>Clase 9: Supervivencia de nido</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,22 +20,55 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
-<script src="index_files/libs/quarto-html/quarto.js"></script>
-<script src="index_files/libs/quarto-html/popper.min.js"></script>
-<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="index_files/libs/quarto-html/anchor.min.js"></script>
-<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Clase5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Clase5_files/libs/quarto-html/quarto.js"></script>
+<script src="Clase5_files/libs/quarto-html/popper.min.js"></script>
+<script src="Clase5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Clase5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Clase5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Clase5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Clase5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Clase5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Clase5_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="fullcontent">
@@ -46,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Curso Ecología de Poblaciones Aplicada</h1>
+<h1 class="title">Clase 9: Supervivencia de nido</h1>
 </div>
 
 
@@ -61,30 +94,63 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introduccion" class="level2">
-<h2 class="anchored" data-anchor-id="introduccion">Introduccion</h2>
-<p>Este curso está diseñado para estudiantes y profesionales en áreas relacionadas con la Ecología, Conservación y Manejo de Recursos, entre otras disciplinas afines.</p>
-<p>El propósito principal de este curso es servir como una guía que permita a los estudiantes desarrollar, interpretar e implementar técnicas de análisis de datos centradas en la Ecología de Poblaciones.</p>
-<p><a href="Asiganciones.html">Asignaciones</a></p>
-<p><a href="Clase1.html">Clase 1- Introducción al curso</a></p>
-<p><a href="Clase2.html">Clase 2- Crecimiento poblacional</a></p>
-<p><a href="Clase3b.html">Clase 3- Regulación de las poblaciones y tamaño poblacional</a></p>
-<p><a href="Clase4.html">Clase 4- Estimadores de abundancia y Uso de Distance</a></p>
-<p><a href="Clase7.html">Clase 5- Uso de Unmarked: Estimación de abundancia por conteo por puntos</a></p>
-<p><a href="Clase8.html">Clase 6- Uso de Unmarked: Estimación de abundancia por transecto</a></p>
-<p><a href="Clase9.html">Clase 7- Introducción a spAbundance</a></p>
-<p><a href="Clase5.html">Clase 8- Uso de Rmark: Captura-Recaptura</a></p>
-<p><a href="Clase5.html">Clase 9- Uso de Rmark: Supervivencia de nido</a></p>
-<p><a href="Clase10.html">Clase 10- Metapoblaciones, estructura espacial y Análisis de viabilidad poblacional</a></p>
-<p><em>No dude en consultarnos ante cualquier inconveniente que surja durante el curso. Puede contactarnos a través de admi@hnbiology.org.</em></p>
+<p>La supervivencia de nidos es un área clave en la ecología de las aves. En términos generales, se mide la probabilidad de que un nido con huevos o crías llegue a producir individuos voladores. El enfoque de Manfield es un método simple que considera la proporción de nidos que tienen éxito.</p>
+<p>Por otro lado, el enfoque RMark para la supervivencia de nidos implica modelos más sofisticados, utilizando técnicas estadísticas avanzadas para tener en cuenta variables específicas como el momento de la temporada, el efecto del depredador, la ubicación del nido, entre otros factores. Este método permite análisis detallados y precisos de la supervivencia de los nidos.</p>
+<p>Para esta clase utilizaremos el paquete Rmark</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RMark)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'RMark' was built under R version 4.3.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>This is RMark 3.0.0
+ Documentation available at http://www.phidot.org/software/mark/rmark/RMarkDocumentation.zip</code></pre>
+</div>
+</div>
+<p>Necesitamos también cargar una base de datos que esté correctamente formateada para su uso.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mallard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En ocasiones, será necesario realizar una preparación inicial de nuestros datos antes de proceder.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mallard<span class="sc">$</span>habitat <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(mallard<span class="sc">$</span>Native <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Native"</span>,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ifelse</span>(mallard<span class="sc">$</span>Planted <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Planted"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(mallard<span class="sc">$</span>Roadside <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Roadside"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Wetland"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>También será necesario ajustar la base de datos para que esté en un formato compatible con RMark.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mallard.pr <span class="ot">&lt;-</span> <span class="fu">process.data</span>(mallard,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nocc=</span><span class="dv">90</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">model=</span><span class="st">"Nest"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">groups=</span>(<span class="st">"habitat"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in process.data(mallard, nocc = 90, model = "Nest", groups = ("habitat")): 
+  habitat  is not a factor variable. Coercing to factor.</code></pre>
+</div>
+</div>
+<p>Por último, podremos emplear un modelo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Model1 <span class="ot">&lt;-</span> <span class="fu">mark</span>(<span class="at">data=</span> mallard.pr, <span class="at">model=</span> <span class="st">"Nest"</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">model.parameters =</span> <span class="fu">list</span>(<span class="at">S=</span> <span class="fu">list</span>(<span class="at">formula =</span> Fate <span class="sc">~</span> NestAge <span class="sc">+</span> PpnGrass)), <span class="at">nocc =</span> <span class="dv">40</span>, <span class="at">threads =</span> <span class="dv">2</span>, <span class="at">delete =</span> <span class="cn">TRUE</span> ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Claro, ahora podemos representar los resultados en un gráfico para una interpretación más clara.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in find.covariates(Model1, mallard): No value given for data argument
+so any covariate values are set to 0.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Clase5_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>En el curso se detallara cada uno de los pasos para lograr a desarrollar el modelo, su interpretacion y su implementacion en casos reales.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">HN Biology Investigation Academy</figcaption>
 </figure>
 </div>
-<p>nvestigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)</p>
-</section>
 
 </main>
 <!-- /main column -->
