@@ -247,22 +247,4 @@ ggplot(data= Carpus_pre_area_basal, aes(x= Area_Basal, y= Predicted))+
 
 
 
-```{r}
-library(unmarked)
-
-data(mallard)
-
-mallardUMF <- unmarkedFramePCount(mallard.y, siteCovs = mallard.site,
-obsCovs = mallard.obs)
-
-(fm.mallard <- pcount(~ ivel+ date + I(date^2) ~ length + elev + forest, mallardUMF, K=30))
-
-(fm.mallard.nb <- pcount(~ date + I(date^2) ~ length + elev, mixture = "NB", mallardUMF, K=30))
-
-```
-
-```{r}
-summary(fm.mallard)
-```
-
 ![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
