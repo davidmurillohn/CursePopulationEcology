@@ -1,4 +1,3 @@
-
 ---
 title: "Clase 9: Supervivencia de nido"
 format: html
@@ -75,5 +74,4 @@ ggplot(AgePpn.survival, aes(x = Age, y = DSR)) +
 
 En el curso se detallara cada uno de los pasos para lograr a desarrollar el modelo, su interpretacion y su implementacion en casos reales.
 
-![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
-
+![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)

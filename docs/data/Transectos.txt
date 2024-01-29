@@ -1,0 +1,995 @@
+Sitio	Tipo_F	Punto_Inicial	Fecha	Visita	Hora_I	Hora_F	Especie	Comportamiento	Sustrato	Distancia	DistanciaBosque	Sexo	Deteccion	Observador	Observaciones
+F6	DAI	DAIB	4/1/2023	3	655	705	Ninguna							DM	
+F10	DAI	DAIC	4/1/2023	3	842	855	HYLMUS			60	50		Song	DM	
+F1	DAI	DAIC	11/1/2023	3	1050	1054	LEPVER	Posada	Subcanopy	2	40		Visual	DM	
+F1	DAI	DAIC	11/1/2023	3	1050	1054	LEPVER	Posada	Subcanopy	7	28		Visual	DM	
+F1	DAI	DAIC	11/1/2023	3	1050	1054	LEPVER						Song	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	SETMAG	Forrageando	Dosel	5	40		Visual	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	EMPIDONAX	Forrageando	Dosel	5	40		Visual	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	VERCHR	Forrageando	Dosel	10	20		Visual	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	VERCYA	Forrageando	Dosel	10	20		Visual	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	SETPEN	Forrageando	Dosel	10	20		Visual	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	SETPET	Forrageando	Dosel	10	20		Visual	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	SETRUT	Forrageando	Dosel	10	20		Visual	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	MNIVAR	Forrageando	Dosel	10	20		Visual	DM	
+F33	DAI	DAIC	11/1/2023	3	645	700	DUMCAR						Song	DM	
+F15	DAI	DAIB	10/1/2023	3	1103	1009	EMPIDONAX	Posada	Subcanopy	7	-48		Visual	DM	
+F24	DAI	DAIC	6/1/2023	3	647	656	SETMAG	Cantando	Subcanopy	3	40		Visual	DM	
+F24	DAI	DAIC	6/1/2023	3	647	656	RAMSUL	Posada	Dosel	40	0		Visual	DM	
+F24	DAI	DAIC	6/1/2023	3	647	656	RAMSUL	Posada	Dosel	40	0		Visual	DM	
+F21	DAI	DAIB	6/1/2023	3	1019	1024	Ninguna							DM	
+F13	DAI	DAIB	5/1/2023	3	922	927	Ninguna							DM	
+F54	DAI	DAIB	5/1/2023	3	755	804	PSAMON	Cantando	Dosel	35	35		Visual	DM	
+F4	DAI	DAIB	9/1/2023	3	714	725	CARPUS	Cantando	Sotobosque	5	-30		Visual	DM	
+F4	DAI	DAIB	9/1/2023	3	714	725	PSAMON						Song	DM	
+F54	DAI	DAIC	14/1/2023	3	1010	1019	Ninguna							DM	
+F33	DAI	DAIB	9/1/2023	3	854	901	Ninguna							DM	
+F54	DAI	DAIC	20/8/2022	2	627	633	Ninguna							DM	
+F8	DAI	DAIC	20/8/2022	2	756	802	Ninguna							DM	
+F7	DAI	DAIC	20/8/2022	2	856	901	Ninguna							DM	
+F22	DAI	DAIC	21/8/2022	2	605	611	Ninguna							DM	
+F10	DAI	DAIB	21/8/2022	2	644		HENLEUCOPHYS	Cantando		5	-30		Song	DM	
+F10	DAI	DAIB	21/8/2022	2	644		RAMSUL	Cantando		30	-25		Song	DM	
+F10	DAI	DAIB	21/8/2022	2	644		PSAMON	Posada	Dosel		100		Visual	DM	
+F10	DAI	DAIB	21/8/2022	2	644		PSAWAG	Posada	Dosel		80		Visual	DM	
+F10	DAI	DAIB	21/8/2022	2	644		PSAWAG	Posada	Dosel		80		Visual	DM	
+F10	DAI	DAIB	21/8/2022	2	644		PSAWAG	Posada	Dosel		80		Visual	DM	
+F6	DAI	DAIC	21/8/2022	2	745	751	PSAMON						Song	DM	
+F23	DAI	DAIB	19/8/2022	2	630	638	AULPRA	Posada	Dosel	3	-40		Visual	DM	
+F23	DAI	DAIB	19/8/2022	2	630	638	RAMSUL						Song	DM	
+F23	DAI	DAIB	19/8/2022	2	630	638	DIVDIV						Song	DM	
+F33	DAI	DAIC	19/8/2022	2	819	830	LEPVER						Song	DM	
+F33	DAI	DAIC	19/8/2022	2	819	830	RAMSUL				25		Song	DM	
+F33	DAI	DAIC	19/8/2022	2	819	830	PATFLA			70	25		Visual	DM	
+F33	DAI	DAIC	19/8/2022	2	819	830	ATLALB	Forrageando	Sotobosque	3	0		Visual	DM	
+F33	DAI	DAIC	19/8/2022	2	819	830	CATAUR	Volando					Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	MIOOLE			5	0		Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	MIOOLE			5	0		Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	MELFOR			60	15		Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	MELFOR			60	15		Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	MELFOR			60	15		Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	RAMSUL			0	0		Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	AULPRA			20	-1		Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	RAMSUL			0	0		Visual	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	PATFLA						Song	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	TITSEM						Song	DM	
+F4	DAI	DAIC	19/8/2022	2	938	950	TURGRA			20	-50		Visual	DM	
+F54	DAI	DAIB	19/82022	2	1042	1047	RUPMAG						Song	DM	
+F9	DAI	DAIC	18/8/2022	2	617	624	PIOSEN			10	30		Visual	DM	
+F9	DAI	DAIC	18/8/2022	2	617	624	PIOSEN			10	30		Visual	DM	
+F25	DAI	DAIB	18/8/2022	2	804	811	Ninguna							DM	
+F26	DAI	DAIB	18/8/2022	2	910	917	PIACAY			10	-20		Visual	DM	
+F26	DAI	DAIB	18/8/2022	2	910	917	PIACAY			10	0		Visual	DM	
+F26	DAI	DAIB	18/8/2022	2	910	917	PSAMON			5	15		Visual	DM	
+F26	DAI	DAIB	18/8/2022	2	910	917	DIVDIV						Song	DM	
+F26	DAI	DAIB	18/8/2022	2	910	917	PSAWAG			30	30		Visual	DM	
+F21	DAI	DAIB	17/8/2022	2	625	634	PATFLA			50	-10		Visual	DM	
+F21	DAI	DAIB	17/8/2022	2	625	634	SALMAX			10	0		Visual	DM	
+F21	DAI	DAIB	17/8/2022	2	625	634	PSAMON			70	-5		Visual	DM	
+F13	DAI	DAIC	17/8/2022	2	736	745	ELAFOR	Volando					Visual	DM	
+F13	DAI	DAIC	17/8/2022	2	736	745	ELAFOR	Volando					Visual	DM	
+F13	DAI	DAIC	17/8/2022	2	736	745	ELAFOR	Volando					Visual	DM	
+F13	DAI	DAIC	17/8/2022	2	736	745	ELAFOR	Volando					Visual	DM	
+F13	DAI	DAIC	17/8/2022	2	736	745	ELAFOR	Volando					Visual	DM	
+F13	DAI	DAIC	17/8/2022	2	736	745	ELAFOR	Volando					Visual	DM	
+F24	DAI	DAIC	17/8/2022	2	854	902	DIVDIV						Song	DM	
+F24	DAI	DAIC	17/8/2022	2	854	902	GLABRA						Song	DM	
+F24	DAI	DAIC	17/8/2022	2	854	902	LEPVER						Song	DM	
+F15	DAI	DAIB	16/8/2022	2	547	555	DIVDIV			15	-30		Song	DM	
+F33	DAI	DAIC	16/8/2022	2	718	729	PITSUL			20	45		Song	DM	
+F33	DAI	DAIC	16/8/2022	2	718	729	MELAUR						Song	DM	
+F1	DAI	DAIC	18/8/2022	2	821	828	Ninguna							DM	
+F26	DAI	DAIC	9/6/2022	1	1050	1054	DIVDIV	Volando		30			Visual	DM	
+F26	DAI	DAIC	9/6/2022	1	1050	1054	DIVDIV			20	25		Song	DM	
+F25	DAI	DAIB	9/6/2022	1	1156	1202	DIVDIV						Song	DM	
+F14	DAI	DAIC	3/5/2022	1	625	635	PATFLA			10	40		Visual	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	MELAUR			27			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	DIVDIV			38			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	LEPVER			40			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	XIPFLA			40			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	DIVDIV			25			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	DIVDIV			30			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	TROCOL			45			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	TROAED			35			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	EUPNAN			25			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	MELAUR			28			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	AMAALB			40			Song	CAAF y MAPD	
+F14	DAI	DAIC	3/5/2022	1	625	635	PSAMON			15	-25		Visual	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	PHASTR			16			Song	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	LEPVER			48			Song	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	MELAUR						Song	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	SALGRA			34			Song	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	DIVDIV			37			Song	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	CONVIR			20			Song	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	PATFLA			78			Visual	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	TURGRA			10			Song	CAAF y MAPD	
+F9	DAI	DAIB	6/5/2022	1	1004	1014	SALMAX			50			Song	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	PATFLA			40			Song	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	PHEMAC			26			Song	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	ANTPRE			8	30		Visual	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	PSAMON			23	23		Visual	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	DIVDIV			35	13		Visual	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	SALGRA			20			Song	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	BASRUF			20	-20		Visual	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	DIVDIV						Song	CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	PSAMON							CAAF y MAPD	
+F54	DAI	DAIB	12/5/2022	1	800	810	PHEMAC			20			Song	CAAF y MAPD	
+F6	DAI	DAIB	25/5/2022	1	631	640	Ninguna							DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			20	45		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			20	45		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			20	45		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			20	45		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			20	45		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			50	0		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			50	0		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			50	0		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			50	0		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			50	0		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	PSAWAG			50	0		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	AULPRA			10	-10		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	ZENASI			12	-10		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	ZENASI			12	-10		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	ZENASI			12	-10		Visual	DM	
+F10	DAI	DAIC	25/5/2022	1	740	750	MELAUR			12	-6		Visual	DM	
+F22	DAI	DAIB	25/5/2022	1	852	858	Ninguna							DM	
+F8	DAI	DAIC	27/5/2022	1	700	707	Ninguna							DM	
+F7	DAI	DAIB	27/5/2022	1	817	823	DIVDIV						Song	DM	
+F7	DAI	DAIB	27/5/2022	1	817	823	DIVDIV						Song	DM	
+F54	DAI	DAIB	3/6/2022	1	1044	1052	PSIMOR			5	-45		Visual	DM	
+F54	DAI	DAIB	3/6/2022	1	1044	1052	PSIMOR			60	5		Visual	DM	
+F54	DAI	DAIB	3/6/2022	1	1044	1052	PSIMOR	Volando						DM	
+F1	DAI	DAIB	3/5/2022	1	738	745	Ninguna							DM	
+F15	DAI	DAIC	3/5/2022	1	629	634	Ninguna							DM	
+F4	DAI	DAIC	1/6/2022	1	801	812	ELAFOR	Volando						DM	
+F4	DAI	DAIC	1/6/2022	1	801	812	HYLLEU			1	28			DM	
+F4	DAI	DAIC	1/6/2022	1	801	812	DIVDIV			45	20			DM	
+F4	DAI	DAIC	1/6/2022	1	801	812	MELAUR			40	-2			DM	
+F4	DAI	DAIC	1/6/2022	1	801	812	MOMLES						Song	DM	
+F13	DAI	DAIB	3/5/2022	1	1038	1045	Ninguna							DM	
+F24	DAI	DAIB	3/5/2022	1	920	928	AMAALB			20			Visual	DM	
+F24	DAI	DAIB	3/5/2022	1	920	928	AMAALB			20			Visual	DM	
+F24	DAI	DAIB	3/5/2022	1	920	928	AMAALB			20			Visual	DM	
+F24	DAI	DAIB	3/5/2022	1	920	928	AMAALB			20			Visual	DM	
+F21	DAI	DAIC	31/5/2022	1	741	750	Ninguna							DM	
+F23	DAI	DAIC	30/5/2022	1	709	720	GLABRA			15	45		Visual	DM	
+F23	DAI	DAIC	30/5/2022	1	709	720	ICTCHR			18	28		Visual	DM	
+F23	DAI	DAIC	30/5/2022	1	709	720	ICTCHR			18	28		Visual	DM	
+F54	DAI	DAIC	27/5/2022	1	1019	1027	Ninguna							DM	
+F33	DAI	DAIB	8/6/2022	1	655	701	DIVDIV			49			Song	DM	
+F33	DAI	DAIB	8/6/2022	1	655	701	DIVDIV			20			Song	DM	
+F33	DAI	DAIB	7/6/2022	1	1313	1323	RAMSUL			50			Song	DM	
+F33	DAI	DAIB	7/6/2022	1	1313	1323	MOMLES			60			Song	DM	
+F33	DAI	DAIB	7/6/2022	1	1313	1323	ELAFOR	Volando					Visual	DM	
+F33	DAI	DAIB	7/6/2022	1	1313	1323	ELAFOR	Volando					Visual	DM	
+F33	DAI	DAIB	7/6/2022	1	1313	1323	ELAFOR	Volando					Visual	DM	
+F33	DAI	DAIB	7/6/2022	1	1313	1323	PIACAY			20			Visual	DM	
+F9	DAI	Cafetal	31/1/2023	3	1123	1133	RAMSUL			60	70		Song	AP	
+F9	DAI	Cafetal	31/1/2023	3	1123	1133	MELAUR			20	60		Song	AP	
+F9	DAI	Cafetal	31/1/2023	3	1123	1133	SALATR			37	-10		Song	AP	
+F9	DAI	Cafetal	31/1/2023	3	1123	1133	PSAMON			28	10		Visual	AP	
+F9	DAI	Cafetal	31/1/2023	3	1123	1133	SETCIT			23	-20		Visual	AP	
+F9	DAI	Cafetal	31/1/2023	3	1123	1133	AMAALB			70	-50		Song	AP	
+F9	DAI	Cafetal	31/1/2023	3	1123	1133	SETPET			10	45	Male	Visual	AP	
+F8	DAI	Cafetal	1/2/2023	3	1005	1015	PSAMON			40	70		Visual	AP	
+F8	DAI	Cafetal	1/2/2023	3	1005	1015	PSIMOR			20	65		Song	AP	
+F8	DAI	Cafetal	1/2/2023	3	1005	1015	TROAED			20	35		Song	AP	
+F8	DAI	Cafetal	1/2/2023	3	1005	1015	CARPUS			15	-20		Visual	AP	
+F7	DAI	Cafetal	1/2/2023	3	735	745	SALATR			40	80		Song	AP	
+F7	DAI	Cafetal	1/2/2023	3	735	745	DIVDIV			35	75		Song	AP	
+F7	DAI	Cafetal	1/2/2023	3	735	745	DUMCAR			20	5		Song	AP	
+F7	DAI	Cafetal	1/2/2023	3	735	745	SETCIT			15	-20		Song	AP	
+F7	DAI	Cafetal	1/2/2023	3	735	745	CARPUS			5	-20		Song	AP	
+F26	DAI	Cafetal	2/2/2023	3	1013	1023	PSAMON			45			Song	AP	
+F26	DAI	Cafetal	2/2/2023	3	1013	1023	PHASTR			22	-15		Visual	AP	
+F26	DAI	Cafetal	2/2/2023	3	1013	1023	CYAMEL			25	-25		Song	AP	
+F26	DAI	Cafetal	2/2/2023	3	1013	1023	PSAMON			25	-20		Song	AP	
+F26	DAI	Cafetal	2/2/2023	3	1013	1023	PSAMON			25	-20		Song	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	SALATR			33	50		Visual	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	AMAALB			25	60		Visual	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	PSAMON			20	35		Song	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	CARPUS			15	35		Song	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	ICTGUL			22	40		Visual	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	PARNOV			5	-5		Song	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	EUPEXI			5	-5		Visual	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	SETVIR			13	15		Visual	AP	
+F25	DAI	Cafetal	2/2/2023	3	758	808	CATUST			9	-5		Visual	AP	
+F50	DAI	Cafetal	2/2/2023	3	817	827	CARPUS			12	30		Song	AP	"Bosque sin sotobosque, fue recientemente cortado"
+F50	DAI	Cafetal	2/2/2023	3	817	827	SALATR			35	45		Song	AP	
+F50	DAI	Cafetal	2/2/2023	3	817	827	CARPUS			15	35		Visual	AP	
+F14 	DAI	Cafetal	31/1/2023	3	801	811	PSAMON			40	18		Song	AP	
+F14 	DAI	Cafetal	31/1/2023	3	801	811	RAMSUL			35	-30		Song	AP	
+F14 	DAI	Cafetal	31/1/2023	3	801	811	SETVIR			10	-15		Visual	AP	
+F14 	DAI	Cafetal	31/1/2023	3	801	811	SETCIT			10	-10		Visual	AP	
+F14 	DAI	Cafetal	31/1/2023	3	801	811	MYOMIN			15	-10		Visual	AP	
+F14 	DAI	Cafetal	31/1/2023	3	801	811	OREPER			15	-10		Visual	AP	
+F14 	DAI	Cafetal	31/1/2023	3	801	811	SITGRI			20	-25		Visual	AP	
+F25	DAI	Bosque	28/3/2023	3	924	934	SETCIT			10	-50		Song	AP	
+F25	DAI	Bosque	28/3/2023	3	924	934	SALATR			10	-15		Song	AP	
+F25	DAI	Bosque	28/3/2023	3	924	934	SALMAX			15	-10		Song	AP	
+F25	DAI	Bosque	28/3/2023	3	924	934	TROAED			15	25		Visual	AP	
+F25	DAI	Bosque	28/3/2023	3	924	934	ICTGUL			10	-50		Visual	AP	
+F26	DAI	Bosque	28/3/2023	3	738	748	BASCUL			10	-40		Visual	AP	
+F26	DAI	Bosque	28/3/2023	3	738	748	CARCAN			5	-30	Female	Visual	AP	
+F26	DAI	Bosque	28/3/2023	3	738	748	SALATR			30	-20		Song	AP	
+F26	DAI	Bosque	28/3/2023	3	738	748	TITSEM			15	20	Female	Visual	AP	
+F12	DAI	Bosque	23/3/2023	4	1040	1050	PSAMON			25	80		Visual	AP	
+F21	DAI	Bosque	23/3/2023	4	815	825	RAMSUL			10	-40		Visual	AP	
+F21	DAI	Bosque	23/3/2023	4	815	825	SALMAX			30			Song	AP	
+F21	DAI	Bosque	23/3/2023	4	815	825	CONCOO			20	10		Visual	AP	
+F21	DAI	Bosque	23/3/2023	4	815	825	PSIMOR			15	20		Visual	AP	
+F21	DAI	Bosque	23/3/2023	4	815	825	DUMCAR			25	10		Visual	AP	
+F21	DAI	Bosque	23/3/2023	4	815	825	AMAALB			30			Visual	AP	
+F3	DAI	Cafetal	13/3/2023	4	933	943	DIVDIV			25			Visual	AP	
+F3	DAI	Cafetal	13/3/2023	4	933	943	MYAUNI				-40		Song	AP	
+F3	DAI	Cafetal	13/3/2023	4	933	943	TROAED			15	25		Visual	AP	
+F3	DAI	Cafetal	13/3/2023	4	933	943	CARPUS			20	15		Visual	AP	
+F3	DAI	Cafetal	13/3/2023	4	933	943	AMAALB			40	40		Visual	AP	
+F3	DAI	Cafetal	13/3/2023	4	933	943	CATAUR			10	-25		Visual	AP	
+F54	DAI	Bosque	22/3/2023	4	852	902	BASCUL			10	-30		Visual	AP	
+F54	DAI	Bosque	22/3/2023	4	852	902	SETCIT			25	30		Song	AP	
+F54	DAI	Bosque	22/3/2023	4	852	902	PSIMOR			30	40		Visual	AP	
+F24	DAI	Bosque	18/3/2023	4	1030	1040	MYATUB			15			Song	AP	
+F24	DAI	Bosque	18/3/2023	4	1030	1040	EMPHAM			25	-5		Visual	AP	
+F24	DAI	Bosque	18/3/2023	4	1030	1040	SETVIR			30	-10		Visual	AP	
+F24	DAI	Bosque	18/3/2023	4	1030	1040	PSIMOR			40	35		Visual	AP	
+F24	DAI	Bosque	18/3/2023	4	1030	1040	SALATR			35	60		Visual	AP	
+F24	DAI	Bosque	18/3/2023	4	1030	1040	DIVDIV			45	50		Song	AP	
+F50	DAI	Bosque	27/3/2023	4	1012	1022	AULPRA			10	-15		Visual	AP	
+F50	DAI	Bosque	27/3/2023	4	1012	1022	SETVIR			20	-25		Visual	AP	
+F50	DAI	Bosque	27/3/2023	4	1012	1022	MELAUR			25	70		Visual	AP	
+F5	DAI	Bosque	27/3/2023	4	830	840	VIRFLAVO			15	-20		Song	AP	
+F5	DAI	Bosque	27/3/2023	4	830	840	CROSUL			15	10		Visual	AP	
+F5	DAI	Bosque	27/3/2023	4	830	840	CYCGUJ			25	-30		Song	AP	
+F5	DAI	Bosque	27/3/2023	4	830	840	THADOL			20	25		Song	AP	
+F7	DAI	Cafetal	14/3/2023	4	815	825	COLTAP			20	30		Song	AP	
+F7	DAI	Cafetal	14/3/2023	4	815	825	DIVDIV			15	45		Song	AP	
+F7	DAI	Cafetal	14/3/2023	4	815	825	LEPVER			25	10		Visual	AP	
+F7	DAI	Cafetal	14/3/2023	4	815	825	LEPVER			15	-15		Visual	AP	
+F7	DAI	Cafetal	14/3/2023	4	815	825	RAMSUL			60			Song	AP	
+F4	DAI	Cafetal	13/3/2023	4	805	815	TIAOLI			5	50		Visual	AP	
+F4	DAI	Cafetal	13/3/2023	4	805	815	SALATR			10	40		Song	AP	
+F4	DAI	Cafetal	13/3/2023	4	805	815	DIVDIV			20	60		Song	AP	
+F4	DAI	Cafetal	13/3/2023	4	805	815	MELAUR			20	20		Song	AP	
+F4	DAI	Cafetal	13/3/2023	4	805	815	LEPVER			50	-10		Song	AP	
+F4	DAI	Cafetal	13/3/2023	4	805	815	SITGRI			15	-25		Visual	AP	
+F4	DAI	Cafetal	13/3/2023	4	805	815	CARPUS			10	-20		Visual	AP	
+F4	DAI	Cafetal	13/3/2023	4	805	815	PSAMON			30	-40		Visual	AP	
+F8	DAI	Cafetal	14/3/2023	4	911	921	CARPUS			10	35		Visual	AP	
+F8	DAI	Cafetal	14/3/2023	4	911	921	MELAUR			30	60		Song	AP	
+F8	DAI	Cafetal	14/3/2023	4	911	921	DIVDIV			35	80		Visual	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	PSAMON			15	60		Visual	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	PITSUL			10	45		Visual	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	SALATR			10	40		Visual	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	TURGRA			20	30		Visual	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	SETVIR			30	30		Visual	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	XIPFLA			20	-20		Visual	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	LEPVER			20	-30		Song	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	CERTYR			25	-40		Song	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	XIPFLA			25	-40		Song	AP	
+F6	DAI	Cafetal	18/3/2023	4	656	706	MOMLES			30	-15		Song	AP	
+F22	DAI	Cafetal	18/3/2023	4	928	938	CARPUS			10	40		Visual	AP	
+F22	DAI	Cafetal	18/3/2023	4	928	938	CARPUS			15	-30		Visual	AP	
+F10	DAI	Cafetal	18/3/2023	4	822	832	PSAWAG			20	30		Visual	AP	
+F10	DAI	Cafetal	18/3/2023	4	822	832	DIVDIV			25	45		Visual	AP	
+F10	DAI	Cafetal	18/3/2023	4	822	832	RAMSUL			30	-10		Visual	AP	
+F10	DAI	Cafetal	18/3/2023	4	822	832	PSIMOR			35	40		Song	AP	
+F9	DAI	Bosque	24/3/2023	4	808	818	DUMCAR			25	-15		Song	AP	
+F9	DAI	Bosque	24/3/2023	4	808	818	TITSEM			10	-15		Visual	AP	
+F9	DAI	Bosque	24/3/2023	4	808	818	CARPUS			10	-5		Visual	AP	
+F9	DAI	Bosque	24/3/2023	4	808	818	MELAUR			40	80		Visual	AP	
+F9	DAI	Bosque	24/3/2023	4	808	818	PSAMON			35	50		Visual	AP	
+F9	DAI	Bosque	24/3/2023	4	808	818	TROAED			10	35		Visual	AP	
+F14	DAI	Bosque	24/3/2023	4	1021	1031	LEPVER			30	-60		Song	AP	
+F14	DAI	Bosque	24/3/2023	4	1021	1031	PSAMON			30	10		Visual	AP	
+F14	DAI	Bosque	24/3/2023	4	1021	1031	PSIMOR			10	30		Visual	AP	
+F15	DAI	Bosque	30/3/2023	4	827	837	PHASTR			1	-40		Visual	AP	
+F15	DAI	Bosque	30/3/2023	4	827	837	MOMLES			10	-40		Song	AP	
+F15	DAI	Bosque	30/3/2023	4	827	837	PHEMAC			15	-40		Song	AP	
+F15	DAI	Bosque	30/3/2023	4	827	837	PSIMOR			20	30		Visual	AP	
+F15	DAI	Bosque	30/3/2023	4	827	837	PSIMOR			30	60		Song	AP	
+F15	DAI	Bosque	30/3/2023	4	827	837	PSIMOR			25	30		Song	AP	
+F15	DAI	Bosque	30/3/2023	4	827	837	PSAMON			25	45		Visual	AP	
+F13	DAI	Bosque	22/3/2023	4	1027	1037	CONVIR			10	40		Visual	AP	
+F13	DAI	Bosque	22/3/2023	4	1027	1037	MOMLES			40	-60		Visual	AP	
+F33	DAI	Bosque	30/3/2023	4	1010	1020	PSAMON			10	45		Visual	AP	
+F33	DAI	Bosque	30/3/2023	4	1010	1020	PSAMON			5	-10		Visual	AP	
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
+															
