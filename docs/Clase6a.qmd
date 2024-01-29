@@ -1,0 +1,243 @@
+
+---
+title: "Clase 6a: Uso de Unmarked, Estimación de ocupacia"
+format: html
+editor: visual
+---
+
+::: panel-tabset
+
+## Cargar base de datos
+
+```{r}
+Aves <- read.csv("data/AvesHabitatUm.csv")
+```
+
+Seleccionar variables necesarias
+
+```{r}
+
+library(tidyverse)
+
+AvesLimpia <- Aves %>% 
+  select(Site, VEGID, Type, ALTITUDE, Area_Basal, Hora, Fecha, Cielo, Viento, Especies, Abundancia) %>% 
+  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%Y")) %>% 
+  mutate(Hora = as.integer(str_replace(Hora, ":", "")))
+  
+AvesOrdenadas <- AvesLimpia %>%
+  arrange(Site, Especies, Fecha, Hora, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  group_by(Site, Especies, Fecha, Hora, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  summarise(Abundancia = max(Abundancia)) %>%
+  group_by(Site, Fecha, Hora,  Especies, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  mutate(Orden = factor(row_number())) %>% 
+  filter(Orden %in% c(1, 2, 3))
+
+CarpusPivot <- AvesOrdenadas %>% 
+  pivot_wider(names_from = Especies, values_from = Abundancia, values_fill = 0) %>% 
+  select(Site, VEGID, Type, ALTITUDE, Area_Basal, Fecha, Hora, Orden, CARPUS)
+
+CarpusPivotOrden <- CarpusPivot %>%
+  arrange(Site, VEGID, Type, ALTITUDE, Area_Basal, CARPUS, Fecha, Hora) %>%
+  group_by(Site,VEGID, Type, ALTITUDE, Area_Basal, CARPUS) %>%
+  mutate(Orden = factor(row_number())) %>% 
+  filter(!is.na(Site))
+  
+
+head(CarpusPivotOrden)
+```
+
+
+## Formatear base de datos a formato unmarked
+
+Pasar cada replica en columnas diferentes de acuerdo a la especie de ave
+
+```{r}
+
+
+# Crear un conjunto de datos con todos los niveles de Orden por Site
+CARPUSunmarked <- CarpusPivotOrden %>%
+  filter(!is.na(Fecha)) %>% 
+  mutate(Orden = as.numeric(Orden)) %>% 
+  complete(Orden = 1:3) %>%
+  mutate(CARPUS = ifelse(is.na(Fecha), NA, CARPUS),
+         CARPUS = replace_na(CARPUS, 50))
+
+# Pivot_wider
+CARPUSunmarkedReady <- CARPUSunmarked %>%
+  mutate(Fechaord = yday(Fecha)) %>% 
+  group_by(Site, Orden, VEGID, Type, ALTITUDE, Area_Basal) %>%
+  summarise(CARPUS = max(CARPUS),
+            Fechaord = max(Fechaord),
+            Hora = max(Hora)) %>% 
+  ungroup() %>%
+  group_by(Site, VEGID, Type, ALTITUDE, Area_Basal) %>% 
+  pivot_wider(names_from = Orden,
+              values_from = c(Fechaord, Hora, CARPUS),
+              values_fill =  0) %>% 
+  mutate(CARPUS_1 = replace(CARPUS_1, CARPUS_1 == 50, NA)) %>% 
+  mutate(CARPUS_2 = replace(CARPUS_2, CARPUS_2 == 50, NA)) %>% 
+  mutate(CARPUS_3 = replace(CARPUS_3, CARPUS_3 == 50, NA)) 
+
+
+```
+
+
+## Crear variables de detectabilidad
+
+```{r}
+## Definir ocasiones de deteccion
+CARPUS_y <- CARPUSunmarkedReady[,12:14]
+
+CARPUS_y[CARPUS_y > 1] <- 1 # Pasar matrix a 0 y 1
+
+
+## Definir los variables asociados a la deteccion:
+
+
+Fecha_CARPUS= list(Fecha=CARPUSunmarkedReady[,6:8]) 
+
+# Y quien realizo la observacion
+
+Hora_CARPUS= list(Hora=CARPUSunmarkedReady[,9:11]) 
+
+
+```
+
+
+## Crear variables de habitat (covariables)
+
+```{r}
+## Definir los variables de covarianza
+
+CARPUS_siteCovs <- CARPUSunmarkedReady[,c("Type", "ALTITUDE", "Area_Basal")]
+```
+
+## Crear tabla unmarked
+
+```{r}
+
+library(unmarked)
+
+## CREAR DATA FRAME
+CARPUSunmarked_df <- unmarkedFrameOccu(y = CARPUS_y, siteCovs = CARPUS_siteCovs, 
+                                    obsCovs=c(Fecha_CARPUS, Hora_CARPUS))
+
+summary(CARPUSunmarked_df)
+
+```
+
+
+## Ajustar modelo de deteccion
+
+```{r}
+#### MODELAR DETECCION PRIMERO
+
+ModelDet0 <- occu(~1 ~1, CARPUSunmarked_df) ##Null model
+
+ModelDet1 <- occu(~Fecha ~1, CARPUSunmarked_df)
+
+ModelDet2 <- occu(~Hora ~1, CARPUSunmarked_df)
+
+ModelDet3 <- occu(~Fecha + Hora ~1, CARPUSunmarked_df)
+```
+
+
+
+## Seleccion de modelo de deteccion
+
+```{r}
+library(AICcmodavg)
+
+DetModels <- list(ModelDet0, ModelDet1, ModelDet2, ModelDet3)
+
+DetNames <- c("Nulo", "Fecha", "Hora", "Fecha + Hora")
+
+aictab(DetModels, DetNames, sort = TRUE)
+```
+
+## Ajustar modelo de Abundancia
+
+```{r}
+#### MODELAR DETECCION PRIMERO
+
+ModelAbun0 <- occu(~1 ~ 1, CARPUSunmarked_df) ##Null model
+
+ModelAbun1 <- occu(~1 ~ Type, CARPUSunmarked_df)
+
+ModelAbun2 <- occu(~1 ~ ALTITUDE, CARPUSunmarked_df)
+
+ModelAbun3 <- occu(~1 ~ Area_Basal, CARPUSunmarked_df)
+```
+## Seleccion de modelo de abundancia
+
+```{r}
+library(AICcmodavg)
+
+AbunModels <- list(ModelAbun0, ModelAbun1, ModelAbun2, ModelAbun3)
+
+AbunNames <- c("Nulo", "Type", "ALTITUDE", "Area_Basal")
+
+aictab(AbunModels, AbunNames, sort = TRUE)
+```
+## Resumen de los resultados
+
+```{r}
+summary(ModelAbun2)
+confint(ModelAbun2, type = "state", level = 0.95)
+```
+
+## Bondad de ajuste
+
+```{r, warning=FALSE, message=FALSE}
+
+
+fitstats <- function(Mod_global2) {
+  observed <- getY(Mod_global2@data)
+  expected <- fitted(Mod_global2)
+  resids <- residuals(Mod_global2)
+  sse <- sum(resids^2,na.rm=TRUE)
+  chisq <- sum((observed - expected)^2 / expected,na.rm=TRUE)
+  freeTuke <- sum((sqrt(observed) - sqrt(expected))^2,na.rm=TRUE)
+  out <- c(SSE=sse, Chisq=chisq, freemanTukey=freeTuke)
+  return(out)
+}
+
+(pb <- parboot(ModelAbun2, fitstats, nsim=100, report=1))
+
+cHat_pb <- pb@t0[2] / mean(pb@t.star[,2])
+
+
+
+```
+
+
+## Prepar data para graficar
+
+```{r}
+CARPUS_ALTITUDE <- data.frame(ALTITUDE = seq(min(CARPUSunmarkedReady$ALTITUDE, na.rm = TRUE), max(CARPUSunmarkedReady$ALTITUDE, na.rm = TRUE), length.out = 100))
+                                 
+Carpus_ALTITUDE <- predict(ModelAbun2, newdata = CARPUS_ALTITUDE, type = "state")
+
+Carpus_ALTITUDE$ALTITUDE <- CARPUS_ALTITUDE$ALTITUDE 
+```
+
+
+## Graficar modelo
+
+```{r}
+ggplot(data= Carpus_ALTITUDE, aes(x= ALTITUDE, y= Predicted))+
+  geom_ribbon(aes(ymin= lower,
+                  ymax= upper), fill = "lightblue") +
+  geom_line(color= "black") +
+  labs(x = "Elevacion", 
+       y = expression(paste("Probabilidad de ocupancia (", psi, ")", sep = "")))+
+  ggtitle("Ocupancia de Cardenilla pusilla versus la elevacion") +
+  theme_classic()
+```
+
+
+::: 
+
+
+
+![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)

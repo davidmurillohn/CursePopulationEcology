@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ---
 title: "Clase 8- Uso de Unmarked: Estimación de abundancia por transecto"
 format: html

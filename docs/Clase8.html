@@ -94,7 +94,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
 <p>En esta clase, exploraremos el uso de Unmarked para modelar la abundancia de especies a partir de datos recopilados mediante trasectos. Desde los fundamentos, explicaremos paso a paso cómo utilizar este paquete, cubriendo el proceso completo: desde el ajuste inicial del modelo hasta la selección, validación e interpretación de los resultados. También abordaremos la presentación de los datos para su inclusión en publicaciones científicas, asegurando un entendimiento completo y la capacidad de aplicar estos modelos de manera efectiva en contextos de investigación y divulgación científica.</p>
 <p>Cargar paquete</p>
 <div class="cell">
@@ -277,15 +276,15 @@ Call: parboot(object = fmp4, statistic = fitstats, nsim = 100, report = 1)
 
 Parametric Bootstrap Statistics:
                 t0 mean(t0 - t_B) StdDev(t0 - t_B) Pr(t_B &gt; t0)
-SSE           53.7          13.76            10.45       0.0891
-Chisq        128.0          20.96            16.85       0.1089
-freemanTukey  31.3           2.27             3.64       0.2475
+SSE           53.7          14.95             9.18       0.0693
+Chisq        128.0          20.86            19.97       0.1287
+freemanTukey  31.3           2.53             3.75       0.2574
 
 t_B quantiles:
              0% 2.5% 25% 50% 75% 97.5% 100%
-SSE          20   25  34  39  44    63   84
-Chisq        75   79  95 105 116   140  160
-freemanTukey 20   22  27  29  31    36   41
+SSE          19   25  32  39  45    55   72
+Chisq        64   77  92 105 118   152  167
+freemanTukey 19   21  26  29  31    36   37
 
 t0 = Original statistic computed from data
 t_B = Vector of bootstrap samples</code></pre>
