@@ -29,10 +29,13 @@ Realizar el ejercicio realizado en clases, pero con una base de datos distinta "
 
 ## Asignación 5
 
-Realizar el ejercicio visto en clase, pero utilizando el archivo SETMAF.rds del googledrive
+Realizar el ejercicio visto en clase, pero utilizando el archivo SETMAG.rds que se encuentra en el googledrive
 
 ## Asignación 6
 
+Realizar el ejercicio de ocupacia, pero utilizando el archivo SETMAG.rds que se encuentra en el google drive
+
 ## Asignación 7
+
 
 :::
