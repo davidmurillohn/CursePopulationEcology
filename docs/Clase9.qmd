@@ -13,19 +13,26 @@ El paquete spAbundance ajusta modelos univariados (es decir, de una sola especie
 
 [spAbundance](https://www.jeffdoser.com/files/spabundance-web/)
 
+<https://www.jeffdoser.com/files/spabundance-web/articles/distancesampling>
+
 En esta clase, vamos a explorar el paquete spAbundance y comparar su implementación con los paquetes Distance y Unmarked.
+
+::: panel-tabset
+
+### Cargar paquetes
 
 ```{r}
 library(spAbundance)
 library(tidyverse)
 ```
-Cargar Base de datos
+
+### Cargar Base de datos
 
 ```{r}
 CARPUS <- readRDS("data/CARPUSunmarked.rds")
 ```
 
-Preparar datos para la tabla
+### Preparar datos para la tabla
 
 ```{r}
 CARPUS_y <- CARPUS[,12:14]
@@ -40,7 +47,7 @@ covs <- list(Elevacion = CARPUS[,4],
 CARPUS_covs <- list(y= CARPUS_y, covs = covs)
 ```
 
-Ajustar modelo
+### Ajustar modelo
 
 ```{r, message=FALSE, warning=FALSE, results='hide'}
 out <- abund(formula = ~ 1,
@@ -64,12 +71,20 @@ out3 <- abund(formula = ~ AreaBasal,
              n.batch = 300, batch.length = 100)
 ```
 
+
+### Seleccion de modelo mas adecuado
+
 ```{r,}
 waicAbund(out)
 waicAbund(out1)
 waicAbund(out2)
 waicAbund(out3)
+```
 
+
+### Revision de modelo
+
+```{r,}
 summary(out3)
 
 # Abundance regression coefficients
@@ -77,7 +92,7 @@ plot(out, param = 'beta', density = FALSE)
 
 ```
 
-Preparar tabla para graficar
+### Preparar tabla para graficar
 
 ```{r}
 AreaBasal <- data.frame(AreaBasal = seq(min(CARPUS$Area_Basal, na.rm = TRUE), 
@@ -103,7 +118,7 @@ mu.plot.dat <- data.frame(mu.med = mu.0.quants[2, ],
 ```
 
 
-Graficar modelo
+### Graficar modelo
 
 ```{r}
 ggplot(mu.plot.dat, aes(x = AreaBasal, y = mu.med)) + 
@@ -114,11 +129,14 @@ ggplot(mu.plot.dat, aes(x = AreaBasal, y = mu.med)) +
   theme_classic()
 ```
 
-
+:::
 
 ## spOccupancy
 
 spOccupancy ajusta modelos de ocupación espacial de especies individuales, múltiples especies e integrados utilizando el método de Monte Carlo por cadenas de Markov (MCMC). Los modelos se ajustan utilizando la técnica de aumento de datos Pólya-Gamma. Los modelos espaciales se ajustan utilizando procesos gaussianos o procesos gaussianos de vecinos más cercanos (NNGP) para conjuntos de datos espaciales grandes. El paquete proporciona funcionalidad para la integración de datos de ocupación de múltiples especies individuales utilizando un marco de verosimilitud conjunta. Para modelos de múltiples especies, spOccupancy proporciona funciones para tener en cuenta las correlaciones residuales entre especies en un marco de modelo de distribución de especies conjuntas mientras se tiene en cuenta la detección imperfecta. A partir de la versión 0.4.0, spOccupancy proporciona funciones para modelos de ocupación de especies individuales de múltiples temporadas (es decir, espacio-temporales). A continuación, proporcionamos una introducción muy breve a algunas de las funcionalidades del paquete, e ilustramos solo una de las funciones de ajuste de modelos. Para obtener más información, consulte los recursos referenciados al final de esta página.
+
+<https://www.jeffdoser.com/files/spoccupancy-web/articles/modelfitting>
+
 
 :::
 

@@ -1,4 +1,3 @@
-
 ---
 title: "Clase 5: Uso de Unmarked, Estimación de abundancia por conteo por puntos SETMAG"
 format: html
@@ -12,7 +11,6 @@ En esta clase se obordara como utilizar Unmarked para modelar abundancia de espe
 En esta clase, exploraremos el uso de Unmarked para modelar la abundancia de especies a partir de datos recopilados mediante conteo por puntos. Desde los fundamentos, explicaremos paso a paso cómo utilizar este paquete, cubriendo el proceso completo: desde el ajuste inicial del modelo hasta la selección, validación e interpretación de los resultados. También abordaremos la presentación de los datos para su inclusión en publicaciones científicas, asegurando un entendimiento completo y la capacidad de aplicar estos modelos de manera efectiva en contextos de investigación y divulgación científica.
 
 ::: panel-tabset
-
 ## Cargar base de datos
 
 ```{r}
@@ -42,7 +40,6 @@ SetmagPivot <- AvesOrdenadas %>%
   select(Site, VEGID, Type, ALTITUDE, Area_Basal, Fecha, Hora, Orden,SETMAG)
 ```
 
-
 ```{r}
 SetmagPivotOrden <-SetmagPivot %>%
   arrange(Site, VEGID, Type, ALTITUDE, Area_Basal,SETMAG, Fecha, Hora) %>%
@@ -53,7 +50,6 @@ SetmagPivotOrden <-SetmagPivot %>%
 
 head(SetmagPivotOrden)
 ```
-
 
 ## Formatear base de datos a formato unmarked
 
@@ -88,10 +84,10 @@ SetmagunmarkedReady <-Setmagunmarked %>%
 
 
 ```
+
 ```{r}
 # saveRDS(SetmagunmarkedReady, file = "SETMAG.rds")
 ```
-
 
 ## Crear variables de detectabilidad
 
@@ -112,7 +108,6 @@ Hora_Setmag= list(Hora=SetmagunmarkedReady[,9:11])
 
 
 ```
-
 
 ## Crear variables de habitat (covariables)
 
@@ -136,7 +131,6 @@ summary(Setmagunmarked_df)
 
 ```
 
-
 ## Ajustar modelo de deteccion
 
 ```{r}
@@ -150,8 +144,6 @@ ModelDet2 <- pcount(~Hora ~1,SETMAGunmarked_df)
 
 ModelDet3 <- pcount(~Fecha + Hora ~1,SETMAGunmarked_df)
 ```
-
-
 
 ## Seleccion de modelo de deteccion
 
@@ -178,6 +170,7 @@ ModelAbun2 <- pcount(~1 ~ ALTITUDE,SETMAGunmarked_df)
 
 ModelAbun3 <- pcount(~1 ~ Area_Basal,SETMAGunmarked_df)
 ```
+
 ## Seleccion de modelo de abundancia
 
 ```{r}
@@ -189,6 +182,7 @@ AbunNames <- c("Nulo", "Type", "ALTITUDE", "Area_Basal")
 
 aictab(AbunModels, AbunNames, sort = TRUE)
 ```
+
 ## Resumen de los resultados
 
 ```{r}
@@ -222,7 +216,6 @@ MigGOF <- Nmix.gof.test(ModelAbun3, nsim = 100, report = 3)
 
 ```
 
-
 ## Prepar data para graficar
 
 ```{r}
@@ -232,7 +225,6 @@ Setmag_pre_area_basal <- predict(ModelAbun3, newdata =SETMAG_arear_basal, type =
 
 Setmag_pre_area_basal$Area_Basal <-SETMAG_arear_basal$Area_Basal 
 ```
-
 
 ## Graficar modelo
 
@@ -246,10 +238,6 @@ ggplot(data=SETMAG_pre_area_basal, aes(x= Area_Basal, y= Predicted))+
   ggtitle("Relacion de Cardenilla pusilla versus el area basal") +
   theme_classic()
 ```
+:::
 
-
-::: 
-
-
-
-![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
+![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)

@@ -1,4 +1,3 @@
-
 ---
 title: "Clase 6a: Uso de Unmarked, Estimación de ocupacia"
 format: html
@@ -6,7 +5,6 @@ editor: visual
 ---
 
 ::: panel-tabset
-
 ## Cargar base de datos
 
 ```{r}
@@ -46,7 +44,6 @@ CarpusPivotOrden <- CarpusPivot %>%
 head(CarpusPivotOrden)
 ```
 
-
 ## Formatear base de datos a formato unmarked
 
 Pasar cada replica en columnas diferentes de acuerdo a la especie de ave
@@ -81,7 +78,6 @@ CARPUSunmarkedReady <- CARPUSunmarked %>%
 
 ```
 
-
 ## Crear variables de detectabilidad
 
 ```{r}
@@ -102,7 +98,6 @@ Hora_CARPUS= list(Hora=CARPUSunmarkedReady[,9:11])
 
 
 ```
-
 
 ## Crear variables de habitat (covariables)
 
@@ -126,7 +121,6 @@ summary(CARPUSunmarked_df)
 
 ```
 
-
 ## Ajustar modelo de deteccion
 
 ```{r}
@@ -140,8 +134,6 @@ ModelDet2 <- occu(~Hora ~1, CARPUSunmarked_df)
 
 ModelDet3 <- occu(~Fecha + Hora ~1, CARPUSunmarked_df)
 ```
-
-
 
 ## Seleccion de modelo de deteccion
 
@@ -168,6 +160,7 @@ ModelAbun2 <- occu(~1 ~ ALTITUDE, CARPUSunmarked_df)
 
 ModelAbun3 <- occu(~1 ~ Area_Basal, CARPUSunmarked_df)
 ```
+
 ## Seleccion de modelo de abundancia
 
 ```{r}
@@ -179,6 +172,7 @@ AbunNames <- c("Nulo", "Type", "ALTITUDE", "Area_Basal")
 
 aictab(AbunModels, AbunNames, sort = TRUE)
 ```
+
 ## Resumen de los resultados
 
 ```{r}
@@ -210,7 +204,6 @@ cHat_pb <- pb@t0[2] / mean(pb@t.star[,2])
 
 ```
 
-
 ## Prepar data para graficar
 
 ```{r}
@@ -220,7 +213,6 @@ Carpus_ALTITUDE <- predict(ModelAbun2, newdata = CARPUS_ALTITUDE, type = "state"
 
 Carpus_ALTITUDE$ALTITUDE <- CARPUS_ALTITUDE$ALTITUDE 
 ```
-
 
 ## Graficar modelo
 
@@ -234,10 +226,6 @@ ggplot(data= Carpus_ALTITUDE, aes(x= ALTITUDE, y= Predicted))+
   ggtitle("Ocupancia de Cardenilla pusilla versus la elevacion") +
   theme_classic()
 ```
+:::
 
-
-::: 
-
-
-
-![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
+![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
