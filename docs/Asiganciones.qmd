@@ -1,8 +1,9 @@
-<<<<<<< HEAD
+
 ---
-title: "Asignacion"
+title: "Asignaciones"
 author: "David Murillo"
 format: html
+theme: cerulean
 ---
 
 A continuación, encontrará una serie de ejercicios que le ayudarán a complementar lo visto en las asignaciones. Estos ejercicios deben ser entregados al final del curso y se le recompensará con horas en el certificado que se le entregará una vez finalizado el curso, todo esto a su propio ritmo. Si tiene alguna consulta, no dude en preguntarnos a través de nuestras redes sociales o correo electrónico (admi@hnbiology.org o david.murillo@hnbiology.org).
@@ -23,17 +24,20 @@ A medida que avance en el curso, se irán agregando más asignaciones.
 
 Realizar el ejercicio visto en clase para estimar la abundancia y su respectivos intervalos de confianza al 95%, asi como presentar el grafico, utilizando el metodo de transectos.
 
+Para realizar el grafico primero debera prepara la dataframe utilizando el comonado 'data.frame' y el grafio debera se con 'ggplot' agregando el 'geom_errorbarth'.
+
 ## Asignación 4
 
-Realizar el ejercicio realizado en clases, pero con una base de datos distinta "amakihi"
+Ajustar modelos de abundancia y densidad como los visto en clase, pero en este caso utilizando la base de datos "amakihi". Como resultado presentar su grafica con los intervalos de confianza al 95%
 
 ## Asignación 5
 
-Realizar el ejercicio visto en clase, pero utilizando el archivo SETMAG.rds que se encuentra en el googledrive
+Ajustar modelos de detectabilidad, seguidamente de modelo que contenda la detectabilidad y abundanica. Como se mostro en clases. En esre caso utilizra la base de datos 'SETMAG.rds' que se encuentra en el googledrive. Como resultado presentar el estimado, el intercepto, error standar y sus intervalos de confianza al 95% con su respectiva grafica del modelo mas adecuado. 
 
 ## Asignación 6
 
-Realizar el ejercicio de ocupacia, pero utilizando el archivo SETMAG.rds que se encuentra en el google drive
+Ajustar modelos de detectabilidad, seguidamente de modelo que contenda la detectabilidad y ocupancia. Como se mostro en clases. En esre caso utilizra la base de datos 'SETMAG.rds' que se encuentra en el googledrive. Como resultado presentar el estimado, el intercepto, error standar y sus intervalos de confianza al 95% con su respectiva grafica del modelo mas adecuado. 
+
 
 ## Asignación 7
 
