@@ -26,11 +26,11 @@ El propósito principal de este curso es servir como una guía que permita a los
 
 [Clase 5- Uso de Unmarked: Estimación de abundancia por conteo por puntos](Clase7.html)
 
-[Clase 6a- Uso de Unmarked: Estimación de occupacia](Clase6a.html)
+[Clase 6- Uso de Unmarked: Estimación de occupacia](Clase6a.html)
 
 [Clase 7- Uso de Unmarked: Estimación de abundancia por transecto](Clase8.html)
 
-[Clase 8- Introducción a spAbundance](Clase9.html)
+[Clase 8- Introducción a spAbundance y spOccupancy](Clase9.html)
 
 [Clase 9a- Uso de Rmark: Captura-Recaptura](Clase5.html)
 
