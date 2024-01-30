@@ -184,6 +184,7 @@ ggplot(data = Forest_pre, aes(x= Forest, y= Predicted))+
   labs(title = "Abundancia de Insectivoros versus fecha")+
   theme_classic()
 ```
+
 :::
 
 ![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)

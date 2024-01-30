@@ -94,9 +94,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>::: panel-tabset</p>
-<section id="spabundance" class="level2">
-<h2 class="anchored" data-anchor-id="spabundance">spAbundance</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">spAbundance</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">spOccupancy</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>El paquete spAbundance ajusta modelos univariados (es decir, de una sola especie) y multivariados (es decir, de múltiples especies) de mezcla espacial N, modelos jerárquicos de muestreo de distancia y modelos mixtos generalizados lineales utilizando cadenas de Markov Monte Carlo (MCMC). Los modelos espaciales se ajustan utilizando Procesos Gaussianos de Vecino más Cercano (NNGPs) para facilitar el ajuste del modelo a grandes conjuntos de datos espaciales. spAbundance utiliza una sintaxis análoga a su “paquete hermano” spOccupancy (Doser et al.&nbsp;2022). A continuación, proporcionamos una introducción muy breve a algunas de las funcionalidades del paquete e ilustramos solo una de las funciones de ajuste del modelo. Para obtener más información, consulta los recursos referenciados al final de esta página y la pestaña “Artículos” en la parte superior de la página.</p>
 <p><a href="https://www.jeffdoser.com/files/spabundance-web/">spAbundance</a></p>
 <p>En esta clase, vamos a explorar el paquete spAbundance y comparar su implementación con los paquetes Distance y Unmarked.</p>
@@ -165,22 +166,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       elpd          pD        WAIC 
--66.5556266   0.9293364 134.9699260 </code></pre>
+-66.5554848   0.9349291 134.9808278 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     elpd        pD      WAIC 
--525.1851 1506.9088 4064.1878 </code></pre>
+-363.3437 2729.5565 6185.8004 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      elpd         pD       WAIC 
--64.664314   1.837477 133.003581 </code></pre>
+-64.671271   1.896897 133.136336 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      elpd         pD       WAIC 
--61.134737   1.416841 125.103156 </code></pre>
+-61.144627   1.417236 125.123727 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -194,12 +195,12 @@ Burn-in: 3000
 Thinning Rate: 1
 Number of Chains: 1
 Total Posterior Samples: 27000
-Run Time (min): 0.0352
+Run Time (min): 0.0353
 
 Abundance (log scale): 
                Mean     SD    2.5%     50%   97.5% Rhat ESS
-(Intercept) -1.5111 0.3597 -2.2808 -1.4870 -0.8787   NA 214
-AreaBasal    0.0357 0.0127  0.0116  0.0357  0.0635   NA 161</code></pre>
+(Intercept) -1.4935 0.3577 -2.2221 -1.4893 -0.8098   NA 214
+AreaBasal    0.0349 0.0129  0.0064  0.0358  0.0599   NA 155</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abundance regression coefficients</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">param =</span> <span class="st">'beta'</span>, <span class="at">density =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -242,17 +243,18 @@ AreaBasal    0.0357 0.0127  0.0116  0.0357  0.0635   NA 161</code></pre>
 <p><img src="Clase9_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section>
-<section id="spoccupancy" class="level2">
-<h2 class="anchored" data-anchor-id="spoccupancy">spOccupancy</h2>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>spOccupancy ajusta modelos de ocupación espacial de especies individuales, múltiples especies e integrados utilizando el método de Monte Carlo por cadenas de Markov (MCMC). Los modelos se ajustan utilizando la técnica de aumento de datos Pólya-Gamma. Los modelos espaciales se ajustan utilizando procesos gaussianos o procesos gaussianos de vecinos más cercanos (NNGP) para conjuntos de datos espaciales grandes. El paquete proporciona funcionalidad para la integración de datos de ocupación de múltiples especies individuales utilizando un marco de verosimilitud conjunta. Para modelos de múltiples especies, spOccupancy proporciona funciones para tener en cuenta las correlaciones residuales entre especies en un marco de modelo de distribución de especies conjuntas mientras se tiene en cuenta la detección imperfecta. A partir de la versión 0.4.0, spOccupancy proporciona funciones para modelos de ocupación de especies individuales de múltiples temporadas (es decir, espacio-temporales). A continuación, proporcionamos una introducción muy breve a algunas de las funcionalidades del paquete, e ilustramos solo una de las funciones de ajuste de modelos. Para obtener más información, consulte los recursos referenciados al final de esta página.</p>
+</div>
+</div>
+</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">HN Biology Investigation Academy</figcaption>
 </figure>
 </div>
-</section>
 
 </main>
 <!-- /main column -->
