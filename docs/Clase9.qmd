@@ -10,8 +10,10 @@ editor: visual
 ## Inferencia frecuentista versus bayesiana
 
 La siguiente informacion es basada del libro: Bayesian GLMs in R for Ecology, Mark Wrren & Carl Smith, 2021.
-<https://orcid.org/0000-0003-3285-0379>
-<https://www.waterstones.com/book/bayesian-glms-in-r-for-ecology/mark-warren/carl-smith/9798498164656>
+
+[Orcid Autor](https://orcid.org/0000-0003-3285-0379)
+
+[Referencia](https://www.waterstones.com/book/bayesian-glms-in-r-for-ecology/mark-warren/carl-smith/9798498164656)
 
 
 - La inferencia bayesiana es atribuida a Thomas Bayes, un clerigo, filosofo y estadistico del siglo XVIII. La estadistica frecuentista fue desarrollada mucho despues, en el siglo XX, por diferentes personas, incluyendo Sir Ronald Fisher y Jerzy Splawa-Neyman.
@@ -38,11 +40,13 @@ En la Inferencia Bayesiana:
 
 ## spAbundance
 
+[Referecia](https://arxiv.org/abs/2310.19446)
+
 El paquete spAbundance ajusta modelos univariados (es decir, de una sola especie) y multivariados (es decir, de múltiples especies) de mezcla espacial N, modelos jerárquicos de muestreo de distancia y modelos mixtos generalizados lineales utilizando cadenas de Markov Monte Carlo (MCMC). Los modelos espaciales se ajustan utilizando Procesos Gaussianos de Vecino más Cercano (NNGPs) para facilitar el ajuste del modelo a grandes conjuntos de datos espaciales. spAbundance utiliza una sintaxis análoga a su "paquete hermano" spOccupancy (Doser et al. 2022). A continuación, proporcionamos una introducción muy breve a algunas de las funcionalidades del paquete e ilustramos solo una de las funciones de ajuste del modelo. Para obtener más información, consulta los recursos referenciados al final de esta página y la pestaña "Artículos" en la parte superior de la página.
 
 [spAbundance](https://www.jeffdoser.com/files/spabundance-web/)
 
-<https://www.jeffdoser.com/files/spabundance-web/articles/distancesampling>
+[Ejemplos usando spAbundance](https://www.jeffdoser.com/files/spabundance-web/articles/)
 
 En esta clase, vamos a explorar el paquete spAbundance y comparar su implementación con los paquetes Distance y Unmarked.
 
@@ -116,6 +120,15 @@ waicAbund(out3)
 
 - WAIC: Es el criterio de información Watanabe-Akaike. Es una medida de la calidad predictiva del modelo que tiene en cuenta tanto la bondad de ajuste como la complejidad del modelo. Cuanto más bajo sea el valor de WAIC, mejor será el modelo en términos de balance entre ajuste y complejidad.
 
+### Validacion del modelo
+
+```{r}
+ppc.out <- ppcAbund(out3, fit.stat = 'freeman-tukey', group = 0)
+summary(ppc.out)
+```
+
+- El valor p bayesiano es mayor que 0.1 y menor que 0.9, lo que indica un ajuste adecuado a los datos
+
 ### Revision de modelo
 
 ```{r,}
@@ -167,9 +180,11 @@ ggplot(mu.plot.dat, aes(x = AreaBasal, y = mu.med)) +
 
 ## spOccupancy
 
+[Referencia](https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.13897)
+
 spOccupancy ajusta modelos de ocupación espacial de especies individuales, múltiples especies e integrados utilizando el método de Monte Carlo por cadenas de Markov (MCMC). Los modelos se ajustan utilizando la técnica de aumento de datos Pólya-Gamma. Los modelos espaciales se ajustan utilizando procesos gaussianos o procesos gaussianos de vecinos más cercanos (NNGP) para conjuntos de datos espaciales grandes. El paquete proporciona funcionalidad para la integración de datos de ocupación de múltiples especies individuales utilizando un marco de verosimilitud conjunta. Para modelos de múltiples especies, spOccupancy proporciona funciones para tener en cuenta las correlaciones residuales entre especies en un marco de modelo de distribución de especies conjuntas mientras se tiene en cuenta la detección imperfecta. A partir de la versión 0.4.0, spOccupancy proporciona funciones para modelos de ocupación de especies individuales de múltiples temporadas (es decir, espacio-temporales). A continuación, proporcionamos una introducción muy breve a algunas de las funcionalidades del paquete, e ilustramos solo una de las funciones de ajuste de modelos. Para obtener más información, consulte los recursos referenciados al final de esta página.
 
-<https://www.jeffdoser.com/files/spoccupancy-web/articles/modelfitting>
+[Elemplos para spOcupancy](https://www.jeffdoser.com/files/spoccupancy-web/articles/)
 
 
 :::
