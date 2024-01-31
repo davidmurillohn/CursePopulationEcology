@@ -209,22 +209,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       elpd          pD        WAIC 
--66.5570782   0.9495005 135.0131574 </code></pre>
+-66.5565369   0.9443078 135.0016893 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     elpd        pD      WAIC 
--186.1303 1583.0988 3538.4581 </code></pre>
+-124.8205  535.5001 1320.6412 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      elpd         pD       WAIC 
--64.658918   1.889959 133.097755 </code></pre>
+-64.671450   1.883913 133.110727 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      elpd         pD       WAIC 
--61.188238   1.532835 125.442147 </code></pre>
+-61.122805   1.384885 125.015379 </code></pre>
 </div>
 </div>
 <ul>
@@ -236,7 +236,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ppc.out <span class="ot">&lt;-</span> <span class="fu">ppcAbund</span>(out3, <span class="at">fit.stat =</span> <span class="st">'freeman-tukey'</span>, <span class="at">group =</span> <span class="dv">0</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ppc.out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ppc.out2 <span class="ot">&lt;-</span> <span class="fu">ppcAbund</span>(out3, <span class="at">fit.stat =</span> <span class="st">'chi-squared'</span>, <span class="at">group =</span> <span class="dv">0</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ppc.out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -248,8 +250,23 @@ Thinning Rate: 1
 Number of Chains: 1
 Total Posterior Samples: 27000
 
-Bayesian p-value:  0.8721 
+Bayesian p-value:  0.889 
 Fit statistic:  freeman-tukey </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ppc.out2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ppcAbund(object = out3, fit.stat = "chi-squared", group = 0)
+
+Samples per Chain: 30000
+Burn-in: 3000
+Thinning Rate: 1
+Number of Chains: 1
+Total Posterior Samples: 27000
+
+Bayesian p-value:  0.5431 
+Fit statistic:  chi-squared </code></pre>
 </div>
 </div>
 <ul>
@@ -258,7 +275,7 @@ Fit statistic:  freeman-tukey </code></pre>
 </div>
 <div id="tabset-1-7" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-7-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -274,11 +291,11 @@ Run Time (min): 0.0352
 
 Abundance (log scale): 
                Mean     SD    2.5%     50%   97.5% Rhat ESS
-(Intercept) -1.5369 0.3833 -2.2905 -1.5322 -0.7959   NA 182
-AreaBasal    0.0366 0.0140  0.0071  0.0372  0.0610   NA 148</code></pre>
+(Intercept) -1.4964 0.3507 -2.2129 -1.4971 -0.8225   NA 252
+AreaBasal    0.0352 0.0124  0.0089  0.0356  0.0589   NA 177</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abundance regression coefficients</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">param =</span> <span class="st">'beta'</span>, <span class="at">density =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abundance regression coefficients</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">param =</span> <span class="st">'beta'</span>, <span class="at">density =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Clase9_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -286,36 +303,36 @@ AreaBasal    0.0366 0.0140  0.0071  0.0372  0.0610   NA 148</code></pre>
 </div>
 <div id="tabset-1-8" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-8-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>AreaBasal <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">AreaBasal =</span> <span class="fu">seq</span>(<span class="fu">min</span>(CARPUS<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">max</span>(CARPUS<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">length.out =</span> <span class="dv">100</span>))</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>AreaBasal.s <span class="ot">&lt;-</span> AreaBasal <span class="sc">-</span> <span class="fu">mean</span>(CARPUS<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">sd</span>(CARPUS<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>X<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">AreaBasal =</span> AreaBasal.s))</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>out.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(out3, X<span class="fl">.0</span>, <span class="at">ignore.RE =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the lower bound, median, and 95% credible interval</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>mu.<span class="fl">0.</span>quants <span class="ot">&lt;-</span> <span class="fu">apply</span>(out.pred<span class="sc">$</span>mu.<span class="fl">0.</span>samples, <span class="dv">2</span>, quantile, </span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>))</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>mu.plot.dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">mu.med =</span> mu.<span class="fl">0.</span>quants[<span class="dv">2</span>, ], </span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mu.low =</span> mu.<span class="fl">0.</span>quants[<span class="dv">1</span>, ], </span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mu.high =</span> mu.<span class="fl">0.</span>quants[<span class="dv">3</span>, ], </span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">AreaBasal =</span> AreaBasal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>AreaBasal <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">AreaBasal =</span> <span class="fu">seq</span>(<span class="fu">min</span>(CARPUS<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="fu">max</span>(CARPUS<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">length.out =</span> <span class="dv">100</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>AreaBasal.s <span class="ot">&lt;-</span> AreaBasal <span class="sc">-</span> <span class="fu">mean</span>(CARPUS<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">sd</span>(CARPUS<span class="sc">$</span>Area_Basal, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>X<span class="fl">.0</span> <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="at">intercept =</span> <span class="dv">1</span>, <span class="at">AreaBasal =</span> AreaBasal.s))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>out.pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(out3, X<span class="fl">.0</span>, <span class="at">ignore.RE =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the lower bound, median, and 95% credible interval</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>mu.<span class="fl">0.</span>quants <span class="ot">&lt;-</span> <span class="fu">apply</span>(out.pred<span class="sc">$</span>mu.<span class="fl">0.</span>samples, <span class="dv">2</span>, quantile, </span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>                     <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>))</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>mu.plot.dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">mu.med =</span> mu.<span class="fl">0.</span>quants[<span class="dv">2</span>, ], </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mu.low =</span> mu.<span class="fl">0.</span>quants[<span class="dv">1</span>, ], </span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>                          <span class="at">mu.high =</span> mu.<span class="fl">0.</span>quants[<span class="dv">3</span>, ], </span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">AreaBasal =</span> AreaBasal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div id="tabset-1-9" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-9-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mu.plot.dat, <span class="fu">aes</span>(<span class="at">x =</span> AreaBasal, <span class="at">y =</span> mu.med)) <span class="sc">+</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mu.low, <span class="at">ymax =</span> mu.high), <span class="at">fill =</span> <span class="st">'lightblue'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Covariate'</span>, <span class="at">y =</span> <span class="st">'Expected abundance'</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mu.plot.dat, <span class="fu">aes</span>(<span class="at">x =</span> AreaBasal, <span class="at">y =</span> mu.med)) <span class="sc">+</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mu.low, <span class="at">ymax =</span> mu.high), <span class="at">fill =</span> <span class="st">'lightblue'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">'Covariate'</span>, <span class="at">y =</span> <span class="st">'Expected abundance'</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Clase9_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>

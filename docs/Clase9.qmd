@@ -124,7 +124,10 @@ waicAbund(out3)
 
 ```{r}
 ppc.out <- ppcAbund(out3, fit.stat = 'freeman-tukey', group = 0)
+ppc.out2 <- ppcAbund(out3, fit.stat = 'chi-squared', group = 0)
+
 summary(ppc.out)
+summary(ppc.out2)
 ```
 
 - El valor p bayesiano es mayor que 0.1 y menor que 0.9, lo que indica un ajuste adecuado a los datos
