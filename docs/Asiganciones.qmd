@@ -22,17 +22,17 @@ A medida que avance en el curso, se irán agregando más asignaciones.
 
 ## Asignación 3
 
-Realizar el ejercicio visto en clase para estimar la abundancia y su respectivos intervalos de confianza al 95%, asi como presentar el grafico, utilizando el metodo de transectos.
+Realizar el ejercicio discutido en clase para estimar la abundancia y sus respectivos intervalos de confianza al 95%. Además, presentar el gráfico correspondiente utilizando el método de transectos.
 
-Para realizar el grafico primero debera prepara la dataframe utilizando el comonado 'data.frame' y el grafio debera se con 'ggplot' agregando el 'geom_errorbarth'.
+Para generar el gráfico, primero se debe preparar el dataframe utilizando el comando 'data.frame' y luego crear el gráfico con 'ggplot', agregando 'geom_errorbarth'.
 
 ## Asignación 4
 
-Ajustar modelos de abundancia y densidad como los visto en clase, pero en este caso utilizando la base de datos "amakihi". Como resultado presentar su grafica con los intervalos de confianza al 95%
+Ajustar modelos de abundancia y densidad según lo visto en clase, utilizando la base de datos "amakihi". Presentar los resultados en un gráfico con intervalos de confianza al 95%.
 
 ## Asignación 5
 
-Ajustar modelos de detectabilidad, seguidamente de modelo que contenda la detectabilidad y abundanica. Como se mostro en clases. En esre caso utilizra la base de datos 'SETMAG.rds' que se encuentra en el googledrive. Como resultado presentar el estimado, el intercepto, error standar y sus intervalos de confianza al 95% con su respectiva grafica del modelo mas adecuado. 
+Ajustar modelos de detectabilidad, seguido por un modelo que incorpore tanto la detectabilidad como la abundancia, tal como se presentó en clase. En este caso, se utilizará la base de datos 'SETMAG.rds' alojada en Google Drive. Presentar los estimados, el intercepto, el error estándar y sus intervalos de confianza al 95% junto con el gráfico del modelo más adecuado.
 
 ## Asignación 6
 
@@ -40,6 +40,12 @@ Ajustar modelos de detectabilidad, seguidamente de modelo que contenda la detect
 
 
 ## Asignación 7
+
+Ajustar modelos de abundancia o densidad para las especies insectívoras, como se presentó en clase. Presentar los estimados, el intercepto, el error estándar y sus intervalos de confianza al 95%, junto con el gráfico del modelo más adecuado.
+
+## Asignación 8
+
+Ajustar modelos de abundancia con enfoque bayesiano utilizando el paquete 'spAbundance', como se mostró en clase. En este caso, utilizar la base de datos 'SETMAG.rds' alojada en Google Drive. Presentar los estimados, el intercepto, el error estándar y sus intervalos de confianza al 95%, junto con el gráfico del modelo más adecuado.
 
 
 :::
