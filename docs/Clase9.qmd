@@ -7,6 +7,35 @@ editor: visual
 
 ::: panel-tabset
 
+## Inferencia frecuentista versus bayesiana
+
+La siguiente informacion es basada del libro: Bayesian GLMs in R for Ecology, Mark Wrren & Carl Smith, 2021.
+<https://orcid.org/0000-0003-3285-0379>
+<https://www.waterstones.com/book/bayesian-glms-in-r-for-ecology/mark-warren/carl-smith/9798498164656>
+
+
+- La inferencia bayesiana es atribuida a Thomas Bayes, un clerigo, filosofo y estadistico del siglo XVIII. La estadistica frecuentista fue desarrollada mucho despues, en el siglo XX, por diferentes personas, incluyendo Sir Ronald Fisher y Jerzy Splawa-Neyman.
+
+### Diferemcias entre inferencia Bayesiana y Frecuentista
+
+| Inferencia Bayesiana                       | Inferencia Frecuentista                        |
+|---------------------------------------------|-------------------------------------------------|
+| Provee una medida de probabilidad de que la hipótesis sea verdadera dada los datos; P(H/D) | Inferencia basada en la probabilidad (P) de los datos (D) dada la hipótesis (H); P(D/H) | 
+| Los parámetros de los modelos son variables aleatorias con conocimiento medible y probabilístico como una medida de "grados de creencia" | La manera de implementación es probar los datos versus una hipótesis para responder las preguntas |
+|Genera distribuciones posteriores de parámetros dados los datos e información previa (prior information); los resultados proveen un panorama completo de la incertidumbre y permiten discernir los parámetros de los modelos con mayor certeza | Utilizando la probabilidad (valor-P) de que los datos respalden la hipótesis nula; el valor típicamente aceptado es de 0.05. |
+| La distribución posterior es proporcional a la evidencia en combinación con el conocimiento previo sobre el sistema | Si la hipótesis nula es rechazada, la alternativa es aceptada |
+
+
+> La inferencia bayesiana precede a la inferencia frecuentista por aproximadamente 200 años.
+
+En la Inferencia Bayesiana:
+
+- La distribución a priori representa la incertidumbre antes de observar los datos.
+
+- La distribución a posteriori representa la incertidumbre actualizada después de observar los datos.
+
+- Los intervalos de credibilidad bayesianos se utilizan para cuantificar la incertidumbre sobre los parámetros del modelo.
+
 ## spAbundance
 
 El paquete spAbundance ajusta modelos univariados (es decir, de una sola especie) y multivariados (es decir, de múltiples especies) de mezcla espacial N, modelos jerárquicos de muestreo de distancia y modelos mixtos generalizados lineales utilizando cadenas de Markov Monte Carlo (MCMC). Los modelos espaciales se ajustan utilizando Procesos Gaussianos de Vecino más Cercano (NNGPs) para facilitar el ajuste del modelo a grandes conjuntos de datos espaciales. spAbundance utiliza una sintaxis análoga a su "paquete hermano" spOccupancy (Doser et al. 2022). A continuación, proporcionamos una introducción muy breve a algunas de las funcionalidades del paquete e ilustramos solo una de las funciones de ajuste del modelo. Para obtener más información, consulta los recursos referenciados al final de esta página y la pestaña "Artículos" en la parte superior de la página.
@@ -21,7 +50,7 @@ En esta clase, vamos a explorar el paquete spAbundance y comparar su implementac
 
 ### Cargar paquetes
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 library(spAbundance)
 library(tidyverse)
 ```
@@ -52,22 +81,22 @@ CARPUS_covs <- list(y= CARPUS_y, covs = covs)
 ```{r, message=FALSE, warning=FALSE, results='hide'}
 out <- abund(formula = ~ 1,
              data = CARPUS_covs,
-             n.rep = 3, family = "Poisson",
+             n.rep = 1000, family = "Poisson",
              n.batch = 300, batch.length = 100)
 
 out1 <- abund(formula = ~ Elevacion,
              data = CARPUS_covs,
-             n.rep = 3, family = "Poisson",
+             n.rep = 1000, family = "Poisson",
              n.batch = 300, batch.length = 100)
 
 out2 <- abund(formula = ~ Habitat ,
              data = CARPUS_covs,
-             n.rep = 3, family = "Poisson",
+             n.rep = 1000, family = "Poisson",
              n.batch = 300, batch.length = 100)
 
 out3 <- abund(formula = ~ AreaBasal,
              data = CARPUS_covs,
-             n.rep = 3, family = "Poisson",
+             n.rep = 1000, family = "Poisson",
              n.batch = 300, batch.length = 100)
 ```
 
@@ -81,6 +110,11 @@ waicAbund(out2)
 waicAbund(out3)
 ```
 
+- elpd: Es el logaritmo de la densidad predictiva efectiva, que es una medida de la bondad de ajuste del modelo. Cuanto mayor sea el valor de elpd, mejor se ajusta el modelo a los datos observados.
+
+- pD: Es el número efectivo de parámetros del modelo. Indica la complejidad del modelo y se utiliza para penalizar la complejidad del modelo en el cálculo del WAIC. Un valor más alto de pD indica un modelo más complejo.
+
+- WAIC: Es el criterio de información Watanabe-Akaike. Es una medida de la calidad predictiva del modelo que tiene en cuenta tanto la bondad de ajuste como la complejidad del modelo. Cuanto más bajo sea el valor de WAIC, mejor será el modelo en términos de balance entre ajuste y complejidad.
 
 ### Revision de modelo
 
