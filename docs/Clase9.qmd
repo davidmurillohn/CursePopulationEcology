@@ -18,7 +18,7 @@ La siguiente informacion es basada del libro: Bayesian GLMs in R for Ecology, Ma
 
 - La inferencia bayesiana es atribuida a Thomas Bayes, un clerigo, filosofo y estadistico del siglo XVIII. La estadistica frecuentista fue desarrollada mucho despues, en el siglo XX, por diferentes personas, incluyendo Sir Ronald Fisher y Jerzy Splawa-Neyman.
 
-### Diferemcias entre inferencia Bayesiana y Frecuentista
+### Diferencias entre inferencia Bayesiana y Frecuentista
 
 | Inferencia Bayesiana                       | Inferencia Frecuentista                        |
 |---------------------------------------------|-------------------------------------------------|

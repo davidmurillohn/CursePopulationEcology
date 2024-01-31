@@ -104,8 +104,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>La inferencia bayesiana es atribuida a Thomas Bayes, un clerigo, filosofo y estadistico del siglo XVIII. La estadistica frecuentista fue desarrollada mucho despues, en el siglo XX, por diferentes personas, incluyendo Sir Ronald Fisher y Jerzy Splawa-Neyman.</li>
 </ul>
-<section id="diferemcias-entre-inferencia-bayesiana-y-frecuentista" class="level3">
-<h3 class="anchored" data-anchor-id="diferemcias-entre-inferencia-bayesiana-y-frecuentista">Diferemcias entre inferencia Bayesiana y Frecuentista</h3>
+<section id="diferencias-entre-inferencia-bayesiana-y-frecuentista" class="level3">
+<h3 class="anchored" data-anchor-id="diferencias-entre-inferencia-bayesiana-y-frecuentista">Diferencias entre inferencia Bayesiana y Frecuentista</h3>
 <table class="table">
 <colgroup>
 <col style="width: 47%">
@@ -208,23 +208,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>      elpd         pD       WAIC 
--66.556663   0.942355 134.998037 </code></pre>
+<pre><code>       elpd          pD        WAIC 
+-66.5570782   0.9495005 135.0131574 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     elpd        pD      WAIC 
--574.5368 1486.4179 4121.9093 </code></pre>
+-186.1303 1583.0988 3538.4581 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     elpd        pD      WAIC 
--64.66940   1.86703 133.07285 </code></pre>
+<pre><code>      elpd         pD       WAIC 
+-64.658918   1.889959 133.097755 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     elpd        pD      WAIC 
--61.08681   1.28173 124.73709 </code></pre>
+<pre><code>      elpd         pD       WAIC 
+-61.188238   1.532835 125.442147 </code></pre>
 </div>
 </div>
 <ul>
@@ -248,7 +248,7 @@ Thinning Rate: 1
 Number of Chains: 1
 Total Posterior Samples: 27000
 
-Bayesian p-value:  0.8947 
+Bayesian p-value:  0.8721 
 Fit statistic:  freeman-tukey </code></pre>
 </div>
 </div>
@@ -270,12 +270,12 @@ Burn-in: 3000
 Thinning Rate: 1
 Number of Chains: 1
 Total Posterior Samples: 27000
-Run Time (min): 0.0353
+Run Time (min): 0.0352
 
 Abundance (log scale): 
                Mean     SD    2.5%     50%   97.5% Rhat ESS
-(Intercept) -1.5181 0.3360 -2.2113 -1.5094 -0.8940   NA 226
-AreaBasal    0.0361 0.0117  0.0131  0.0368  0.0587   NA 176</code></pre>
+(Intercept) -1.5369 0.3833 -2.2905 -1.5322 -0.7959   NA 182
+AreaBasal    0.0366 0.0140  0.0071  0.0372  0.0610   NA 148</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abundance regression coefficients</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">param =</span> <span class="st">'beta'</span>, <span class="at">density =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
