@@ -4,8 +4,6 @@ format: html
 editor: visual
 ---
 
-::: panel-tabset
-
 [Rmark material](http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf)
 
 ## Supervivencia de nido
@@ -20,7 +18,10 @@ Para esta clase utilizaremos el paquete Rmark
 library(RMark)
 library(tidyverse)
 ```
+
 ::: panel-tabset
+
+
 
 ### Cargar base de datos
 
@@ -195,12 +196,6 @@ ggplot(age.survival, aes(x = Age, y = DSR)) +
   ylab("Estimated DSR") +
   theme_bw()
 ```
-:::
-
-## Captura-recaptura
-
-captura recaptura
-
 :::
 
 ![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)
