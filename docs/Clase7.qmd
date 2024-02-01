@@ -1,4 +1,3 @@
-
 ---
 title: "Clase 5: Uso de Unmarked, Estimación de abundancia por conteo por puntos"
 format: html
@@ -12,7 +11,6 @@ En esta clase se obordara como utilizar Unmarked para modelar abundancia de espe
 En esta clase, exploraremos el uso de Unmarked para modelar la abundancia de especies a partir de datos recopilados mediante conteo por puntos. Desde los fundamentos, explicaremos paso a paso cómo utilizar este paquete, cubriendo el proceso completo: desde el ajuste inicial del modelo hasta la selección, validación e interpretación de los resultados. También abordaremos la presentación de los datos para su inclusión en publicaciones científicas, asegurando un entendimiento completo y la capacidad de aplicar estos modelos de manera efectiva en contextos de investigación y divulgación científica.
 
 ::: panel-tabset
-
 ## Cargar base de datos
 
 ```{r}
@@ -52,7 +50,6 @@ CarpusPivotOrden <- CarpusPivot %>%
 head(CarpusPivotOrden)
 ```
 
-
 ## Formatear base de datos a formato unmarked
 
 Pasar cada replica en columnas diferentes de acuerdo a la especie de ave
@@ -87,7 +84,6 @@ CARPUSunmarkedReady <- CARPUSunmarked %>%
 
 ```
 
-
 ## Crear variables de detectabilidad
 
 ```{r}
@@ -107,7 +103,6 @@ Hora_CARPUS= list(Hora=CARPUSunmarkedReady[,9:11])
 
 
 ```
-
 
 ## Crear variables de habitat (covariables)
 
@@ -131,7 +126,6 @@ summary(CARPUSunmarked_df)
 
 ```
 
-
 ## Ajustar modelo de deteccion
 
 ```{r}
@@ -145,8 +139,6 @@ ModelDet2 <- pcount(~Hora ~1, CARPUSunmarked_df)
 
 ModelDet3 <- pcount(~Fecha + Hora ~1, CARPUSunmarked_df)
 ```
-
-
 
 ## Seleccion de modelo de deteccion
 
@@ -173,6 +165,7 @@ ModelAbun2 <- pcount(~1 ~ ALTITUDE, CARPUSunmarked_df)
 
 ModelAbun3 <- pcount(~1 ~ Area_Basal, CARPUSunmarked_df)
 ```
+
 ## Seleccion de modelo de abundancia
 
 ```{r}
@@ -184,6 +177,7 @@ AbunNames <- c("Nulo", "Type", "ALTITUDE", "Area_Basal")
 
 aictab(AbunModels, AbunNames, sort = TRUE)
 ```
+
 ## Resumen de los resultados
 
 ```{r}
@@ -217,7 +211,6 @@ MigGOF <- Nmix.gof.test(ModelAbun3, nsim = 100, report = 3)
 
 ```
 
-
 ## Prepar data para graficar
 
 ```{r}
@@ -227,7 +220,6 @@ Carpus_pre_area_basal <- predict(ModelAbun3, newdata = CARPUS_arear_basal, type 
 
 Carpus_pre_area_basal$Area_Basal <- CARPUS_arear_basal$Area_Basal 
 ```
-
 
 ## Graficar modelo
 
@@ -241,10 +233,6 @@ ggplot(data= Carpus_pre_area_basal, aes(x= Area_Basal, y= Predicted))+
   ggtitle("Relacion de Cardenilla pusilla versus el area basal") +
   theme_classic()
 ```
+:::
 
-
-::: 
-
-
-
-![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
+![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)

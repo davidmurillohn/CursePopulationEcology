@@ -1,4 +1,3 @@
-
 ---
 title: "Clase 8: Introducción a spAbundance y a spOccupancy"
 format: html
@@ -6,7 +5,6 @@ editor: visual
 ---
 
 ::: panel-tabset
-
 ## Inferencia frecuentista versus bayesiana
 
 La siguiente informacion es basada del libro: Bayesian GLMs in R for Ecology, Mark Wrren & Carl Smith, 2021.
@@ -15,28 +13,26 @@ La siguiente informacion es basada del libro: Bayesian GLMs in R for Ecology, Ma
 
 [Referencia](https://www.waterstones.com/book/bayesian-glms-in-r-for-ecology/mark-warren/carl-smith/9798498164656)
 
-
-- La inferencia bayesiana es atribuida a Thomas Bayes, un clerigo, filosofo y estadistico del siglo XVIII. La estadistica frecuentista fue desarrollada mucho despues, en el siglo XX, por diferentes personas, incluyendo Sir Ronald Fisher y Jerzy Splawa-Neyman.
+-   La inferencia bayesiana es atribuida a Thomas Bayes, un clerigo, filosofo y estadistico del siglo XVIII. La estadistica frecuentista fue desarrollada mucho despues, en el siglo XX, por diferentes personas, incluyendo Sir Ronald Fisher y Jerzy Splawa-Neyman.
 
 ### Diferencias entre inferencia Bayesiana y Frecuentista
 
-| Inferencia Bayesiana                       | Inferencia Frecuentista                        |
-|---------------------------------------------|-------------------------------------------------|
-| Provee una medida de probabilidad de que la hipótesis sea verdadera dada los datos; P(H/D) | Inferencia basada en la probabilidad (P) de los datos (D) dada la hipótesis (H); P(D/H) | 
-| Los parámetros de los modelos son variables aleatorias con conocimiento medible y probabilístico como una medida de "grados de creencia" | La manera de implementación es probar los datos versus una hipótesis para responder las preguntas |
-|Genera distribuciones posteriores de parámetros dados los datos e información previa (prior information); los resultados proveen un panorama completo de la incertidumbre y permiten discernir los parámetros de los modelos con mayor certeza | Utilizando la probabilidad (valor-P) de que los datos respalden la hipótesis nula; el valor típicamente aceptado es de 0.05. |
-| La distribución posterior es proporcional a la evidencia en combinación con el conocimiento previo sobre el sistema | Si la hipótesis nula es rechazada, la alternativa es aceptada |
-
+| Inferencia Bayesiana                                                                                                                                                                                                                           | Inferencia Frecuentista                                                                                                      |
+|-----------------------------------|-------------------------------------|
+| Provee una medida de probabilidad de que la hipótesis sea verdadera dada los datos; P(H/D)                                                                                                                                                     | Inferencia basada en la probabilidad (P) de los datos (D) dada la hipótesis (H); P(D/H)                                      |
+| Los parámetros de los modelos son variables aleatorias con conocimiento medible y probabilístico como una medida de "grados de creencia"                                                                                                       | La manera de implementación es probar los datos versus una hipótesis para responder las preguntas                            |
+| Genera distribuciones posteriores de parámetros dados los datos e información previa (prior information); los resultados proveen un panorama completo de la incertidumbre y permiten discernir los parámetros de los modelos con mayor certeza | Utilizando la probabilidad (valor-P) de que los datos respalden la hipótesis nula; el valor típicamente aceptado es de 0.05. |
+| La distribución posterior es proporcional a la evidencia en combinación con el conocimiento previo sobre el sistema                                                                                                                            | Si la hipótesis nula es rechazada, la alternativa es aceptada                                                                |
 
 > La inferencia bayesiana precede a la inferencia frecuentista por aproximadamente 200 años.
 
 En la Inferencia Bayesiana:
 
-- La distribución a priori representa la incertidumbre antes de observar los datos.
+-   La distribución a priori representa la incertidumbre antes de observar los datos.
 
-- La distribución a posteriori representa la incertidumbre actualizada después de observar los datos.
+-   La distribución a posteriori representa la incertidumbre actualizada después de observar los datos.
 
-- Los intervalos de credibilidad bayesianos se utilizan para cuantificar la incertidumbre sobre los parámetros del modelo.
+-   Los intervalos de credibilidad bayesianos se utilizan para cuantificar la incertidumbre sobre los parámetros del modelo.
 
 ## spAbundance
 
@@ -51,7 +47,6 @@ El paquete spAbundance ajusta modelos univariados (es decir, de una sola especie
 En esta clase, vamos a explorar el paquete spAbundance y comparar su implementación con los paquetes Distance y Unmarked.
 
 ::: panel-tabset
-
 ### Cargar paquetes
 
 ```{r, warning=FALSE, message=FALSE}
@@ -104,7 +99,6 @@ out3 <- abund(formula = ~ AreaBasal,
              n.batch = 300, batch.length = 100)
 ```
 
-
 ### Seleccion de modelo mas adecuado
 
 ```{r,}
@@ -114,11 +108,11 @@ waicAbund(out2)
 waicAbund(out3)
 ```
 
-- elpd: Es el logaritmo de la densidad predictiva efectiva, que es una medida de la bondad de ajuste del modelo. Cuanto mayor sea el valor de elpd, mejor se ajusta el modelo a los datos observados.
+-   elpd: Es el logaritmo de la densidad predictiva efectiva, que es una medida de la bondad de ajuste del modelo. Cuanto mayor sea el valor de elpd, mejor se ajusta el modelo a los datos observados.
 
-- pD: Es el número efectivo de parámetros del modelo. Indica la complejidad del modelo y se utiliza para penalizar la complejidad del modelo en el cálculo del WAIC. Un valor más alto de pD indica un modelo más complejo.
+-   pD: Es el número efectivo de parámetros del modelo. Indica la complejidad del modelo y se utiliza para penalizar la complejidad del modelo en el cálculo del WAIC. Un valor más alto de pD indica un modelo más complejo.
 
-- WAIC: Es el criterio de información Watanabe-Akaike. Es una medida de la calidad predictiva del modelo que tiene en cuenta tanto la bondad de ajuste como la complejidad del modelo. Cuanto más bajo sea el valor de WAIC, mejor será el modelo en términos de balance entre ajuste y complejidad.
+-   WAIC: Es el criterio de información Watanabe-Akaike. Es una medida de la calidad predictiva del modelo que tiene en cuenta tanto la bondad de ajuste como la complejidad del modelo. Cuanto más bajo sea el valor de WAIC, mejor será el modelo en términos de balance entre ajuste y complejidad.
 
 ### Validacion del modelo
 
@@ -130,7 +124,7 @@ summary(ppc.out)
 summary(ppc.out2)
 ```
 
-- El valor p bayesiano es mayor que 0.1 y menor que 0.9, lo que indica un ajuste adecuado a los datos
+-   El valor p bayesiano es mayor que 0.1 y menor que 0.9, lo que indica un ajuste adecuado a los datos
 
 ### Revision de modelo
 
@@ -167,7 +161,6 @@ mu.plot.dat <- data.frame(mu.med = mu.0.quants[2, ],
                           AreaBasal = AreaBasal)
 ```
 
-
 ### Graficar modelo
 
 ```{r}
@@ -178,7 +171,6 @@ ggplot(mu.plot.dat, aes(x = AreaBasal, y = mu.med)) +
   labs(x = 'Covariate', y = 'Expected abundance') +
   theme_classic()
 ```
-
 :::
 
 ## spOccupancy
@@ -188,8 +180,6 @@ ggplot(mu.plot.dat, aes(x = AreaBasal, y = mu.med)) +
 spOccupancy ajusta modelos de ocupación espacial de especies individuales, múltiples especies e integrados utilizando el método de Monte Carlo por cadenas de Markov (MCMC). Los modelos se ajustan utilizando la técnica de aumento de datos Pólya-Gamma. Los modelos espaciales se ajustan utilizando procesos gaussianos o procesos gaussianos de vecinos más cercanos (NNGP) para conjuntos de datos espaciales grandes. El paquete proporciona funcionalidad para la integración de datos de ocupación de múltiples especies individuales utilizando un marco de verosimilitud conjunta. Para modelos de múltiples especies, spOccupancy proporciona funciones para tener en cuenta las correlaciones residuales entre especies en un marco de modelo de distribución de especies conjuntas mientras se tiene en cuenta la detección imperfecta. A partir de la versión 0.4.0, spOccupancy proporciona funciones para modelos de ocupación de especies individuales de múltiples temporadas (es decir, espacio-temporales). A continuación, proporcionamos una introducción muy breve a algunas de las funcionalidades del paquete, e ilustramos solo una de las funciones de ajuste de modelos. Para obtener más información, consulte los recursos referenciados al final de esta página.
 
 [Elemplos para spOcupancy](https://www.jeffdoser.com/files/spoccupancy-web/articles/)
-
-
 :::
 
 ![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)

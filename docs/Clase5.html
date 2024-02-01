@@ -94,57 +94,199 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Supervivencia de nido</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Captura-recaptura</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>La supervivencia de nidos es un área clave en la ecología de las aves. En términos generales, se mide la probabilidad de que un nido con huevos o crías llegue a producir individuos voladores. El enfoque de Manfield es un método simple que considera la proporción de nidos que tienen éxito.</p>
 <p>Por otro lado, el enfoque RMark para la supervivencia de nidos implica modelos más sofisticados, utilizando técnicas estadísticas avanzadas para tener en cuenta variables específicas como el momento de la temporada, el efecto del depredador, la ubicación del nido, entre otros factores. Este método permite análisis detallados y precisos de la supervivencia de los nidos.</p>
 <p>Para esta clase utilizaremos el paquete Rmark</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RMark)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'RMark' was built under R version 4.3.2</code></pre>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RMark)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>This is RMark 3.0.0
- Documentation available at http://www.phidot.org/software/mark/rmark/RMarkDocumentation.zip</code></pre>
-</div>
-</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Cargar base de datos</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Preparacion de la base de datos</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Ajustar modelos</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Seleccionar modelo mas adecuado</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-5" role="tab" aria-controls="tabset-1-5" aria-selected="false" href="">Preparar datos de grass para graficar</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-6-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-6" role="tab" aria-controls="tabset-1-6" aria-selected="false" href="">preparar datos de age para graficar</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>Necesitamos también cargar una base de datos que esté correctamente formateada para su uso.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mallard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mallard)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Esta base de datos presenta 565 observaciones con las siguientes 13 variables.</p>
+<ul>
+<li><p>FirstFound el día en que se encontró el nido por primera vez</p></li>
+<li><p>LastPresent el último día que los polluelos estuvieron presentes</p></li>
+<li><p>LastChecked el último día en que se revisó el nido</p></li>
+<li><p>Fate el destino del nido; 0=eclosionó y 1=depredado</p></li>
+<li><p>Freq la frecuencia de nidos con estos datos; siempre es 1 en este ejemplo</p></li>
+<li><p>Robel lectura de Robel del grosor de la vegetación</p></li>
+<li><p>PpnGrass proporción de pasto en la cercanía del nido</p></li>
+<li><p>Native variable 0/1; 1 si es vegetación nativa</p></li>
+<li><p>Planted variable 0/1; 1 si es vegetación plantada</p></li>
+<li><p>Wetland variable 0/1; 1 si es vegetación de humedal</p></li>
+<li><p>Roadside variable 0/1; 1 si es vegetación de carretera</p></li>
+<li><p>AgeFound edad del nido en días el día que se encontró el nido</p></li>
+<li><p>AgeDay1 edad del nido al inicio del estudio</p></li>
+</ul>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>En ocasiones, será necesario realizar una preparación inicial de nuestros datos antes de proceder.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mallard<span class="sc">$</span>habitat <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(mallard<span class="sc">$</span>Native <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Native"</span>,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ifelse</span>(mallard<span class="sc">$</span>Planted <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Planted"</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">ifelse</span>(mallard<span class="sc">$</span>Roadside <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Roadside"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Wetland"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mallard1 <span class="ot">&lt;-</span> mallard <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Habitat =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    Native <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Native"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    Planted <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Planted"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    Roadside <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"Roadside"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Wetland"</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>También será necesario ajustar la base de datos para que esté en un formato compatible con RMark.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mallard.pr <span class="ot">&lt;-</span> <span class="fu">process.data</span>(mallard,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">nocc=</span><span class="dv">90</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">model=</span><span class="st">"Nest"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">groups=</span>(<span class="st">"habitat"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ti <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">565</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Model0 <span class="ot">&lt;-</span> <span class="fu">mark</span>(<span class="at">data =</span> mallard1, <span class="at">model =</span> <span class="st">"Nest"</span>, <span class="at">time.intervals =</span> ti , <span class="at">groups =</span> <span class="st">"Habitat"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">model.parameters =</span> <span class="fu">list</span>(<span class="at">S=</span> <span class="fu">list</span>(<span class="at">formula =</span> Fate <span class="sc">~</span> <span class="dv">1</span>)))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>Model1 <span class="ot">&lt;-</span> <span class="fu">mark</span>(<span class="at">data =</span> mallard1, <span class="at">model =</span> <span class="st">"Nest"</span>, <span class="at">time.intervals =</span> ti , <span class="at">groups =</span> <span class="st">"Habitat"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">model.parameters =</span> <span class="fu">list</span>(<span class="at">S=</span> <span class="fu">list</span>(<span class="at">formula =</span> Fate <span class="sc">~</span> NestAge <span class="sc">+</span> PpnGrass)))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>Model2 <span class="ot">&lt;-</span> <span class="fu">mark</span>(<span class="at">data =</span> mallard1, <span class="at">model =</span> <span class="st">"Nest"</span>, <span class="at">time.intervals =</span> ti , <span class="at">groups =</span> <span class="st">"Habitat"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">model.parameters =</span> <span class="fu">list</span>(<span class="at">S=</span> <span class="fu">list</span>(<span class="at">formula =</span> Fate <span class="sc">~</span> Robel)))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>Model3 <span class="ot">&lt;-</span> <span class="fu">mark</span>(<span class="at">data =</span> mallard1, <span class="at">model =</span> <span class="st">"Nest"</span>, <span class="at">time.intervals =</span> ti , <span class="at">groups =</span> <span class="st">"Habitat"</span>, </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">model.parameters =</span> <span class="fu">list</span>(<span class="at">S=</span> <span class="fu">list</span>(<span class="at">formula =</span> Fate <span class="sc">~</span> AgeDay1)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(Model0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "mark" "Nest"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>MallardModels <span class="ot">=</span><span class="fu">collect.models</span>(<span class="at">type=</span><span class="st">"Nest"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>MallardModels</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       model npar     AICc DeltaAICc     weight Deviance
+2 S(~FateNestAge + PpnGrass)    3 1563.010  0.000000 0.91784141 1557.006
+1                  S(~Fate1)    1 1569.117  6.107033 0.04331540 1567.116
+4            S(~FateAgeDay1)    2 1570.668  7.658640 0.01993954 1566.666
+3              S(~FateRobel)    2 1570.775  7.765340 0.01890365 1566.773</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model0[["results"]][["AICc"]]</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Model1[["results"]][["AICc"]]</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Model2[["results"]][["AICc"]]</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Model3[["results"]][["AICc"]]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-1-5" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-5-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model1$design.matrix</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Model1$results$beta</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Model1$results$beta.vcv</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Model1$results$real</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>fc_grass <span class="ot">&lt;-</span> <span class="fu">find.covariates</span>(Model1, mallard1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning in process.data(mallard, nocc = 90, model = "Nest", groups = ("habitat")): 
-  habitat  is not a factor variable. Coercing to factor.</code></pre>
-</div>
-</div>
-<p>Por último, podremos emplear un modelo.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Model1 <span class="ot">&lt;-</span> <span class="fu">mark</span>(<span class="at">data=</span> mallard.pr, <span class="at">model=</span> <span class="st">"Nest"</span>,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">model.parameters =</span> <span class="fu">list</span>(<span class="at">S=</span> <span class="fu">list</span>(<span class="at">formula =</span> Fate <span class="sc">~</span> NestAge <span class="sc">+</span> PpnGrass)), <span class="at">nocc =</span> <span class="dv">40</span>, <span class="at">threads =</span> <span class="dv">2</span>, <span class="at">delete =</span> <span class="cn">TRUE</span> ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Claro, ahora podemos representar los resultados en un gráfico para una interpretación más clara.</p>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in find.covariates(Model1, mallard): No value given for data argument
+<pre><code>Warning in find.covariates(Model1, mallard1): No value given for data argument
 so any covariate values are set to 0.</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># assign 17 to 1st 50 nest ages</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fc_grass<span class="sc">$</span>value[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>] <span class="ot">&lt;-</span> <span class="dv">17</span>  </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># assign range of values to PpnGrass</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>fc_grass<span class="sc">$</span>value[fc_grass<span class="sc">$</span>var <span class="sc">==</span> <span class="st">"PpnGrass"</span>] <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fl">0.01</span>, <span class="fl">0.99</span>, <span class="at">length =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in fc_grass$value[fc_grass$var == "PpnGrass"] &lt;- seq(0.01, 0.99, :
+number of items to replace is not a multiple of replacement length</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fill design matrix with values</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>design_grass <span class="ot">&lt;-</span> <span class="fu">fill.covariates</span>(Model1,fc_grass)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>grass.survival <span class="ot">&lt;-</span> <span class="fu">compute.real</span>(Model1, <span class="at">design =</span> design_grass)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># insert covariate columns</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>grass.survival <span class="ot">&lt;-</span> <span class="fu">cbind</span>(design_grass[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span> , <span class="dv">3</span>], grass.survival[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,])     </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(grass.survival) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PpnGrass"</span>, <span class="st">"DSR"</span>, <span class="st">"seDSR"</span>, <span class="st">"lclDSR"</span>, <span class="st">"uclDSR"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># view estimates of DSR for each age and PpnGrass combo   </span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grass.survival)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PpnGrass       DSR       seDSR    lclDSR    uclDSR NA
+1 0.01000000 0.9398226 0.007793762 0.9226061 0.9534027   
+2 0.01989899 0.9400288 0.007662541 0.9231290 0.9534009   
+3 0.02979798 0.9402344 0.007532402 0.9236477 0.9533996   
+4 0.03969697 0.9404393 0.007403352 0.9241625 0.9533988   
+5 0.04959596 0.9406435 0.007275401 0.9246732 0.9533986   
+6 0.05949495 0.9408471 0.007148557 0.9251797 0.9533990   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grass.survival, <span class="fu">aes</span>(<span class="at">x =</span> PpnGrass, <span class="at">y =</span> DSR)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lclDSR, <span class="at">ymax =</span> uclDSR), <span class="at">alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Proportion Grass on Site"</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimated DSR"</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Clase5_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>En el curso se detallara cada uno de los pasos para lograr a desarrollar el modelo, su interpretacion y su implementacion en casos reales.</p>
+</div>
+<div id="tabset-1-6" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-6-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fc_age <span class="ot">&lt;-</span> <span class="fu">find.covariates</span>(Model1, mallard1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in find.covariates(Model1, mallard1): No value given for data argument
+so any covariate values are set to 0.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fc_age<span class="sc">$</span>value[<span class="dv">1</span><span class="sc">:</span><span class="dv">35</span>] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">35</span>                      <span class="co"># assign 1:35 to 1st 35 nest ages</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>fc_age<span class="sc">$</span>value[fc_age<span class="sc">$</span>var <span class="sc">==</span> <span class="st">"PpnGrass"</span>] <span class="ot">&lt;-</span> <span class="fl">0.1</span>       <span class="co"># assign new value to PpnGrass</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>design_age <span class="ot">&lt;-</span> <span class="fu">fill.covariates</span>(Model1, fc_age)  <span class="co"># fill design matrix with values</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># extract 1st 35 rows of output</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>age.survival <span class="ot">&lt;-</span> <span class="fu">compute.real</span>(Model1, <span class="at">design =</span> design_age)[<span class="dv">1</span><span class="sc">:</span><span class="dv">35</span>, ]</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># insert covariate columns</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>age.survival <span class="ot">&lt;-</span> <span class="fu">cbind</span>(design_age[<span class="dv">1</span><span class="sc">:</span><span class="dv">35</span>, <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)], age.survival)     </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(age.survival) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Age"</span>, <span class="st">"PpnGrass"</span>,<span class="st">"DSR"</span>, <span class="st">"seDSR"</span>, <span class="st">"lclDSR"</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"uclDSR"</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(age.survival)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Age PpnGrass       DSR      seDSR    lclDSR    uclDSR NA
+1   1      0.1 0.9228137 0.01215584 0.8953612 0.9435182   
+2   2      0.1 0.9241404 0.01160073 0.8980411 0.9439757   
+3   3      0.1 0.9254462 0.01107197 0.9006284 0.9444481   
+4   4      0.1 0.9267312 0.01056992 0.9031233 0.9449369   
+5   5      0.1 0.9279959 0.01009497 0.9055260 0.9454435   
+6   6      0.1 0.9292403 0.00964755 0.9078363 0.9459694   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(age.survival, <span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> DSR)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lclDSR, <span class="at">ymax =</span> uclDSR), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Nest Age (days)"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Estimated DSR"</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Clase5_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>captura recaptura</p>
+</div>
+</div>
+</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg" class="img-fluid figure-img"></p>

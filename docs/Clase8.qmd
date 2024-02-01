@@ -73,15 +73,14 @@ head(Insectivoras2)
 
 table(Insectivoras$Distancia)
 ```
-## Agragar covariables de paisaje
 
+## Agragar covariables de paisaje
 
 ```{r}
 Insectivoras3 <- Insectivoras2 %>% 
   mutate(Site_ID = Sitio) %>% 
   left_join(PaisajeMetricas, by= "Site_ID")
 ```
-
 
 ## Prepara data en formato unmarked
 
@@ -184,7 +183,6 @@ ggplot(data = Forest_pre, aes(x= Forest, y= Predicted))+
   labs(title = "Abundancia de Insectivoros versus fecha")+
   theme_classic()
 ```
-
 :::
 
 ![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)

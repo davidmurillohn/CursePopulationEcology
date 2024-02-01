@@ -4,15 +4,25 @@ format: html
 editor: visual
 ---
 
+::: panel-tabset
+
+[Rmark material](http://www.phidot.org/software/mark/docs/book/pdf/app_3.pdf)
+
+## Supervivencia de nido
+
 La supervivencia de nidos es un área clave en la ecología de las aves. En términos generales, se mide la probabilidad de que un nido con huevos o crías llegue a producir individuos voladores. El enfoque de Manfield es un método simple que considera la proporción de nidos que tienen éxito.
 
 Por otro lado, el enfoque RMark para la supervivencia de nidos implica modelos más sofisticados, utilizando técnicas estadísticas avanzadas para tener en cuenta variables específicas como el momento de la temporada, el efecto del depredador, la ubicación del nido, entre otros factores. Este método permite análisis detallados y precisos de la supervivencia de los nidos.
 
 Para esta clase utilizaremos el paquete Rmark
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 library(RMark)
+library(tidyverse)
 ```
+::: panel-tabset
+
+### Cargar base de datos
 
 Necesitamos también cargar una base de datos que esté correctamente formateada para su uso.
 
@@ -20,58 +30,177 @@ Necesitamos también cargar una base de datos que esté correctamente formateada
 data(mallard)
 ```
 
+Esta base de datos presenta 565 observaciones con las siguientes 13 variables.
+
+- FirstFound
+el día en que se encontró el nido por primera vez
+
+- LastPresent
+el último día que los polluelos estuvieron presentes
+
+- LastChecked
+el último día en que se revisó el nido
+
+- Fate
+el destino del nido; 0=eclosionó y 1=depredado
+
+- Freq
+la frecuencia de nidos con estos datos; siempre es 1 en este ejemplo
+
+- Robel
+lectura de Robel del grosor de la vegetación
+
+- PpnGrass
+proporción de pasto en la cercanía del nido
+
+- Native
+variable 0/1; 1 si es vegetación nativa
+
+- Planted
+variable 0/1; 1 si es vegetación plantada
+
+- Wetland
+variable 0/1; 1 si es vegetación de humedal
+
+- Roadside
+variable 0/1; 1 si es vegetación de carretera
+
+- AgeFound
+edad del nido en días el día que se encontró el nido
+
+- AgeDay1
+edad del nido al inicio del estudio
+
+
+### Preparacion de la base de datos
+
 En ocasiones, será necesario realizar una preparación inicial de nuestros datos antes de proceder.
 
 ```{r}
-mallard$habitat <- ifelse(mallard$Native == 1, "Native",
-                         ifelse(mallard$Planted == 1, "Planted",
-                                ifelse(mallard$Roadside == 1, "Roadside",
-                                       "Wetland")))
+
+mallard1 <- mallard %>%
+  mutate(Habitat = case_when(
+    Native == 1 ~ "Native",
+    Planted == 1 ~ "Planted",
+    Roadside == 1 ~ "Roadside",
+    TRUE ~ "Wetland"
+  ))
+
 ```
 
-También será necesario ajustar la base de datos para que esté en un formato compatible con RMark.
+### Ajustar modelos
+
+```{r, results='hide', warning=FALSE, message=FALSE}
+ti = rep(1,565)
+
+Model0 <- mark(data = mallard1, model = "Nest", time.intervals = ti , groups = "Habitat",
+               model.parameters = list(S= list(formula = Fate ~ 1)))
+
+Model1 <- mark(data = mallard1, model = "Nest", time.intervals = ti , groups = "Habitat",
+               model.parameters = list(S= list(formula = Fate ~ NestAge + PpnGrass)))
+
+Model2 <- mark(data = mallard1, model = "Nest", time.intervals = ti , groups = "Habitat",
+               model.parameters = list(S= list(formula = Fate ~ Robel)))
+
+Model3 <- mark(data = mallard1, model = "Nest", time.intervals = ti , groups = "Habitat", 
+               model.parameters = list(S= list(formula = Fate ~ AgeDay1)))
+
+
+
+```
+
+### Seleccionar modelo mas adecuado 
+
 
 ```{r}
-mallard.pr <- process.data(mallard,
-                          nocc=90,
-                          model="Nest",
-                          groups=("habitat"))
-```
 
-Por último, podremos emplear un modelo.
+class(Model0)
 
-```{r, results='hide', warning=FALSE}
+MallardModels =collect.models(type="Nest")
+MallardModels
 
-Model1 <- mark(data= mallard.pr, model= "Nest",
-              model.parameters = list(S= list(formula = Fate ~ NestAge + PpnGrass)), nocc = 40, threads = 2, delete = TRUE ) 
-
+#Model0[["results"]][["AICc"]]
+#Model1[["results"]][["AICc"]]
+#Model2[["results"]][["AICc"]]
+#Model3[["results"]][["AICc"]]
 
 ```
 
-Claro, ahora podemos representar los resultados en un gráfico para una interpretación más clara.
+### Preparar datos de grass para graficar
 
-```{r, echo=FALSE }
-fc <- find.covariates(Model1,mallard)
-fc$value[1:35] <- 1:35
-fc$value[fc$var == "PpnGrass"] <- 0.1 
-design <- fill.covariates(Model1, fc)
+```{r}
+#Model1$design.matrix
+#Model1$results$beta
+#Model1$results$beta.vcv
+#Model1$results$real
 
-AgePpn.survival <- compute.real(Model1, design = design)[1:35, ]
+fc_grass <- find.covariates(Model1, mallard1)
 
-AgePpn.survival <- cbind(design[1:35, c(2:3)], AgePpn.survival)  
+# assign 17 to 1st 50 nest ages
+fc_grass$value[1:100] <- 17  
 
-colnames(AgePpn.survival) <- c("Age", "PpnGrass","DSR", "seDSR", "lclDSR",
-                              "uclDSR")
+# assign range of values to PpnGrass
+fc_grass$value[fc_grass$var == "PpnGrass"] <- seq(0.01, 0.99, length = 100)
 
-library(ggplot2)
-ggplot(AgePpn.survival, aes(x = Age, y = DSR)) +
+# fill design matrix with values
+design_grass <- fill.covariates(Model1,fc_grass)
+
+grass.survival <- compute.real(Model1, design = design_grass)
+
+# insert covariate columns
+grass.survival <- cbind(design_grass[1:100 , 3], grass.survival[1:100,])     
+
+colnames(grass.survival) <- c("PpnGrass", "DSR", "seDSR", "lclDSR", "uclDSR")
+
+# view estimates of DSR for each age and PpnGrass combo   
+
+head(grass.survival)
+
+ggplot(grass.survival, aes(x = PpnGrass, y = DSR)) +
   geom_line() +
-  geom_ribbon(aes(ymin = lclDSR, ymax = uclDSR), alpha = 0.3) +
-  xlab("Nest Age (days)") +
+  geom_ribbon(aes(ymin = lclDSR, ymax = uclDSR), alpha = 0.3,
+              fill = "lightblue") +
+  xlab("Proportion Grass on Site") +
   ylab("Estimated DSR") +
   theme_bw()
 ```
 
-En el curso se detallara cada uno de los pasos para lograr a desarrollar el modelo, su interpretacion y su implementacion en casos reales.
+### preparar datos de age para graficar
+
+```{r}
+fc_age <- find.covariates(Model1, mallard1)
+
+fc_age$value[1:35] <- 1:35                      # assign 1:35 to 1st 35 nest ages
+
+fc_age$value[fc_age$var == "PpnGrass"] <- 0.1       # assign new value to PpnGrass
+
+design_age <- fill.covariates(Model1, fc_age)  # fill design matrix with values
+
+# extract 1st 35 rows of output
+
+age.survival <- compute.real(Model1, design = design_age)[1:35, ]
+
+# insert covariate columns
+age.survival <- cbind(design_age[1:35, c(2,3)], age.survival)     
+
+colnames(age.survival) <- c("Age", "PpnGrass","DSR", "seDSR", "lclDSR",
+                              "uclDSR")
+
+head(age.survival)
+
+ggplot(age.survival, aes(x = Age, y = DSR)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = lclDSR, ymax = uclDSR), alpha = 0.3, fill = "lightblue") +
+  xlab("Nest Age (days)") +
+  ylab("Estimated DSR") +
+  theme_bw()
+```
+:::
+
+## Captura-recaptura
+
+captura recaptura
+
+:::
 
 ![HN Biology Investigation Academy](HN%20Cursos%20publicidad/HN%20Biology%20Inv%20large.jpg)

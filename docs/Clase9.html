@@ -108,8 +108,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="diferencias-entre-inferencia-bayesiana-y-frecuentista">Diferencias entre inferencia Bayesiana y Frecuentista</h3>
 <table class="table">
 <colgroup>
-<col style="width: 47%">
-<col style="width: 52%">
+<col style="width: 48%">
+<col style="width: 51%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -209,22 +209,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       elpd          pD        WAIC 
--66.5565369   0.9443078 135.0016893 </code></pre>
+-66.5567581   0.9440758 135.0016678 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     elpd        pD      WAIC 
--124.8205  535.5001 1320.6412 </code></pre>
+-130.1546  805.3023 1870.9139 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      elpd         pD       WAIC 
--64.671450   1.883913 133.110727 </code></pre>
+-64.654620   1.822773 132.954786 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">waicAbund</span>(out3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      elpd         pD       WAIC 
--61.122805   1.384885 125.015379 </code></pre>
+-61.099336   1.290183 124.779038 </code></pre>
 </div>
 </div>
 <ul>
@@ -250,7 +250,7 @@ Thinning Rate: 1
 Number of Chains: 1
 Total Posterior Samples: 27000
 
-Bayesian p-value:  0.889 
+Bayesian p-value:  0.899 
 Fit statistic:  freeman-tukey </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ppc.out2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -265,7 +265,7 @@ Thinning Rate: 1
 Number of Chains: 1
 Total Posterior Samples: 27000
 
-Bayesian p-value:  0.5431 
+Bayesian p-value:  0.5552 
 Fit statistic:  chi-squared </code></pre>
 </div>
 </div>
@@ -287,12 +287,12 @@ Burn-in: 3000
 Thinning Rate: 1
 Number of Chains: 1
 Total Posterior Samples: 27000
-Run Time (min): 0.0352
+Run Time (min): 0.0353
 
 Abundance (log scale): 
                Mean     SD    2.5%     50%   97.5% Rhat ESS
-(Intercept) -1.4964 0.3507 -2.2129 -1.4971 -0.8225   NA 252
-AreaBasal    0.0352 0.0124  0.0089  0.0356  0.0589   NA 177</code></pre>
+(Intercept) -1.4804 0.3338 -2.1902 -1.4674 -0.8617   NA 272
+AreaBasal    0.0346 0.0117  0.0104  0.0337  0.0580   NA 218</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Abundance regression coefficients</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">param =</span> <span class="st">'beta'</span>, <span class="at">density =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
