@@ -4,42 +4,43 @@ model {
 dsr.mu ~ dnorm(0, 0.33) # intercept, note this is vague (0,1) on real scale
 
 # fixed effects for nest level covariates (all are linear on logit scale)
-b.age ~ dnorm(0, 1) # nest age effect
-b.dist ~ dnorm(0, 1) # distance from management edge
-b.init ~ dnorm(0, 1) # nest initiation date effect
+b.AgeFound ~ dnorm(0, 1) # nest age effect
+# b.dist ~ dnorm(0, 1) # distance from management edge
+b.AgeDay1 ~ dnorm(0, 1) # nest initiation date effect
+b.PpnGrass ~ dnorm(0, 1) 
+#b.Habitat ~ dnorm(0, 1)
+b.Age ~ dnorm(0,1)
 
 # note: I'm modeling site and year as crossed random effects - they could also be nested
 # random site effects
-dsr.area.sd ~ dunif(0.01, 1) # random site effect
-dsr.area.tau <- pow(dsr.area.sd, -2)
-for (j in 1:n.areas){
-  eps.area[j] ~ dnorm(0, dsr.area.tau)
-}
+#dsr.Habitat.sd ~ dunif(0.01, 1) # random site effect
+#dsr.Habitat.tau <- pow(dsr.Habitat.sd, -2)
+#for (j in 1:Habitat){
+#  eps.Habitat[j] ~ dnorm(0, dsr.Habitat.tau)
+#}
 
 # random year effects
-dsr.yr.sd ~ dunif(0.01, 1) # random year effect
-dsr.yr.tau <- pow(dsr.yr.sd, -2)
-for (i in 1:n.yrs){
-  eps.yr[i] ~ dnorm(0, dsr.yr.tau)
-}
+#dsr.yr.sd ~ dunif(0.01, 1) # random year effect
+#dsr.yr.tau <- pow(dsr.yr.sd, -2)
+#for (i in 1:n.yrs){
+#  eps.yr[i] ~ dnorm(0, dsr.yr.tau)
+#}
 
 # random species effects
-dsr.spp.sd ~ dunif(0.01, 1) # random species effect
-dsr.spp.tau <- pow(dsr.spp.sd, -2)
-for (i in 1:n.spp){
-  eps.spp[i] ~ dnorm(0, dsr.spp.tau)
-}
+#dsr.spp.sd ~ dunif(0.01, 1) # random species effect
+#dsr.spp.tau <- pow(dsr.spp.sd, -2)
+#for (i in 1:n.spp){
+#  eps.spp[i] ~ dnorm(0, dsr.spp.tau)
+#}
 
 for (i in 1:n.nests){
-  for (j in 1:expos[i]){
-      # daily survival is function of mean dsr, nest age effect, distance from edge,
-      # initiation date, and random effects for area, year, and species
-      logitS[i,j] <- dsr.mu + b.age*(age[i]+j-1) + b.dist*dist[i] + b.init*init[i] + 
-        eps.area[area[i]] + eps.yr[year[i]] + eps.spp[spp[i]]
+  for (j in 1:Freq[i]){
+      # daily survival is function of mean PpnGrass, AgeFound, Age
+      logitS[i,j] <- dsr.mu + b.AgeFound*AgeFound[i] + b.PpnGrass*PpnGrass[i] + b.Age*Age[i]
       logit(S[i,j]) <- logitS[i,j] # convert back to real scale
       } 
-    IS[i] <- prod(S[i,1:expos[i]]) # prob of surviving entire exposure interval
-    survive[i] ~ dbern(IS[i]) # does nest survive this nest check interval?
+    IS[i] <- prod(S[i,1:Freq[i]]) # prob of surviving entire exposure interval
+    Fate[i] ~ dbern(IS[i]) # does nest survive this nest check interval?
     }
   } # end jags model
 

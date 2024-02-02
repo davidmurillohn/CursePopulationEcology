@@ -20,9 +20,6 @@ library(tidyverse)
 ```
 
 ::: panel-tabset
-
-
-
 ### Cargar base de datos
 
 Necesitamos también cargar una base de datos que esté correctamente formateada para su uso.
@@ -33,45 +30,31 @@ data(mallard)
 
 Esta base de datos presenta 565 observaciones con las siguientes 13 variables.
 
-- FirstFound
-el día en que se encontró el nido por primera vez
+-   FirstFound el día en que se encontró el nido por primera vez
 
-- LastPresent
-el último día que los polluelos estuvieron presentes
+-   LastPresent el último día que los polluelos estuvieron presentes
 
-- LastChecked
-el último día en que se revisó el nido
+-   LastChecked el último día en que se revisó el nido
 
-- Fate
-el destino del nido; 0=eclosionó y 1=depredado
+-   Fate el destino del nido; 0=eclosionó y 1=depredado
 
-- Freq
-la frecuencia de nidos con estos datos; siempre es 1 en este ejemplo
+-   Freq la frecuencia de nidos con estos datos; siempre es 1 en este ejemplo
 
-- Robel
-lectura de Robel del grosor de la vegetación
+-   Robel lectura de Robel del grosor de la vegetación
 
-- PpnGrass
-proporción de pasto en la cercanía del nido
+-   PpnGrass proporción de pasto en la cercanía del nido
 
-- Native
-variable 0/1; 1 si es vegetación nativa
+-   Native variable 0/1; 1 si es vegetación nativa
 
-- Planted
-variable 0/1; 1 si es vegetación plantada
+-   Planted variable 0/1; 1 si es vegetación plantada
 
-- Wetland
-variable 0/1; 1 si es vegetación de humedal
+-   Wetland variable 0/1; 1 si es vegetación de humedal
 
-- Roadside
-variable 0/1; 1 si es vegetación de carretera
+-   Roadside variable 0/1; 1 si es vegetación de carretera
 
-- AgeFound
-edad del nido en días el día que se encontró el nido
+-   AgeFound edad del nido en días el día que se encontró el nido
 
-- AgeDay1
-edad del nido al inicio del estudio
-
+-   AgeDay1 edad del nido al inicio del estudio
 
 ### Preparacion de la base de datos
 
@@ -110,8 +93,7 @@ Model3 <- mark(data = mallard1, model = "Nest", time.intervals = ti , groups = "
 
 ```
 
-### Seleccionar modelo mas adecuado 
-
+### Seleccionar modelo mas adecuado
 
 ```{r}
 

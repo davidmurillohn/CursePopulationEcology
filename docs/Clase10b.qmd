@@ -46,7 +46,7 @@ NidoPatos1 <- NidosPatos %>%
 Crearemos una lista con las covariables que pueden implementarce en el modelo
 
 ```{r}
-# bundle data
+
 dsr.data <- list(n.nests = dim(NidoPatos1)[1], 
                  n.yrs = max(NidoPatos1$year), 
                  n.areas = max(NidoPatos1$block), 
@@ -171,6 +171,194 @@ ggplot(Age_df_pre, aes(x= age, y =dsr)) +
 ```
 
 
+
+:::
+
+## Ejemplo con mallard dsr
+
+::: panle-tabset
+
+## Cargar base de datos
+
+```{r}
+Mallard <- readRDS("data/Mallar.rds")
+```
+
+
+
+```{r}
+mallard1 <- Mallard %>%
+  mutate(Habitat = case_when(
+    Native == 1 ~ "Native",
+    Planted == 1 ~ "Planted",
+    Roadside == 1 ~ "Roadside",
+    TRUE ~ "Wetland"
+  ))
+```
+
+## Preparar datos para el modelo
+
+Crearemos una lista con las covariables que pueden implementarce en el modelo
+
+```{r}
+
+dsr.data <- list(n.nests = dim(mallard1)[1], 
+                 FirstFound = mallard1$FirstFound, 
+                 LastPresent = mallard1$LastPresent, 
+                 LastChecked = mallard1$LastChecked,
+                 Fate= mallard1$Fate,
+                 Freq= mallard1$Freq,
+                 Robel = mallard1$Robel,
+                 PpnGrass = mallard1$PpnGrass,
+                 AgeFound = mallard1$AgeFound,
+                 AgeDay1 = mallard1$AgeDay1,
+                 Habitat = mallard1$Habitat)
+
+dsr.data <- list(n.nests = dim(mallard1)[1], 
+                 Fate= mallard1$Fate,
+                 PpnGrass = mallard1$PpnGrass,
+                 AgeFound = mallard1$AgeFound,
+                 Freq= mallard1$Freq,
+                 Age = mallard1$LastPresent - mallard1$FirstFound)
+```
+
+## Crear funcion del modelo
+
+```{r}
+# Shaffer's nest survival model, coded for JAGS
+{sink("dsr.jags"); cat("
+model {
+# modeling daily nest survival on the logit scale
+dsr.mu ~ dnorm(0, 0.33) # intercept, note this is vague (0,1) on real scale
+
+# fixed effects for nest level covariates (all are linear on logit scale)
+b.AgeFound ~ dnorm(0, 1) # nest age effect
+# b.dist ~ dnorm(0, 1) # distance from management edge
+b.AgeDay1 ~ dnorm(0, 1) # nest initiation date effect
+b.PpnGrass ~ dnorm(0, 1) 
+#b.Habitat ~ dnorm(0, 1)
+b.Age ~ dnorm(0,1)
+
+# note: I'm modeling site and year as crossed random effects - they could also be nested
+# random site effects
+#dsr.Habitat.sd ~ dunif(0.01, 1) # random site effect
+#dsr.Habitat.tau <- pow(dsr.Habitat.sd, -2)
+#for (j in 1:Habitat){
+#  eps.Habitat[j] ~ dnorm(0, dsr.Habitat.tau)
+#}
+
+# random year effects
+#dsr.yr.sd ~ dunif(0.01, 1) # random year effect
+#dsr.yr.tau <- pow(dsr.yr.sd, -2)
+#for (i in 1:n.yrs){
+#  eps.yr[i] ~ dnorm(0, dsr.yr.tau)
+#}
+
+# random species effects
+#dsr.spp.sd ~ dunif(0.01, 1) # random species effect
+#dsr.spp.tau <- pow(dsr.spp.sd, -2)
+#for (i in 1:n.spp){
+#  eps.spp[i] ~ dnorm(0, dsr.spp.tau)
+#}
+
+for (i in 1:n.nests){
+  for (j in 1:Freq[i]){
+      # daily survival is function of mean PpnGrass, AgeFound, Age
+      logitS[i,j] <- dsr.mu + b.AgeFound*AgeFound[i] + b.PpnGrass*PpnGrass[i] + b.Age*Age[i]
+      logit(S[i,j]) <- logitS[i,j] # convert back to real scale
+      } 
+    IS[i] <- prod(S[i,1:Freq[i]]) # prob of surviving entire exposure interval
+    Fate[i] ~ dbern(IS[i]) # does nest survive this nest check interval?
+    }
+  } # end jags model
+",fill = TRUE); sink()}
+```
+
+## Definir parametros del modelo
+
+```{r}
+parms <- c("dsr.mu", "b.AgeFound", "b.PpnGrass", "b.Age")
+
+           
+
+```
+
+## Ajustar modelo
+
+```{r}
+
+# MCMC settings
+na <- 1000; ni <- 1100; nt <- 1        
+nb <- 100; nc <- 3
+
+# call jags (~ 4 min)
+nest.success <- jagsUI(dsr.data, inits = NULL, parms, "dsr.jags", 
+                   n.adapt = na, n.chains = nc, n.thin = nt, 
+                   n.iter = ni, n.burnin = nb, parallel = TRUE)
+```
+## Revisar parametros del modelo 
+
+```{r}
+print(nest.success, digits = 4)
+```
+
+## Preparar datos a graficar por edad
+
+```{r}
+age <- 1:34
+
+dsr_age <- plogis(nest.success$mean$dsr.mu + nest.success$mean$b.AgeFound*age)
+dsr_IC2.5_age <- plogis(nest.success$q2.5$dsr.mu + nest.success$q2.5$b.AgeFound*age)
+dsr_IC97.5_age <- plogis(nest.success$q97.5$dsr.mu + nest.success$q97.5$b.AgeFound*age)
+
+
+Age_df_pre <- data.frame(age = age,
+                         dsr =dsr_age,
+                         IC95L = dsr_IC2.5_age,
+                         IC95H = dsr_IC97.5_age)
+```
+
+
+## Graficar por edad
+
+```{r}
+ggplot(Age_df_pre, aes(x= age, y =dsr)) +
+  geom_ribbon(aes(ymin= IC95L,
+                  ymax= IC95H),
+              alpha= 0.4,
+              fill= "lightgreen")+
+  geom_line()+
+  theme_classic()
+```
+
+## Preparar datos a graficar por edad
+
+```{r}
+PpnGrass <- seq(min(mallard1$PpnGrass), max(mallard1$PpnGrass), length = 100)
+
+dsr_PpnGrass <- plogis(nest.success$mean$dsr.mu + nest.success$mean$b.PpnGrass*PpnGrass)
+dsr_IC2.5_PpnGrass <- plogis(nest.success$q2.5$dsr.mu + nest.success$q2.5$b.PpnGrass*PpnGrass)
+dsr_IC97.5_PpnGrass <- plogis(nest.success$q97.5$dsr.mu + nest.success$q97.5$b.PpnGrass*PpnGrass)
+
+
+PpnGrass_df_pre <- data.frame(PpnGrass = PpnGrass,
+                         dsr =dsr_PpnGrass,
+                         IC95L = dsr_IC2.5_PpnGrass,
+                         IC95H = dsr_IC97.5_PpnGrass)
+```
+
+
+## Graficar por edad
+
+```{r}
+ggplot(PpnGrass_df_pre, aes(x= PpnGrass, y =dsr)) +
+  geom_ribbon(aes(ymin= IC95L,
+                  ymax= IC95H),
+              alpha= 0.4,
+              fill= "lightgreen")+
+  geom_line()+
+  theme_classic()
+```
 
 :::
 
