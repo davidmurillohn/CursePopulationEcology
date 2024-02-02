@@ -34,7 +34,9 @@ El propósito principal de este curso es servir como una guía que permita a los
 
 [Clase 9- Uso de Rmark: Supervivencia de nido](Clase5.html)
 
-[Clase 10- upervivencia de nido: Enfoque Bayesiano](Clase10b.html)
+[Clase 10- Supervivencia de nido: Enfoque Bayesiano](Clase10b.html)
+
+[Clase 10b- Captura-Recaptura: Enfoque Bayesiano](Clase10c.html)
 
 
 *No dude en consultarnos ante cualquier inconveniente que surja durante el curso. Puede contactarnos a través de admi@hnbiology.org.*

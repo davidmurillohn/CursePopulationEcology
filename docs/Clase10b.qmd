@@ -12,8 +12,6 @@ En esta clase veremos dos temas:
 
 ## Supervivencia de nidos
 
-::: panel-tabset
-
 Para este analisi necesitaremos instalar el software [Jags](https://sourceforge.net/projects/mcmc-jags/)
 
 
@@ -362,6 +360,6 @@ ggplot(PpnGrass_df_pre, aes(x= PpnGrass, y =dsr)) +
 
 :::
 
-:::
+![HN Biology Investigation Academy](HN Cursos publicidad/HN Biology Inv large.jpg)
 
 

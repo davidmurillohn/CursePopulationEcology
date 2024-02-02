@@ -1,0 +1,98 @@
+---
+title: "Captura-recaptura"
+author: "David Murillo"
+format: html
+---
+
+::: panel-tabset
+
+## Cargar paquete
+
+```{r}
+library(multimark)
+```
+
+
+[Referencia](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4662319/)
+
+## Cargar base de datos
+
+```{r}
+data(bobcat)
+head(bobcat)
+tail(bobcat)
+```
+
+## Crear con covariable
+
+```{r}
+dummy <- rnorm(ncol(bobcat)) # some fake temporal covariates
+Forest <- rnorm(ncol(bobcat))
+Bird <- rpois(ncol(bobcat), 3)
+Habitat <- rep(c("A", "B"), each = ncol(bobcat) / 2)
+
+Covs <- data.frame(dummy = dummy,
+                   Forest = Forest,
+                   Habitat= Habitat)
+```
+
+
+## Procesar base de datos
+
+```{r}
+bobcatsetup <- processdata(Enc.Mat=bobcat,data.type= "never", covs = Covs)
+```
+
+
+## Ajustar Modelos
+
+
+
+```{r}
+bobcat1 <- multimarkClosed(mms=bobcatsetup,
+                           mod.p=~1,
+                           parms="all",
+                           nchains=2,iter=45000,burnin=5000)
+
+bobcat2 <- multimarkClosed(mms=bobcatsetup,
+                                  mod.p=~dummy + Habitat,
+                                  parms="all",
+                           nchains=2,iter=45000,burnin=5000)
+
+bobcat3 <- multimarkClosed(mms=bobcatsetup,
+                           mod.p=~Forest + Habitat,
+                           parms="all",
+                           nchains=2,iter=45000,burnin=5000)
+
+bobcat4 <- multimarkClosed(mms=bobcatsetup,
+                           mod.p=~dummy + Forest,
+                           parms="all",
+                           nchains=2,iter=45000,burnin=5000)
+
+bobcat5 <- multimarkClosed(mms=bobcatsetup,
+                           mod.p=~Habitat,
+                           parms="all",
+                           nchains=2,iter=45000,burnin=5000)
+```
+
+
+
+
+                        
+
+
+
+
+## Resultados 
+
+summary(bobcat4$mcmc)
+summary(bobcat5$mcmc)
+
+
+> Posterior model probabilities (PMM) and abundance estimates for the bobcat data. 
+
+> Summaries include posterior modes (N), 95% highest posterior density intervals (HPDI), effective sample sizes (ESS), and Gelman–Rubin–Brooks diagnostics (GRB) for N. Models for detection probability (p) included no effects (˜1), behavioral effects (˜c), time effects (˜time), and individual effects (˜h). Models for the conditional probability of a left‐ or right‐sided encounter (delta) included δ 1=δ 2 (˜1) and δ 1≠δ 2 (˜type)
+
+
+:::
+
