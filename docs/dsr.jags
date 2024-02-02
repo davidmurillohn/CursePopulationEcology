@@ -1,0 +1,45 @@
+
+model {
+# modeling daily nest survival on the logit scale
+dsr.mu ~ dnorm(0, 0.33) # intercept, note this is vague (0,1) on real scale
+
+# fixed effects for nest level covariates (all are linear on logit scale)
+b.age ~ dnorm(0, 1) # nest age effect
+b.dist ~ dnorm(0, 1) # distance from management edge
+b.init ~ dnorm(0, 1) # nest initiation date effect
+
+# note: I'm modeling site and year as crossed random effects - they could also be nested
+# random site effects
+dsr.area.sd ~ dunif(0.01, 1) # random site effect
+dsr.area.tau <- pow(dsr.area.sd, -2)
+for (j in 1:n.areas){
+  eps.area[j] ~ dnorm(0, dsr.area.tau)
+}
+
+# random year effects
+dsr.yr.sd ~ dunif(0.01, 1) # random year effect
+dsr.yr.tau <- pow(dsr.yr.sd, -2)
+for (i in 1:n.yrs){
+  eps.yr[i] ~ dnorm(0, dsr.yr.tau)
+}
+
+# random species effects
+dsr.spp.sd ~ dunif(0.01, 1) # random species effect
+dsr.spp.tau <- pow(dsr.spp.sd, -2)
+for (i in 1:n.spp){
+  eps.spp[i] ~ dnorm(0, dsr.spp.tau)
+}
+
+for (i in 1:n.nests){
+  for (j in 1:expos[i]){
+      # daily survival is function of mean dsr, nest age effect, distance from edge,
+      # initiation date, and random effects for area, year, and species
+      logitS[i,j] <- dsr.mu + b.age*(age[i]+j-1) + b.dist*dist[i] + b.init*init[i] + 
+        eps.area[area[i]] + eps.yr[year[i]] + eps.spp[spp[i]]
+      logit(S[i,j]) <- logitS[i,j] # convert back to real scale
+      } 
+    IS[i] <- prod(S[i,1:expos[i]]) # prob of surviving entire exposure interval
+    survive[i] ~ dbern(IS[i]) # does nest survive this nest check interval?
+    }
+  } # end jags model
+

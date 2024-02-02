@@ -1,0 +1,179 @@
+---
+title: "Clase10b"
+author: "David Murillo"
+format: html
+---
+
+En esta clase veremos dos temas:
+1) Supervivencia de nidos enfoque bayesiano
+2) Captura-Recaptura enfoque bayesiano
+
+::: panel-tabset
+
+## Supervivencia de nidos
+
+::: panel-tabset
+
+Para este analisi necesitaremos instalar el software [Jags](https://sourceforge.net/projects/mcmc-jags/)
+
+
+## cargar paquetes
+
+```{r}
+
+library(jagsUI)
+library(tidyverse)
+```
+
+## Cargar base de datos
+
+```{r}
+NidosPatos <- read.csv("data/duck_nests.csv", 
+                   header=TRUE)
+```
+
+La base de datos duck_NidoPatos1s.csv contiene una muestra aleatoria de registro para tres anos, divididos en 12 bloques. 
+
+Primero estandarizaremos la visita inicial a cada nido
+
+```{r}
+NidoPatos1 <- NidosPatos %>% 
+  mutate(init_stadard = (init- mean(init))/sd(init))
+```
+
+## Preparar datos para el modelo
+
+Crearemos una lista con las covariables que pueden implementarce en el modelo
+
+```{r}
+# bundle data
+dsr.data <- list(n.nests = dim(NidoPatos1)[1], 
+                 n.yrs = max(NidoPatos1$year), 
+                 n.areas = max(NidoPatos1$block), 
+                 n.spp = max(NidoPatos1$species),
+                 year = NidoPatos1$year, 
+                 area = NidoPatos1$block, 
+                 spp = NidoPatos1$species,
+                 expos = NidoPatos1$expos, 
+                 init = NidoPatos1$init_stadard,
+                 age = NidoPatos1$age_start, 
+                 survive = NidoPatos1$survive,
+                 dist = NidoPatos1$dist)
+```
+
+## Crear funcion del modelo
+
+```{r}
+# Shaffer's nest survival model, coded for JAGS
+{sink("dsr.jags"); cat("
+model {
+# modeling daily nest survival on the logit scale
+dsr.mu ~ dnorm(0, 0.33) # intercept, note this is vague (0,1) on real scale
+
+# fixed effects for nest level covariates (all are linear on logit scale)
+b.age ~ dnorm(0, 1) # nest age effect
+b.dist ~ dnorm(0, 1) # distance from management edge
+b.init ~ dnorm(0, 1) # nest initiation date effect
+
+# note: I'm modeling site and year as crossed random effects - they could also be nested
+# random site effects
+dsr.area.sd ~ dunif(0.01, 1) # random site effect
+dsr.area.tau <- pow(dsr.area.sd, -2)
+for (j in 1:n.areas){
+  eps.area[j] ~ dnorm(0, dsr.area.tau)
+}
+
+# random year effects
+dsr.yr.sd ~ dunif(0.01, 1) # random year effect
+dsr.yr.tau <- pow(dsr.yr.sd, -2)
+for (i in 1:n.yrs){
+  eps.yr[i] ~ dnorm(0, dsr.yr.tau)
+}
+
+# random species effects
+dsr.spp.sd ~ dunif(0.01, 1) # random species effect
+dsr.spp.tau <- pow(dsr.spp.sd, -2)
+for (i in 1:n.spp){
+  eps.spp[i] ~ dnorm(0, dsr.spp.tau)
+}
+
+for (i in 1:n.nests){
+  for (j in 1:expos[i]){
+      # daily survival is function of mean dsr, nest age effect, distance from edge,
+      # initiation date, and random effects for area, year, and species
+      logitS[i,j] <- dsr.mu + b.age*(age[i]+j-1) + b.dist*dist[i] + b.init*init[i] + 
+        eps.area[area[i]] + eps.yr[year[i]] + eps.spp[spp[i]]
+      logit(S[i,j]) <- logitS[i,j] # convert back to real scale
+      } 
+    IS[i] <- prod(S[i,1:expos[i]]) # prob of surviving entire exposure interval
+    survive[i] ~ dbern(IS[i]) # does nest survive this nest check interval?
+    }
+  } # end jags model
+",fill = TRUE); sink()}
+```
+
+## Definir parametros del modelo
+
+```{r}
+parms <- c("dsr.mu", "b.age", "b.dist", "b.init", 
+           "dsr.area.sd", "dsr.yr.sd", "dsr.spp.sd",
+           "eps.area", "eps.yr", "eps.spp")
+
+```
+
+## Ajustar modelo
+
+```{r}
+# MCMC settings
+na <- 1000; ni <- 1100; nt <- 1        
+nb <- 100; nc <- 3
+
+# call jags (~ 4 min)
+nest.success <- jagsUI(dsr.data, inits = NULL, parms, "dsr.jags", 
+                   n.adapt = na, n.chains = nc, n.thin = nt, 
+                   n.iter = ni, n.burnin = nb, parallel = TRUE)
+```
+
+
+## Revisar parametros del modelo 
+
+```{r}
+print(nest.success, digits = 4)
+```
+
+## Preparar datos a graficar
+
+```{r}
+age <- 1:35
+
+dsr <- plogis(nest.success$mean$dsr.mu + nest.success$mean$b.age*age)
+dsr_IC2.5 <- plogis(nest.success$q2.5$dsr.mu + nest.success$q2.5$b.age*age)
+dsr_IC97.5 <- plogis(nest.success$q97.5$dsr.mu + nest.success$q97.5$b.age*age)
+
+
+Age_df_pre <- data.frame(age = age,
+                         dsr =dsr,
+                         IC95L = dsr_IC2.5,
+                         IC95H = dsr_IC97.5)
+```
+
+
+## Graficar
+
+```{r}
+ggplot(Age_df_pre, aes(x= age, y =dsr)) +
+  geom_ribbon(aes(ymin= IC95L,
+                  ymax= IC95H),
+              alpha= 0.4,
+              fill= "lightgreen")+
+  geom_line()+
+  theme_classic()
+```
+
+
+
+:::
+
+:::
+
+
